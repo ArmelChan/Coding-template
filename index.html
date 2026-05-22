@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AI Super Instruction Generator</title>
-  <link rel="preconnect" href="https://api.fontshare.com" />
-  <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&f[]=zodiak@400,700&display=swap" rel="stylesheet" />
+  //api.fontshare.com" />
+  //api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&f[]=zodiak@400,700&display=swap" rel="stylesheet" />
   <style>
     :root, [data-theme="light"] {
       --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
@@ -13,8 +13,7 @@
       --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
       --text-lg: clamp(1.125rem, 1rem + 0.75vw, 1.5rem);
       --text-xl: clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem);
-      --text-2xl: clamp(2rem, 1.2rem + 2.5vw, 3.5rem):
-
+      --text-2xl: clamp(2rem, 1.2rem + 2.5vw, 3.5rem);
       --space-2: 0.5rem;
       --space-3: 0.75rem;
       --space-4: 1rem;
@@ -22,7 +21,6 @@
       --space-8: 2rem;
       --space-12: 3rem;
       --space-16: 4rem;
-
       --color-bg: #f7f6f2;
       --color-surface: #f9f8f5;
       --color-surface-2: #fbfbf9;
@@ -32,14 +30,11 @@
       --color-primary: #01696f;
       --color-primary-hover: #0c4e54;
       --color-primary-highlight: #cedcd8;
-
       --radius-md: 0.5rem;
       --radius-lg: 0.75rem;
       --radius-xl: 1rem;
-
       --shadow-sm: 0 1px 2px rgba(40,37,29,.06);
       --shadow-md: 0 12px 30px rgba(40,37,29,.10);
-
       --font-display: 'Zodiak', Georgia, serif;
       --font-body: 'General Sans', Inter, sans-serif;
     }
@@ -54,7 +49,6 @@
       --color-primary: #4f98a3;
       --color-primary-hover: #227f8b;
       --color-primary-highlight: #313b3b;
-
       --shadow-sm: 0 1px 2px rgba(0,0,0,.2);
       --shadow-md: 0 12px 30px rgba(0,0,0,.35);
     }
@@ -83,486 +77,187 @@
     button, input, textarea, select { font: inherit; }
     a { color: inherit; text-decoration: none; }
 
-    .shell {
-      width: min(1180px, calc(100% - 2rem));
-      margin: 0 auto;
-    }
+    .shell { width: min(1180px, calc(100% - 2rem)); margin: 0 auto; }
 
     .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 20;
+      position: sticky; top: 0; z-index: 20;
       backdrop-filter: blur(12px);
       background: rgba(247,246,242,0.82);
       border-bottom: 1px solid rgba(40,37,29,0.10);
     }
-
     [data-theme="dark"] .topbar {
       background: rgba(23,22,20,0.84);
       border-bottom: 1px solid rgba(205,204,202,0.10);
     }
-
     .topbar-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      padding: 0.9rem 0;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 1rem; padding: 0.9rem 0;
     }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      font-weight: 700;
-    }
-
+    .brand { display: flex; align-items: center; gap: 0.75rem; font-weight: 700; }
     .brand-mark {
-      width: 32px;
-      height: 32px;
-      border-radius: 0.7rem;
+      width: 32px; height: 32px; border-radius: 0.7rem;
       background: var(--color-primary-highlight);
-      display: grid;
-      place-items: center;
-      color: var(--color-primary);
-      font-weight: 800;
+      display: grid; place-items: center;
+      color: var(--color-primary); font-weight: 800;
     }
-
+    .topbar-actions { display: flex; align-items: center; gap: 0.5rem; }
     .theme-toggle {
-      width: 44px;
-      height: 44px;
-      border-radius: 999px;
+      width: 44px; height: 44px; border-radius: 999px;
       border: 1px solid rgba(40,37,29,0.12);
-      background: var(--color-surface);
-      color: var(--color-text);
-      cursor: pointer;
+      background: var(--color-surface); color: var(--color-text); cursor: pointer;
     }
+    [data-theme="dark"] .theme-toggle { border-color: rgba(205,204,202,0.12); }
 
-    [data-theme="dark"] .theme-toggle {
-      border-color: rgba(205,204,202,0.12);
+    .lang-toggle {
+      height: 44px; padding: 0 1rem; border-radius: 999px;
+      border: 1px solid rgba(40,37,29,0.12);
+      background: var(--color-surface); color: var(--color-text);
+      cursor: pointer; font-weight: 700; font-size: var(--text-sm);
+      transition: 180ms ease;
     }
+    .lang-toggle:hover { background: var(--color-primary-highlight); color: var(--color-primary); }
+    [data-theme="dark"] .lang-toggle { border-color: rgba(205,204,202,0.12); }
 
     .hero {
       padding: clamp(3rem, 8vw, 6rem) 0 2rem;
-      display: grid;
-      gap: 1.25rem;
+      display: grid; gap: 1.25rem;
     }
-
     .eyebrow {
-      display: inline-flex;
-      width: fit-content;
-      padding: 0.45rem 0.8rem;
-      border-radius: 999px;
+      display: inline-flex; width: fit-content;
+      padding: 0.45rem 0.8rem; border-radius: 999px;
       background: var(--color-primary-highlight);
       color: var(--color-primary);
-      font-size: var(--text-sm);
-      font-weight: 700;
+      font-size: var(--text-sm); font-weight: 700;
     }
-
-    h1, h2, h3 {
-      margin: 0;
-      line-height: 1.12;
-    }
-
-    h1 {
-      font-family: var(--font-display);
-      font-size: var(--text-2xl);
-      max-width: 12ch;
-    }
-
-    h2 {
-      font-size: var(--text-xl);
-      margin-bottom: 0.75rem;
-    }
-
-    h3 {
-      font-size: var(--text-lg);
-      margin-bottom: 0.5rem;
-    }
-
-    .hero-copy {
-      max-width: 68ch;
-      color: var(--color-text-muted);
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-    }
+    h1, h2, h3 { margin: 0; line-height: 1.12; }
+    h1 { font-family: var(--font-display); font-size: var(--text-2xl); max-width: 12ch; }
+    h2 { font-size: var(--text-xl); margin-bottom: 0.75rem; }
+    h3 { font-size: var(--text-lg); margin-bottom: 0.5rem; }
+    .hero-copy { max-width: 68ch; color: var(--color-text-muted); }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
 
     .btn {
-      min-height: 44px;
-      padding: 0.85rem 1rem;
-      border-radius: var(--radius-lg);
-      border: 1px solid transparent;
-      font-weight: 700;
-      cursor: pointer;
-      transition: 180ms ease;
+      min-height: 44px; padding: 0.85rem 1rem;
+      border-radius: var(--radius-lg); border: 1px solid transparent;
+      font-weight: 700; cursor: pointer; transition: 180ms ease;
     }
-
-    .btn-primary {
-      background: var(--color-primary);
-      color: #fff;
-    }
-
-    .btn-primary:hover {
-      background: var(--color-primary-hover);
-    }
-
+    .btn-primary { background: var(--color-primary); color: #fff; }
+    .btn-primary:hover { background: var(--color-primary-hover); }
     .btn-secondary {
-      background: var(--color-surface);
-      color: var(--color-text);
+      background: var(--color-surface); color: var(--color-text);
       border-color: rgba(40,37,29,0.10);
     }
-
-    [data-theme="dark"] .btn-secondary {
-      border-color: rgba(205,204,202,0.12);
-    }
+    [data-theme="dark"] .btn-secondary { border-color: rgba(205,204,202,0.12); }
 
     .layout {
-      display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      gap: 1.25rem;
-      padding-bottom: 3rem;
+      display: grid; grid-template-columns: 1.05fr 0.95fr;
+      gap: 1.25rem; padding-bottom: 3rem;
     }
-
     .card {
       background: var(--color-surface);
       border: 1px solid rgba(40,37,29,0.10);
       border-radius: var(--radius-xl);
       box-shadow: var(--shadow-sm);
     }
-
-    [data-theme="dark"] .card {
-      border-color: rgba(205,204,202,0.10);
-    }
-
-    .panel {
-      padding: 1.25rem;
-    }
-
-    .panel p {
-      color: var(--color-text-muted);
-      margin-top: 0;
-    }
-
-    .field-grid {
-      display: grid;
-      gap: 0.9rem;
-    }
-
-    .field {
-      display: grid;
-      gap: 0.4rem;
-    }
-
-    label {
-      font-size: var(--text-sm);
-      font-weight: 700;
-    }
-
+    [data-theme="dark"] .card { border-color: rgba(205,204,202,0.10); }
+    .panel { padding: 1.25rem; }
+    .panel p { color: var(--color-text-muted); margin-top: 0; }
+    .field-grid { display: grid; gap: 0.9rem; }
+    .field { display: grid; gap: 0.4rem; }
+    label { font-size: var(--text-sm); font-weight: 700; }
     input, textarea, select {
       width: 100%;
       border: 1px solid rgba(40,37,29,0.12);
-      background: var(--color-surface-2);
-      color: var(--color-text);
-      border-radius: var(--radius-lg);
-      padding: 0.9rem 1rem;
-      outline: none;
+      background: var(--color-surface-2); color: var(--color-text);
+      border-radius: var(--radius-lg); padding: 0.9rem 1rem; outline: none;
     }
-
     [data-theme="dark"] input,
     [data-theme="dark"] textarea,
-    [data-theme="dark"] select {
-      border-color: rgba(205,204,202,0.12);
-    }
-
-    textarea {
-      min-height: 110px;
-      resize: vertical;
-    }
-
+    [data-theme="dark"] select { border-color: rgba(205,204,202,0.12); }
+    textarea { min-height: 110px; resize: vertical; }
     input:focus, textarea:focus, select:focus {
       border-color: var(--color-primary);
       box-shadow: 0 0 0 3px rgba(1,105,111,0.12);
     }
 
     .output-box {
-      min-height: 560px;
-      white-space: pre-wrap;
-      overflow-wrap: break-word;
+      min-height: 560px; white-space: pre-wrap; overflow-wrap: break-word;
       background: var(--color-surface-2);
       border: 1px solid rgba(40,37,29,0.08);
-      border-radius: var(--radius-lg);
-      padding: 1rem;
+      border-radius: var(--radius-lg); padding: 1rem;
       color: var(--color-text);
       font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      font-size: 0.95rem;
-      line-height: 1.65;
+      font-size: 0.95rem; line-height: 1.65;
     }
+    [data-theme="dark"] .output-box { border-color: rgba(205,204,202,0.08); }
+    .helper { font-size: var(--text-sm); color: var(--color-text-muted); }
 
-    [data-theme="dark"] .output-box {
-      border-color: rgba(205,204,202,0.08);
-    }
-
-    .helper {
-      font-size: var(--text-sm);
-      color: var(--color-text-muted);
-    }
-
-    .section-list {
-      display: grid;
-      gap: 0.85rem;
-      margin-top: 1rem;
-    }
-
+    .section-list { display: grid; gap: 0.85rem; margin-top: 1rem; }
     .section-item {
-      padding: 1rem;
-      border-radius: var(--radius-lg);
+      padding: 1rem; border-radius: var(--radius-lg);
       background: var(--color-surface-2);
       border: 1px solid rgba(40,37,29,0.08);
     }
+    [data-theme="dark"] .section-item { border-color: rgba(205,204,202,0.08); }
 
-    [data-theme="dark"] .section-item {
-      border-color: rgba(205,204,202,0.08);
-    }
-
-    .footer {
-      padding: 0 0 3rem;
-      color: var(--color-text-muted);
-      font-size: var(--text-sm);
-    }
+    .footer { padding: 0 0 3rem; color: var(--color-text-muted); font-size: var(--text-sm); }
 
     @media (max-width: 920px) {
-      .layout {
-        grid-template-columns: 1fr;
-      }
-
-      h1 {
-        max-width: 16ch;
-      }
-
-      .output-box {
-        min-height: 420px;
-      }
+      .layout { grid-template-columns: 1fr; }
+      h1 { max-width: 16ch; }
+      .output-box { min-height: 420px; }
     }
   </style>
 </head>
 <body>
+
+  <!-- TOPBAR -->
   <header class="topbar">
     <div class="shell topbar-inner">
       <div class="brand">
         <div class="brand-mark">AI</div>
-        <span>AI Super Instruction Generator</span>
+        <span data-i18n="brandName">AI Super Instruction Generator</span>
       </div>
-      <button class="theme-toggle" type="button" id="themeToggle" aria-label="Toggle theme">◐</button>
+      <div class="topbar-actions">
+        <button class="lang-toggle" id="langToggle" type="button">中文</button>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">◐</button>
+      </div>
     </div>
   </header>
 
+  <!-- HERO -->
   <main class="shell">
     <section class="hero">
-      <span class="eyebrow">Prompt builder</span>
-      <h1>Turn your README logic into a working generator page.</h1>
-      <p class="hero-copy">
-        This page is the first usable version of your Generator system prompt website.
-        The left side collects the prompt design requirements, and the right side assembles them into a copy-ready system prompt draft.
-      </p>
+      <span class="eyebrow" data-i18n="eyebrow">Prompt builder</span>
+      <h1 data-i18n="heroTitle">Turn your README logic into a working generator page.</h1>
+      <p class="hero-copy" data-i18n="heroCopy">This page is the first usable version of your Generator system prompt website. The left side collects the prompt design requirements, and the right side assembles them into a copy-ready system prompt draft.</p>
       <div class="hero-actions">
-        <button class="btn btn-primary" id="generateBtn">Generate Prompt</button>
-        <button class="btn btn-secondary" id="copyBtn">Copy Output</button>
-        <button class="btn btn-secondary" id="loadSampleBtn">Load Sample</button>
+        <button class="btn btn-primary" id="generateBtn" type="button" data-i18n="btnGenerate">Generate Prompt</button>
+        <button class="btn btn-secondary" id="copyBtn" type="button" data-i18n="btnCopy">Copy Output</button>
+        <button class="btn btn-secondary" id="loadSampleBtn" type="button" data-i18n="btnSample">Load Sample</button>
       </div>
     </section>
 
-    <section class="layout">
-      <article class="card panel">
-        <h2>Generator Inputs</h2>
-        <p>Fill in the prompt structure you want, then click Generate Prompt.</p>
+    <!-- LAYOUT -->
+    <div class="layout">
 
-        <div class="field-grid">
-          <div class="field">
-            <label for="productName">Generator / Project Name</label>
-            <input id="productName" type="text" placeholder="e.g. AI Super Instruction Generator" />
-          </div>
-
-          <div class="field">
-            <label for="role">AI Role</label>
-            <textarea id="role" placeholder="e.g. You are an expert AI prompt architect who creates high-quality system prompts for production use."></textarea>
-          </div>
-
-          <div class="field">
-            <label for="objective">Objective</label>
-            <textarea id="objective" placeholder="e.g. Analyze user requirements and output a complete, structured, copy-ready system prompt."></textarea>
-          </div>
-
-          <div class="field">
-            <label for="inputs">Input Processing Rules</label>
-            <textarea id="inputs" placeholder="e.g. Extract user intent, constraints, output format, target audience, tone, and hidden assumptions."></textarea>
-          </div>
-
-          <div class="field">
-            <label for="workflow">Workflow</label>
-            <textarea id="workflow" placeholder="e.g. Understand request → identify missing details → structure prompt sections → validate completeness → return final prompt."></textarea>
-          </div>
-
-          <div class="field">
-            <label for="constraints">Constraints</label>
-            <textarea id="constraints" placeholder="e.g. Avoid vague wording, keep sections explicit, preserve user intent, do not invent requirements."></textarea>
-          </div>
-
-          <div class="field">
-            <label for="outputFormat">Output Format</label>
-            <textarea id="outputFormat" placeholder="e.g. Return sections for Role, Objective, Instructions, Constraints, Output Template, Validation Checklist."></textarea>
-          </div>
-
-          <div class="field">
-            <label for="quality">Quality Standards</label>
-            <textarea id="quality" placeholder="e.g. Clear, complete, implementation-ready, logically structured, reusable, concise but strong."></textarea>
-          </div>
-
-          <div class="field">
-            <label for="validation">Validation Checklist</label>
-            <textarea id="validation" placeholder="e.g. Check for ambiguity, completeness, internal consistency, formatting clarity, and practical usability."></textarea>
-          </div>
-
-          <div class="field">
-            <label for="defaultBehavior">Default Behavior</label>
-            <textarea id="defaultBehavior" placeholder="e.g. If details are missing, infer safely and use best-practice defaults while stating assumptions."></textarea>
-          </div>
-        </div>
-      </article>
-
-      <article class="card panel">
-        <h2>Generated System Prompt</h2>
-        <p class="helper">This output is designed to be copied into README, custom GPT instructions, or another AI config layer.</p>
-        <div id="output" class="output-box">Click “Generate Prompt” to build your system prompt.</div>
-      </article>
-    </section>
-
-    <section class="card panel">
-      <h2>What this page already does</h2>
-      <div class="section-list">
-        <div class="section-item">
-          <h3>Stage 1: Content to structure</h3>
-          <p>Your merged README logic can now be mapped into form fields and transformed into reusable output.</p>
-        </div>
-        <div class="section-item">
-          <h3>Stage 2: Manual generator</h3>
-          <p>This version lets you manually fill sections and instantly assemble a draft system prompt.</p>
-        </div>
-        <div class="section-item">
-          <h3>Stage 3: Future upgrade</h3>
-          <p>Next you can connect this UI to your real README framework, templates, presets, and downloadable prompt blocks.</p>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="shell footer">
-    First version: static HTML generator page for your GitHub repository.
-  </footer>
-
-  <script>
-    const $ = (id) => document.getElementById(id);
-
-    const fields = {
-      productName: $("productName"),
-      role: $("role"),
-      objective: $("objective"),
-      inputs: $("inputs"),
-      workflow: $("workflow"),
-      constraints: $("constraints"),
-      outputFormat: $("outputFormat"),
-      quality: $("quality"),
-      validation: $("validation"),
-      defaultBehavior: $("defaultBehavior")
-    };
-
-    const output = $("output");
-    const generateBtn = $("generateBtn");
-    const copyBtn = $("copyBtn");
-    const loadSampleBtn = $("loadSampleBtn");
-    const themeToggle = $("themeToggle");
-
-    function buildPrompt() {
-      const productName = fields.productName.value.trim() || "Untitled Prompt Generator";
-      const role = fields.role.value.trim() || "[Define AI role]";
-      const objective = fields.objective.value.trim() || "[Define objective]";
-      const inputs = fields.inputs.value.trim() || "[Define input processing rules]";
-      const workflow = fields.workflow.value.trim() || "[Define workflow]";
-      const constraints = fields.constraints.value.trim() || "[Define constraints]";
-      const outputFormat = fields.outputFormat.value.trim() || "[Define output format]";
-      const quality = fields.quality.value.trim() || "[Define quality standards]";
-      const validation = fields.validation.value.trim() || "[Define validation checklist]";
-      const defaultBehavior = fields.defaultBehavior.value.trim() || "[Define default behavior]";
-
-      return `# ${productName}
-
-## ROLE
-${role}
-
-## OBJECTIVE
-${objective}
-
-## INPUT PROCESSING
-${inputs}
-
-## WORKFLOW
-${workflow}
-
-## CONSTRAINTS
-${constraints}
-
-## OUTPUT FORMAT
-${outputFormat}
-
-## QUALITY STANDARDS
-${quality}
-
-## VALIDATION CHECKLIST
-${validation}
-
-## DEFAULT BEHAVIOR
-${defaultBehavior}
-
-## FINAL INSTRUCTION
-Use the above framework to analyze the user's request, structure the response clearly, preserve the user's intent, and produce a complete, copy-ready system prompt with minimal ambiguity.`;
-    }
-
-    generateBtn.addEventListener("click", () => {
-      output.textContent = buildPrompt();
-    });
-
-    copyBtn.addEventListener("click", async () => {
-      try {
-        await navigator.clipboard.writeText(output.textContent);
-        copyBtn.textContent = "Copied";
-        setTimeout(() => copyBtn.textContent = "Copy Output", 1200);
-      } catch (err) {
-        alert("Copy failed. Please copy manually.");
-      }
-    });
-
-    loadSampleBtn.addEventListener("click", () => {
-      fields.productName.value = "AI Super Instruction Generator";
-      fields.role.value = "You are an expert prompt architect specialized in building high-quality system prompts for AI assistants, tools, and workflow generators.";
-      fields.objective.value = "Transform rough user intent into a structured, production-ready system prompt that is reusable, precise, and easy to implement.";
-      fields.inputs.value = "Analyze the user's goal, target audience, desired output, workflow expectations, constraints, tone, formatting requirements, and hidden assumptions before generating the prompt.";
-      fields.workflow.value = "Interpret the request, identify missing structure, organize the prompt into logical sections, improve clarity, enforce constraints, and produce a final copy-ready configuration.";
-      fields.constraints.value = "Do not invent irrelevant requirements, do not weaken specificity, avoid generic filler language, and keep all sections practical and implementation-oriented.";
-      fields.outputFormat.value = "Return a complete system prompt with clearly labeled sections for Role, Objective, Inputs, Workflow, Constraints, Output Format, Quality Standards, Validation Checklist, and Default Behavior.";
-      fields.quality.value = "The output must be explicit, logically ordered, actionable, reusable, context-aware, and suitable for direct copy and paste.";
-      fields.validation.value = "Check clarity, completeness, consistency, user-intent alignment, formatting quality, and whether the prompt can be used immediately with minimal revision.";
-      fields.defaultBehavior.value = "When information is missing, infer carefully using best-practice defaults and keep the structure robust rather than vague.";
-      output.textContent = buildPrompt();
-    });
-
-    themeToggle.addEventListener("click", () => {
-      const html = document.documentElement;
-      const current = html.getAttribute("data-theme");
-      html.setAttribute("data-theme", current === "dark" ? "light" : "dark");
-    });
-  </script>
-</body>
-</html>
+      <!-- LEFT: INPUTS -->
+      <div class="card">
+        <div class="panel">
+          <h2 data-i18n="inputsTitle">Generator Inputs</h2>
+          <p data-i18n="inputsDesc">Fill in the prompt structure you want, then click Generate Prompt.</p>
+          <div class="field-grid">
+            <div class="field">
+              abel for="productName" data-i18n="labelName">Generator / Project Name</label>
+              <input id="productName" type="text" data-i18n-placeholder="placeholderName" placeholder="e.g. AI Super Instruction Generator" />
+            </div>
+            <div class="field">
+              abel for="role" data-i18n="labelRole">AI Role</label>
+              <textarea id="role" data-i18n-placeholder="placeholderRole" placeholder="Describe the AI's role and persona…"></textarea>
+            </div>
+            <div class="field">
+              abel for="objective" data-i18n="labelObjective">Objective</label>
+              <textarea id="objective" data-i18n-placeholder="placeholderObjective" placeholder="What is the primary goal of this prompt?"></textarea>
+            </div>
+            <div class="field">
+              abel for="inputs"
