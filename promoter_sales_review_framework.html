@@ -5,85 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Promoter Sales Review & Incentive Game Framework</title>
   <style>
-    :root {
-      --bg: #f5f7fb;
-      --card: #fff;
-      --text: #1f2937;
-      --muted: #6b7280;
-      --primary: #2563eb;
-      --danger: #dc2626;
-      --line: #e5e7eb;
-    }
+    :root { --bg:#f5f7fb; --card:#fff; --text:#1f2937; --muted:#6b7280; --primary:#2563eb; --danger:#dc2626; --line:#e5e7eb; }
     * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Arial, "Noto Sans TC", "PingFang TC", sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.5;
-    }
-    .container { max-width: 1080px; margin: 24px auto 56px; padding: 0 16px; }
-    .header, .card {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      padding: 20px;
-      margin-bottom: 16px;
-    }
-    h1, h2 { margin: 0 0 10px; }
-    .sub { color: var(--muted); margin: 0; }
-    .lang-note {
-      margin-top: 8px;
-      color: var(--muted);
-      font-size: 13px;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-    }
-    .field { display: flex; flex-direction: column; gap: 6px; }
-    .label { font-weight: 600; font-size: 14px; }
-    .label .zh { color: var(--muted); font-weight: 500; margin-left: 6px; }
-    .input-wrap {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 8px;
-      align-items: center;
-    }
-    input, textarea, select {
-      width: 100%;
-      border: 1px solid #d1d5db;
-      border-radius: 8px;
-      padding: 10px;
-      font-size: 14px;
-      background: #fff;
-    }
-    textarea { min-height: 84px; resize: vertical; }
-    .btn-clear {
-      border: 1px solid var(--danger);
-      color: var(--danger);
-      background: #fff;
-      border-radius: 8px;
-      padding: 8px 10px;
-      cursor: pointer;
-      font-size: 12px;
-      white-space: nowrap;
-    }
-    .btn-clear:hover { background: #fef2f2; }
-    .section-title { margin: 6px 0 14px; }
-    .notice {
-      border-left: 4px solid var(--primary);
-      background: #eff6ff;
-      padding: 10px 12px;
-      border-radius: 8px;
-      font-size: 14px;
-      color: #1e3a8a;
-      margin-top: 8px;
-    }
-    @media (max-width: 840px) {
-      .grid { grid-template-columns: 1fr; }
-    }
+    body { margin:0; font-family:Arial,"Noto Sans TC","PingFang TC",sans-serif; background:var(--bg); color:var(--text); line-height:1.5; }
+    .container { max-width:1080px; margin:24px auto 56px; padding:0 16px; }
+    .header,.card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:20px; margin-bottom:16px; }
+    h1,h2 { margin:0 0 10px; }
+    .sub { color:var(--muted); margin:0; }
+    .lang-note { margin-top:8px; color:var(--muted); font-size:13px; }
+    .grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+    .field { display:flex; flex-direction:column; gap:6px; }
+    .label { font-weight:600; font-size:14px; }
+    .label .zh { color:var(--muted); font-weight:500; margin-left:6px; }
+    .input-wrap { display:grid; grid-template-columns:1fr auto; gap:8px; align-items:center; }
+    input,textarea,select { width:100%; border:1px solid #d1d5db; border-radius:8px; padding:10px; font-size:14px; background:#fff; }
+    textarea { min-height:84px; resize:vertical; }
+    .btn-clear { border:1px solid var(--danger); color:var(--danger); background:#fff; border-radius:8px; padding:8px 10px; cursor:pointer; font-size:12px; white-space:nowrap; }
+    .btn-clear:hover { background:#fef2f2; }
+    .section-title { margin:6px 0 14px; }
+    .notice { border-left:4px solid var(--primary); background:#eff6ff; padding:10px 12px; border-radius:8px; font-size:14px; color:#1e3a8a; margin-top:8px; }
+    @media (max-width:840px){ .grid{ grid-template-columns:1fr; } }
   </style>
 </head>
 <body>
@@ -91,79 +32,54 @@
     <section class="header">
       <h1>Promoter Sales Review & Incentive Game Comparison</h1>
       <p class="sub">Reusable management reporting page (English primary + Chinese support).</p>
-      <p class="lang-note">English-first content is authoritative. 中文為輔助說明。</p>
+      <p class="lang-note">English-first content is authoritative. 中文為輔助說明。Weekly cycle = 7 days.</p>
       <div class="notice">SAMPLE PAGE ONLY / NOT FINAL RESULT. This page is for data input and framework preview.</div>
     </section>
-
+    <section class="card">
+      <h2 class="section-title">0) Weekly Cycle Inputs <span class="sub">每週7天週期輸入</span></h2>
+      <div class="grid">
+        <div class="field"><label class="label" for="week_start_date">Week Start Date <span class="zh">週期開始日期</span></label><div class="input-wrap"><input id="week_start_date" type="date"><button class="btn-clear" data-target="week_start_date">Clear 清除</button></div></div>
+        <div class="field"><label class="label" for="week_end_date">Week End Date <span class="zh">週期結束日期</span></label><div class="input-wrap"><input id="week_end_date" type="date"><button class="btn-clear" data-target="week_end_date">Clear 清除</button></div></div>
+      </div>
+    </section>
     <section class="card">
       <h2 class="section-title">1) Campaign & Promoter Inputs <span class="sub">活動與人員輸入</span></h2>
       <div class="grid">
-        <div class="field">
-          <label class="label" for="campaign_period">Campaign Period <span class="zh">活動期間</span></label>
-          <div class="input-wrap"><input id="campaign_period" type="text" placeholder="2026-05-01 ~ 2026-05-31"><button class="btn-clear" data-target="campaign_period">Clear 清除</button></div>
-        </div>
-        <div class="field">
-          <label class="label" for="promoter_name">Promoter Name <span class="zh">促銷員姓名</span></label>
-          <div class="input-wrap"><input id="promoter_name" type="text" placeholder="e.g. Alex Chan"><button class="btn-clear" data-target="promoter_name">Clear 清除</button></div>
-        </div>
-        <div class="field">
-          <label class="label" for="promoter_id">Promoter ID <span class="zh">促銷員編號</span></label>
-          <div class="input-wrap"><input id="promoter_id" type="text" placeholder="Optional"><button class="btn-clear" data-target="promoter_id">Clear 清除</button></div>
-        </div>
-        <div class="field">
-          <label class="label" for="store">Store <span class="zh">門店</span></label>
-          <div class="input-wrap"><input id="store" type="text" placeholder="Store A"><button class="btn-clear" data-target="store">Clear 清除</button></div>
-        </div>
-        <div class="field">
-          <label class="label" for="region">Region <span class="zh">區域</span></label>
-          <div class="input-wrap"><input id="region" type="text" placeholder="North / South"><button class="btn-clear" data-target="region">Clear 清除</button></div>
-        </div>
+        <div class="field"><label class="label" for="campaign_period">Campaign Period <span class="zh">活動期間</span></label><div class="input-wrap"><input id="campaign_period" type="text" placeholder="2026-W21"><button class="btn-clear" data-target="campaign_period">Clear 清除</button></div></div>
+        <div class="field"><label class="label" for="promoter_name">Promoter Name <span class="zh">促銷員姓名</span></label><div class="input-wrap"><input id="promoter_name" type="text" placeholder="e.g. Alex Chan"><button class="btn-clear" data-target="promoter_name">Clear 清除</button></div></div>
+        <div class="field"><label class="label" for="promoter_id">Promoter ID <span class="zh">促銷員編號</span></label><div class="input-wrap"><input id="promoter_id" type="text" placeholder="Optional"><button class="btn-clear" data-target="promoter_id">Clear 清除</button></div></div>
+        <div class="field"><label class="label" for="store">Store <span class="zh">門店</span></label><div class="input-wrap"><input id="store" type="text" placeholder="Store A"><button class="btn-clear" data-target="store">Clear 清除</button></div></div>
       </div>
     </section>
-
+    <section class="card"><h2 class="section-title">2) Sales & Target Inputs <span class="sub">銷售與目標輸入</span></h2><div class="grid">
+      <div class="field"><label class="label" for="sales_amount">Sales Amount <span class="zh">銷售額</span></label><div class="input-wrap"><input id="sales_amount" type="number" placeholder="120000"><button class="btn-clear" data-target="sales_amount">Clear 清除</button></div></div>
+      <div class="field"><label class="label" for="sales_target">Sales Target <span class="zh">目標</span></label><div class="input-wrap"><input id="sales_target" type="number" placeholder="100000"><button class="btn-clear" data-target="sales_target">Clear 清除</button></div></div>
+      <div class="field"><label class="label" for="achievement_pct">Achievement % <span class="zh">達成率</span></label><div class="input-wrap"><input id="achievement_pct" type="text" placeholder="120%"><button class="btn-clear" data-target="achievement_pct">Clear 清除</button></div></div>
+      <div class="field"><label class="label" for="units_sold">Units Sold <span class="zh">銷售件數</span></label><div class="input-wrap"><input id="units_sold" type="number" placeholder="320"><button class="btn-clear" data-target="units_sold">Clear 清除</button></div></div>
+    </div></section>
+    <section class="card"><h2 class="section-title">3) Incentive Game Inputs <span class="sub">激勵遊戲輸入</span></h2><div class="grid">
+      <div class="field"><label class="label" for="incentive_game_score">Incentive Game Score <span class="zh">遊戲分數</span></label><div class="input-wrap"><input id="incentive_game_score" type="number" placeholder="88"><button class="btn-clear" data-target="incentive_game_score">Clear 清除</button></div></div>
+      <div class="field"><label class="label" for="game_result">Game Result <span class="zh">遊戲結果</span></label><div class="input-wrap"><select id="game_result"><option value="">Select</option><option>Gold</option><option>Silver</option><option>Bronze</option><option>Win</option><option>Lose</option></select><button class="btn-clear" data-target="game_result">Clear 清除</button></div></div>
+      <div class="field"><label class="label" for="prize_qualification">Prize Qualification <span class="zh">獎勵資格</span></label><div class="input-wrap"><select id="prize_qualification"><option value="">Select</option><option>Y</option><option>N</option></select><button class="btn-clear" data-target="prize_qualification">Clear 清除</button></div></div>
+      <div class="field"><label class="label" for="remarks">Remarks <span class="zh">備註</span></label><div class="input-wrap"><textarea id="remarks" placeholder="New joiner / Transfer / Leave"></textarea><button class="btn-clear" data-target="remarks">Clear 清除</button></div></div>
+    </div></section>
     <section class="card">
-      <h2 class="section-title">2) Sales & Target Inputs <span class="sub">銷售與目標輸入</span></h2>
+      <h2 class="section-title">4) Data Intake (Text + Image) <span class="sub">資料輸入（文字 + 圖片）</span></h2>
       <div class="grid">
-        <div class="field"><label class="label" for="sales_amount">Sales Amount <span class="zh">銷售額</span></label><div class="input-wrap"><input id="sales_amount" type="number" placeholder="120000"><button class="btn-clear" data-target="sales_amount">Clear 清除</button></div></div>
-        <div class="field"><label class="label" for="sales_target">Sales Target <span class="zh">目標</span></label><div class="input-wrap"><input id="sales_target" type="number" placeholder="100000"><button class="btn-clear" data-target="sales_target">Clear 清除</button></div></div>
-        <div class="field"><label class="label" for="achievement_pct">Achievement % <span class="zh">達成率</span></label><div class="input-wrap"><input id="achievement_pct" type="text" placeholder="120%"><button class="btn-clear" data-target="achievement_pct">Clear 清除</button></div></div>
-        <div class="field"><label class="label" for="units_sold">Units Sold <span class="zh">銷售件數</span></label><div class="input-wrap"><input id="units_sold" type="number" placeholder="320"><button class="btn-clear" data-target="units_sold">Clear 清除</button></div></div>
-        <div class="field"><label class="label" for="sales_ranking">Sales Ranking <span class="zh">銷售排名</span></label><div class="input-wrap"><input id="sales_ranking" type="number" placeholder="1"><button class="btn-clear" data-target="sales_ranking">Clear 清除</button></div></div>
-      </div>
-    </section>
-
-    <section class="card">
-      <h2 class="section-title">3) Incentive Game Inputs <span class="sub">激勵遊戲輸入</span></h2>
-      <div class="grid">
-        <div class="field"><label class="label" for="incentive_game_score">Incentive Game Score <span class="zh">遊戲分數</span></label><div class="input-wrap"><input id="incentive_game_score" type="number" placeholder="88"><button class="btn-clear" data-target="incentive_game_score">Clear 清除</button></div></div>
-        <div class="field"><label class="label" for="game_result">Game Result <span class="zh">遊戲結果</span></label><div class="input-wrap"><select id="game_result"><option value="">Select</option><option>Gold</option><option>Silver</option><option>Bronze</option><option>Win</option><option>Lose</option></select><button class="btn-clear" data-target="game_result">Clear 清除</button></div></div>
-        <div class="field"><label class="label" for="game_ranking">Game Ranking <span class="zh">遊戲排名</span></label><div class="input-wrap"><input id="game_ranking" type="number" placeholder="5"><button class="btn-clear" data-target="game_ranking">Clear 清除</button></div></div>
-        <div class="field"><label class="label" for="prize_qualification">Prize Qualification <span class="zh">獎勵資格</span></label><div class="input-wrap"><select id="prize_qualification"><option value="">Select</option><option>Y</option><option>N</option></select><button class="btn-clear" data-target="prize_qualification">Clear 清除</button></div></div>
-      </div>
-    </section>
-
-    <section class="card">
-      <h2 class="section-title">4) Supporting Inputs <span class="sub">補充輸入</span></h2>
-      <div class="grid">
-        <div class="field"><label class="label" for="attendance_days">Attendance Days <span class="zh">出勤天數</span></label><div class="input-wrap"><input id="attendance_days" type="number" placeholder="26"><button class="btn-clear" data-target="attendance_days">Clear 清除</button></div></div>
-        <div class="field"><label class="label" for="working_hours">Working Hours <span class="zh">工時</span></label><div class="input-wrap"><input id="working_hours" type="number" placeholder="208"><button class="btn-clear" data-target="working_hours">Clear 清除</button></div></div>
-        <div class="field"><label class="label" for="stock_issue_flag">Stock Issue Flag <span class="zh">缺貨標記</span></label><div class="input-wrap"><select id="stock_issue_flag"><option value="">Select</option><option>Yes</option><option>No</option></select><button class="btn-clear" data-target="stock_issue_flag">Clear 清除</button></div></div>
-        <div class="field"><label class="label" for="remarks">Remarks <span class="zh">備註</span></label><div class="input-wrap"><textarea id="remarks" placeholder="New joiner / Transfer / Leave"></textarea><button class="btn-clear" data-target="remarks">Clear 清除</button></div></div>
+        <div class="field"><label class="label" for="raw_text_input">Raw Text Input <span class="zh">貼上文字資料</span></label><div class="input-wrap"><textarea id="raw_text_input" placeholder="Paste Excel output text here..."></textarea><button class="btn-clear" data-target="raw_text_input">Clear 清除</button></div></div>
+        <div class="field"><label class="label" for="image_upload">Image Upload <span class="zh">上載圖片</span></label><div class="input-wrap"><input id="image_upload" type="file" accept="image/*"><button class="btn-clear" data-target="image_upload">Clear 清除</button></div></div>
       </div>
     </section>
   </main>
-
   <script>
     document.querySelectorAll('.btn-clear').forEach((button) => {
       button.addEventListener('click', () => {
         const targetId = button.getAttribute('data-target');
         const input = document.getElementById(targetId);
         if (!input) return;
-        if (input.tagName === 'SELECT') {
-          input.selectedIndex = 0;
-        } else {
-          input.value = '';
-        }
+        if (input.type === 'file') input.value = '';
+        else if (input.tagName === 'SELECT') input.selectedIndex = 0;
+        else input.value = '';
         input.focus();
       });
     });
