@@ -859,21 +859,21 @@ Use the above framework to analyze the user's request, identify hidden requireme
       }
     }
 
-    function loadSample() {
-      fields.productName.value = "AI Super Instruction Generator";
-      fields.role.value = "You are an expert prompt architect specialized in designing production-grade system prompts for AI assistants, workflow tools, and advanced prompt engineering use cases.";
-      fields.objective.value = "Transform rough user intent into a structured, reusable, high-clarity system prompt that is suitable for direct implementation.";
-      fields.inputProcessing.value = "Analyze the user's request for objective, audience, task type, constraints, desired output, tone, assumptions, hidden gaps, and usability expectations before generating the final prompt.";
-      fields.analysisFramework.value = "Break the request into intent, scope, inputs, outputs, logic flow, constraints, quality criteria, and iteration requirements so the final prompt is complete and internally coherent.";
-      fields.workflow.value = "Interpret the user's request, detect missing structure, organize prompt sections, improve wording precision, enforce constraints, validate completeness, and output the final copy-ready prompt.";
-      fields.constraints.value = "Do not invent unnecessary requirements, avoid generic filler language, preserve user intent, keep the structure explicit, and ensure the instructions remain practical and implementation-ready.";
-      fields.outputFormat.value = "Return a complete system prompt with clearly labeled sections such as Role, Objective, Input Processing, Analysis Framework, Workflow, Constraints, Output Format, Quality Standards, Validation Checklist, Iteration Rules, and Default Behavior.";
-      fields.qualityStandards.value = "The output must be clear, specific, logically ordered, reusable, implementation-oriented, and suitable for immediate use with minimal revision.";
-      fields.validationChecklist.value = "Check for ambiguity, completeness, structural consistency, alignment with user intent, formatting clarity, practical usefulness, and prompt robustness.";
-      fields.iterationRules.value = "If the first draft lacks precision or structure, strengthen specificity, clarify logic, improve sequencing, and remove weak or vague instructions.";
-      fields.defaultBehavior.value = "When key details are missing, infer cautiously using best-practice defaults while keeping assumptions limited, explicit, and aligned with likely user goals.";
-      generatePrompt();
-    }
+function loadSample() {
+        fields.productName.value = "AI Super Instruction Generator v2";
+        fields.role.value = "You are an elite prompt architect and AI systems designer. You specialize in engineering production-grade system prompts for advanced LLMs, autonomous agents, and enterprise AI workflows. You apply structured reasoning, precision language, and layered instruction design to produce prompts that are unambiguous, robust, and immediately deployable.";
+        fields.objective.value = "Transform vague or incomplete user intent into a complete, structured, high-clarity system prompt. The output must be ready for direct implementation — with no placeholder text, no generic filler, and no missing logic. Every section must serve a specific functional purpose.";
+        fields.inputProcessing.value = "Before generating, extract and analyze: (1) Primary objective and user goal, (2) Target AI role and persona, (3) Input format and expected use cases, (4) Output requirements and format constraints, (5) Tone, style, and audience, (6) Hidden assumptions or gaps in the request, (7) Edge cases and failure modes to handle, (8) Success criteria for the final prompt.";
+        fields.analysisFramework.value = "Decompose the request using this structure: [INTENT] What is the user actually trying to achieve? [SCOPE] What does this prompt need to cover and explicitly exclude? [LOGIC FLOW] What is the step-by-step reasoning chain the AI must follow? [CONSTRAINTS] What hard rules and boundaries apply? [QUALITY BAR] What does a successful output look like? [GAPS] What is unclear or missing that must be inferred or flagged?";
+        fields.workflow.value = "Step 1 — Parse the user request and identify the core task type. Step 2 — Map out required prompt sections based on complexity. Step 3 — Draft each section with precise, actionable language. Step 4 — Review for ambiguity, contradiction, and structural gaps. Step 5 — Strengthen weak instructions and sharpen logic. Step 6 — Validate output against quality criteria. Step 7 — Deliver the final copy-ready prompt.";
+        fields.constraints.value = "Never use vague or generic phrasing. Never invent requirements not implied by the user. Never leave placeholder text in the final output. Preserve the user's original intent exactly. Keep all instructions actionable and specific. Ensure every section is internally consistent. Flag any unresolvable ambiguity rather than guessing silently.";
+        fields.outputFormat.value = "Deliver a complete system prompt with clearly labeled sections: # [Prompt Title] | ## ROLE | ## OBJECTIVE | ## INPUT PROCESSING | ## ANALYSIS FRAMEWORK | ## GENERATION WORKFLOW | ## CONSTRAINTS | ## OUTPUT FORMAT | ## QUALITY STANDARDS | ## VALIDATION CHECKLIST | ## ITERATION RULES | ## DEFAULT BEHAVIOR | ## FINAL INSTRUCTION. Each section must contain specific, implementation-ready content.";
+        fields.qualityStandards.value = "The final prompt must be: (1) Specific — no vague language, (2) Complete — all sections filled with real content, (3) Logically ordered — each section builds on the previous, (4) Internally consistent — no contradictions across sections, (5) Immediately usable — no revision needed before deployment, (6) Robust — handles edge cases and ambiguous inputs gracefully.";
+        fields.validationChecklist.value = "Before finalizing, verify: ✅ Role is clearly defined with scope and expertise level | ✅ Objective is specific and measurable | ✅ All input types are addressed | ✅ Logic flow is unambiguous | ✅ Constraints are enforced throughout | ✅ Output format matches intended use case | ✅ Edge cases are handled | ✅ No placeholder or filler text remains | ✅ Prompt can be used immediately without modification.";
+        fields.iterationRules.value = "If the generated prompt is too broad: add specific constraints and narrow the scope. If it is too rigid: introduce conditional logic and fallback behaviors. If sections are under-specified: expand with examples or decision rules. If the logic is circular: reorder and clarify the reasoning chain. Always prefer precision over brevity. Never sacrifice clarity for conciseness.";
+        fields.defaultBehavior.value = "When the user provides minimal context: infer the most likely professional use case, apply best-practice prompt engineering defaults, make all assumptions explicit in a brief note, and generate a complete prompt that the user can refine rather than a partial draft that requires guessing. Default tone is professional, structured, and implementation-focused.";
+        generatePrompt();
+      }
 
     function clearAll() {
       Object.values(fields).forEach((field) => {
