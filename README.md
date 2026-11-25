@@ -29,6 +29,31 @@ Prompting 101 mode follows the 10-part structure from Anthropic's *Prompting 101
 - **Analytical**: use only the provided materials, say plainly when something is missing or unclear, and cite the supporting field or detail.
 - **Generative**: fill gaps with sensible assumptions and list them in an *Assumptions* section.
 
+### A. Claude API export
+The output panel has three tabs in Prompting 101 mode:
+
+| Tab | What you get |
+|---|---|
+| **Prompt** | Readable SYSTEM PROMPT / USER MESSAGE text |
+| **API JSON** | A ready-to-send Messages API body: `system` (optionally with `cache_control`), one `user` message, `thinking: {type: "adaptive"}`, `output_config.effort`, and `fallbacks: "default"` |
+| **cURL** | A command that posts the downloaded JSON with the required headers (`anthropic-version: 2026-10-21`, plus `anthropic-beta: server-side-fallback-2026-07-01` when fallback is on) and prints the reply text with `jq` |
+
+**API Export Settings** (bottom of the form): model (default Claude Opus 5.5; Sonnet 5.5 and Haiku 5.5 available), effort (default `high`), `max_tokens` (default 16000), cache system prompt, and refusal fallback (not available on Haiku 5.5, so it is left out there).
+
+### B. Input data and file upload (section 7)
+- **Input Data** is wrapped in the **Input XML Tag** you choose (e.g. `<sales_sheet>`).
+- **Images** (JPG, PNG, GIF, WebP) and **PDFs** become base64 content blocks placed before the text.
+- **Text files** (.txt .csv .tsv .md .json) are inlined inside `<file name="…">` tags.
+- Unsupported types are rejected with a message; images over 5 MB and requests near 32 MB get a warning.
+
+### C. Evaluation Lab
+1. **Save current form as version** (v1, v2, …). Versions and test cases are kept in this browser's localStorage.
+2. **Test cases**: each case replaces the Input Data. *Expected result* passes when the text appears in the reply (case and whitespace ignored), or use `/regex/flags`. Leave it blank to judge by eye.
+3. **Run evaluation** sends every ticked version × case to the API (3 at a time, retries 429/5xx) and shows a side-by-side table with PASS / FAIL, model, stop reason, tokens and latency. Refusals count as FAIL and show their category.
+4. **Export Batch JSON** writes the same matrix for `POST /v1/messages/batches` (custom_id `v<version>-c<case>`), so you can run it without putting a key in the browser. `fallbacks` is omitted because the Batches API rejects it.
+
+> **API key safety:** the key is held in memory only and is never saved. It is sent directly from your browser to `api.anthropic.com`, using the `anthropic-dangerous-direct-browser-access` header. Use a key with a spend limit, and don't run evaluations on a shared computer.
+
 ## Copy-Ready System Prompt
 
 ```markdown
