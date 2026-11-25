@@ -56,8 +56,8 @@
       --shadow-md: 0 4px 16px rgba(40, 37, 29, 0.08);
       --shadow-lg: 0 12px 32px rgba(40, 37, 29, 0.12);
 
-      --font-display: "Zodiak", Georgia, serif;
-      --font-body: "General Sans", Inter, sans-serif;
+      --font-display: "Zodiak", Georgia, "Noto Serif HK", "Songti TC", serif;
+      --font-body: "General Sans", Inter, "PingFang HK", "Noto Sans HK", "Microsoft JhengHei", sans-serif;
 
       --content-wide: 1180px;
       --transition: 180ms cubic-bezier(0.16, 1, 0.3, 1);
@@ -462,6 +462,242 @@
       flex-wrap: wrap;
       gap: 0.75rem;
       margin-top: 1rem;
+    }
+
+    html:lang(zh) {
+      --font-display: var(--font-body);
+    }
+
+    .topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex-shrink: 0;
+    }
+
+    .lang-switch {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.1rem;
+      padding: 0.2rem;
+      background: var(--color-surface);
+      border: 1px solid rgba(40, 37, 29, 0.12);
+      border-radius: var(--radius-full);
+      box-shadow: var(--shadow-sm);
+    }
+
+    [data-theme="dark"] .lang-switch {
+      border-color: rgba(205, 204, 202, 0.12);
+    }
+
+    .lang-btn {
+      min-height: 40px;
+      padding: 0.35rem 0.75rem;
+      border-radius: var(--radius-full);
+      font-size: var(--text-sm);
+      font-weight: 700;
+      color: var(--color-text-muted);
+      white-space: nowrap;
+    }
+
+    .lang-btn[aria-pressed="true"] {
+      background: var(--color-primary);
+      color: #fff;
+    }
+
+    .lang-sep {
+      color: var(--color-text-faint);
+    }
+
+    a.btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+    }
+
+    .hero h1 {
+      max-width: 20ch;
+    }
+
+    html:lang(zh) .hero h1 {
+      max-width: 15em;
+    }
+
+    .qa-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.9rem;
+    }
+
+    .qa-card {
+      padding: 1rem 1.1rem;
+      background: var(--color-surface);
+      border: 1px solid rgba(40, 37, 29, 0.08);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-sm);
+    }
+
+    [data-theme="dark"] .qa-card {
+      border-color: rgba(205, 204, 202, 0.1);
+    }
+
+    .qa-title {
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      margin-bottom: 0.35rem;
+    }
+
+    .qa-card p {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+    }
+
+    .callout {
+      max-width: 78ch;
+      padding: 0.9rem 1.1rem;
+      background: var(--color-primary-highlight);
+      border-left: 4px solid var(--color-primary);
+      border-radius: var(--radius-md);
+    }
+
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.9em;
+      padding: 0.05rem 0.3rem;
+      background: var(--color-surface-offset);
+      border-radius: var(--radius-sm);
+    }
+
+    .quickstart {
+      margin-bottom: 1.25rem;
+      scroll-margin-top: 5.5rem;
+    }
+
+    #outputPanel {
+      scroll-margin-top: 5.5rem;
+    }
+
+    .qs-steps {
+      list-style: none;
+      counter-reset: qs;
+      margin: 1rem 0 0.75rem;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .qs-step {
+      counter-increment: qs;
+      display: grid;
+      align-content: start;
+      gap: 0.6rem;
+      padding: 1rem;
+      background: var(--color-surface-2);
+      border: 1px solid var(--color-divider);
+      border-radius: var(--radius-lg);
+    }
+
+    .qs-step h3 {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+      margin: 0;
+      font-size: var(--text-base);
+    }
+
+    .qs-step h3::before {
+      content: counter(qs);
+      display: inline-grid;
+      place-items: center;
+      flex-shrink: 0;
+      width: 1.6rem;
+      height: 1.6rem;
+      border-radius: var(--radius-full);
+      background: var(--color-primary);
+      color: #fff;
+      font-size: var(--text-sm);
+    }
+
+    .qs-step p {
+      font-size: var(--text-sm);
+    }
+
+    .qs-step .btn {
+      justify-self: start;
+    }
+
+    .qs-peek summary {
+      cursor: pointer;
+      font-size: var(--text-sm);
+      font-weight: 600;
+      color: var(--color-primary);
+    }
+
+    .qs-example {
+      display: grid;
+      gap: 0.2rem;
+      margin: 0.6rem 0 0;
+      font-size: var(--text-sm);
+    }
+
+    .qs-example dt {
+      font-weight: 700;
+    }
+
+    .qs-example dd {
+      margin: 0 0 0.45rem;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      color: var(--color-text-muted);
+    }
+
+    .qs-answer {
+      margin: 0.6rem 0;
+      padding: 0.75rem;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      font-family: inherit;
+      font-size: var(--text-sm);
+      background: var(--color-surface);
+      border: 1px solid var(--color-divider);
+      border-radius: var(--radius-md);
+    }
+
+    .qs-status {
+      font-size: var(--text-sm);
+      font-weight: 600;
+      color: var(--color-primary);
+    }
+
+    .qs-status:empty {
+      display: none;
+    }
+
+    .mode-intro {
+      margin: -0.4rem 0 0.9rem;
+    }
+
+    @media (max-width: 980px) {
+      .qa-grid,
+      .qs-steps {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .brand-subtitle {
+        display: none;
+      }
+
+      .topbar-inner {
+        gap: 0.5rem;
+      }
+
+      .lang-btn {
+        padding: 0.35rem 0.55rem;
+      }
     }
 
     [hidden] {
@@ -894,138 +1130,175 @@
   </style>
 </head>
 <body>
-  <a class="skip-link" href="#content">Skip to content</a>
+  <a class="skip-link" href="#content" data-i18n="skip">Skip to content</a>
 
   <header class="topbar">
     <div class="shell topbar-inner">
-      <div class="brand" aria-label="AI Super Instruction Generator logo">
+      <div class="brand" aria-label="AI Super Instruction Generator logo" data-i18n-aria="brand.aria">
         <div class="brand-mark">AI</div>
         <div class="brand-text">
-          <span class="brand-title">AI Super Instruction Generator</span>
-          <span class="brand-subtitle">System prompt website prototype</span>
+          <span class="brand-title" data-i18n="brand.title">AI Super Instruction Generator</span>
+          <span class="brand-subtitle" data-i18n="brand.subtitle">System prompt website prototype</span>
         </div>
       </div>
 
-      <button class="theme-toggle" type="button" id="themeToggle" aria-label="Toggle color theme">
-        ◐
-      </button>
+      <div class="topbar-actions">
+        <div class="lang-switch" role="group" aria-label="Language / 語言">
+          <button class="lang-btn" type="button" id="langZh" data-lang="zh-HK" lang="zh-Hant-HK" aria-pressed="false">繁體中文</button>
+          <span class="lang-sep" aria-hidden="true">|</span>
+          <button class="lang-btn" type="button" id="langEn" data-lang="en" lang="en" aria-pressed="true">English</button>
+        </div>
+        <button class="theme-toggle" type="button" id="themeToggle" aria-label="Toggle color theme" data-i18n-aria="theme.aria">
+          ◐
+        </button>
+      </div>
     </div>
   </header>
 
   <main id="content" class="shell">
-    <section class="hero">
-      <span class="eyebrow">Generator system prompt</span>
-      <h1>Turn your README prompt logic into a usable web generator.</h1>
-      <p class="hero-copy">
-        This single-page app is the first practical version of your Generator system prompt website.
-        It lets you define prompt sections on the left and instantly build a structured, copy-ready system prompt on the right.
-      </p>
+    <section class="hero" aria-labelledby="heroTitle">
+      <span class="eyebrow" data-i18n="hero.eyebrow">Prompt generator</span>
+      <h1 id="heroTitle" data-i18n="hero.title">Turn rough ideas into clear, reusable instructions for AI.</h1>
+
+      <div class="qa-grid">
+        <article class="qa-card">
+          <h2 class="qa-title" data-i18n="hero.q1.title">What is this?</h2>
+          <p data-i18n="hero.q1.body">A form that helps you write a prompt: the instructions you give an AI.</p>
+        </article>
+        <article class="qa-card">
+          <h2 class="qa-title" data-i18n="hero.q2.title">How does it help me?</h2>
+          <p data-i18n="hero.q2.body">You fill in the task, the information to use and the answer format. The tool arranges them into a clear, reusable prompt, so the AI has less to guess.</p>
+        </article>
+        <article class="qa-card">
+          <h2 class="qa-title" data-i18n="hero.q3.title">Where do I start?</h2>
+          <p data-i18n="hero.q3.body">Follow the 3-step quick start below. It comes with a made-up sales example you can fill in with one click.</p>
+        </article>
+      </div>
+
+      <p class="callout" data-i18n-html="hero.callout"><strong>This tool writes the prompt; it doesn't give you the answer.</strong> To get an answer, copy the prompt into an AI chat tool (such as claude.ai) and send it there.</p>
 
       <div class="hero-actions">
-        <button class="btn btn-primary" id="generateBtn" type="button">Generate Prompt</button>
-        <button class="btn btn-secondary" id="copyBtn" type="button">Copy Output</button>
-        <button class="btn btn-secondary" id="loadSampleBtn" type="button">Load Sample</button>
-        <button class="btn btn-secondary" id="clearBtn" type="button">Clear All</button>
+        <a class="btn btn-primary" href="#quickstart" id="heroStartBtn" data-i18n="hero.cta">Start the quick start</a>
+        <button class="btn btn-secondary" id="generateBtn" type="button" data-i18n="btn.generate">Generate Prompt</button>
+        <button class="btn btn-secondary" id="copyBtn" type="button" data-i18n="btn.copyOutput">Copy Output</button>
+        <button class="btn btn-secondary" id="loadSampleBtn" type="button" data-i18n="btn.loadSample">Load Sample</button>
+        <button class="btn btn-secondary" id="clearBtn" type="button" data-i18n="btn.clearAll">Clear All</button>
       </div>
+    </section>
 
-      <div class="stats" aria-label="Project status overview">
-        <div class="stat">
-          <span class="stat-label">Current stage</span>
-          <strong>Generator prototype</strong>
-        </div>
-        <div class="stat">
-          <span class="stat-label">Input mode</span>
-          <strong>Manual structured fields</strong>
-        </div>
-        <div class="stat">
-          <span class="stat-label">Output</span>
-          <strong>Copy-ready system prompt</strong>
-        </div>
-        <div class="stat">
-          <span class="stat-label">Deployment target</span>
-          <strong>GitHub Pages</strong>
-        </div>
-      </div>
+    <section class="card panel quickstart" id="quickstart" aria-labelledby="qsTitle">
+      <h2 id="qsTitle" data-i18n="qs.title">Quick start: your first prompt in 3 steps</h2>
+      <p class="panel-copy" data-i18n="qs.intro">We'll use a made-up example. Store A sold 120 units this week and 100 last week. Store B sold 80 units this week; last week's figure is not available.</p>
+
+      <ol class="qs-steps">
+        <li class="qs-step">
+          <h3 data-i18n="qs.s1.title">Choose Prompting 101</h3>
+          <p data-i18n="qs.s1.body">It splits a prompt into labelled boxes, so it's the easiest place to start. V2 Super Instruction is a more advanced mode you can skip for now.</p>
+          <button class="btn btn-secondary" id="qsModeBtn" type="button" data-i18n="qs.s1.btn">Switch to Prompting 101</button>
+        </li>
+        <li class="qs-step">
+          <h3 data-i18n="qs.s2.title">Fill in the task and the data</h3>
+          <p data-i18n="qs.s2.body">For this example you only need five boxes: Task Context, Detailed Task Description &amp; Rules, Immediate Task / Request, Input Data and Output Formatting. Keep Task Nature on Analytical: we want facts, not guesses.</p>
+          <button class="btn btn-secondary" id="qsFillBtn" type="button" data-i18n="qs.s2.btn">Fill in the example for me</button>
+          <span class="hint" data-i18n="qs.s2.note">Fills the Prompting 101 boxes with the example, in the language you're viewing. You can edit everything afterwards.</span>
+          <details class="qs-peek">
+            <summary data-i18n="qs.s2.peek">See what gets filled in</summary>
+            <dl class="qs-example" id="qsExample"></dl>
+          </details>
+        </li>
+        <li class="qs-step">
+          <h3 data-i18n="qs.s3.title">Generate and copy the prompt</h3>
+          <p data-i18n-html="qs.s3.body">Click <strong>Generate Prompt</strong>, then <strong>Copy</strong>. The result has two parts: <code>SYSTEM PROMPT</code> (the overall rules) and <code>USER MESSAGE</code> (what to do this time). Paste both, in order and with their headings, into an AI chat tool and send. Only then do you get an answer.</p>
+          <button class="btn btn-primary" id="qsGenerateBtn" type="button" data-i18n="qs.s3.btn">Generate the prompt</button>
+          <details class="qs-peek">
+            <summary data-i18n="qs.answer.summary">What a good answer looks like</summary>
+            <pre class="qs-answer" data-i18n="qs.answer.body">- Store A sold 120 units this week, up 20 units (20%) from 100 last week.
+- Store B sold 80 units this week; last week's figure was not provided, so no weekly change can be given.
+- This week, Store A sold 40 more units than Store B (120 vs 80).</pre>
+            <p class="hint" data-i18n="qs.answer.note">The exact wording will vary. Check that Store A is up 20 units (20%) and that Store B has no guessed change.</p>
+          </details>
+        </li>
+      </ol>
+      <p class="qs-status" id="qsStatus" aria-live="polite"></p>
+      <p class="hint" data-i18n="qs.later">Later, you can compare prompt versions in Evaluation Lab or export to the Claude API. You don't need either to get started.</p>
     </section>
 
     <section class="layout">
       <article class="card panel">
         <div class="panel-head">
           <div>
-            <h2>Generator Inputs</h2>
-            <p class="panel-copy">
-              Fill in the prompt architecture you want to define. This mirrors the structure you have been building in README,
-              but converts it into a web-based generation workflow.
-            </p>
+            <h2 data-i18n="panel.inputs.title">Generator Inputs</h2>
+            <p class="panel-copy" data-i18n="panel.inputs.copy">Fill in the boxes below, then click Generate Prompt. New here? Choose Prompting 101.</p>
           </div>
         </div>
 
-        <div class="mode-switch" role="group" aria-label="Prompt mode">
-          <button class="mode-btn" type="button" id="modeV2Btn" aria-pressed="true">V2 Super Instruction</button>
-          <button class="mode-btn" type="button" id="mode101Btn" aria-pressed="false">Prompting 101 · 10-part</button>
+        <div class="mode-switch" role="group" aria-label="Prompt mode" data-i18n-aria="mode.group">
+          <button class="mode-btn" type="button" id="modeV2Btn" aria-pressed="true" data-i18n="mode.v2">V2 Super Instruction</button>
+          <button class="mode-btn" type="button" id="mode101Btn" aria-pressed="false" data-i18n="mode.101">Prompting 101 · 10-part</button>
         </div>
+        <p class="hint mode-intro" id="modeIntro"></p>
 
         <div class="field-grid">
           <div class="field-grid" id="v2Fields">
           <div class="field">
-            <label for="productName">Generator / Project Name</label>
-            <input id="productName" type="text" placeholder="e.g. AI Super Instruction Generator" />
-            <span class="hint">This becomes the title of the generated prompt.</span>
+            <label for="productName" data-i18n="f.productName">Generator / Project Name</label>
+            <input id="productName" type="text" placeholder="e.g. AI Super Instruction Generator" data-i18n-ph="ph.productName" />
+            <span class="hint" data-i18n="hint.productName">This becomes the title of the generated prompt.</span>
           </div>
 
           <div class="field">
-            <label for="role">Role</label>
-            <textarea id="role" placeholder="e.g. You are an expert AI prompt architect specialized in building high-quality system prompts for production use."></textarea>
+            <label for="role" data-i18n="f.role">Role</label>
+            <textarea id="role" placeholder="e.g. You are an expert AI prompt architect specialized in building high-quality system prompts for production use." data-i18n-ph="ph.role"></textarea>
           </div>
 
           <div class="field">
-            <label for="objective">Objective</label>
-            <textarea id="objective" placeholder="e.g. Transform rough user intent into a structured, production-ready system prompt."></textarea>
+            <label for="objective" data-i18n="f.objective">Objective</label>
+            <textarea id="objective" placeholder="e.g. Transform rough user intent into a structured, production-ready system prompt." data-i18n-ph="ph.objective"></textarea>
           </div>
 
           <div class="field">
-            <label for="inputProcessing">Input Processing Rules</label>
-            <textarea id="inputProcessing" placeholder="e.g. Extract the user's goal, constraints, target audience, preferred output, tone, and hidden assumptions before drafting the prompt."></textarea>
+            <label for="inputProcessing" data-i18n="f.inputProcessing">Input Processing Rules</label>
+            <textarea id="inputProcessing" placeholder="e.g. Extract the user's goal, constraints, target audience, preferred output, tone, and hidden assumptions before drafting the prompt." data-i18n-ph="ph.inputProcessing"></textarea>
           </div>
 
           <div class="field">
-            <label for="analysisFramework">Analysis Framework</label>
-            <textarea id="analysisFramework" placeholder="e.g. Analyze user needs through intent, constraints, structure, tone, risk, missing details, and implementation readiness."></textarea>
+            <label for="analysisFramework" data-i18n="f.analysisFramework">Analysis Framework</label>
+            <textarea id="analysisFramework" placeholder="e.g. Analyze user needs through intent, constraints, structure, tone, risk, missing details, and implementation readiness." data-i18n-ph="ph.analysisFramework"></textarea>
           </div>
 
           <div class="field">
-            <label for="workflow">Generation Workflow</label>
-            <textarea id="workflow" placeholder="e.g. Understand request → identify missing structure → build prompt sections → validate clarity → output final prompt."></textarea>
+            <label for="workflow" data-i18n="f.workflow">Generation Workflow</label>
+            <textarea id="workflow" placeholder="e.g. Understand request → identify missing structure → build prompt sections → validate clarity → output final prompt." data-i18n-ph="ph.workflow"></textarea>
           </div>
 
           <div class="field">
-            <label for="constraints">Constraints</label>
-            <textarea id="constraints" placeholder="e.g. Do not invent requirements, avoid generic filler, preserve user intent, and keep all instructions implementation-ready."></textarea>
+            <label for="constraints" data-i18n="f.constraints">Constraints</label>
+            <textarea id="constraints" placeholder="e.g. Do not invent requirements, avoid generic filler, preserve user intent, and keep all instructions implementation-ready." data-i18n-ph="ph.constraints"></textarea>
           </div>
 
           <div class="field">
-            <label for="outputFormat">Output Format</label>
-            <textarea id="outputFormat" placeholder="e.g. Return sections for Role, Objective, Input Processing, Analysis Framework, Workflow, Constraints, Output Template, Quality Standards, Validation Checklist, and Default Behavior."></textarea>
+            <label for="outputFormat" data-i18n="f.outputFormat">Output Format</label>
+            <textarea id="outputFormat" placeholder="e.g. Return sections for Role, Objective, Input Processing, Analysis Framework, Workflow, Constraints, Output Template, Quality Standards, Validation Checklist, and Default Behavior." data-i18n-ph="ph.outputFormat"></textarea>
           </div>
 
           <div class="field">
-            <label for="qualityStandards">Quality Standards</label>
-            <textarea id="qualityStandards" placeholder="e.g. The result must be clear, specific, reusable, logically ordered, practical, and suitable for direct copy-paste."></textarea>
+            <label for="qualityStandards" data-i18n="f.qualityStandards">Quality Standards</label>
+            <textarea id="qualityStandards" placeholder="e.g. The result must be clear, specific, reusable, logically ordered, practical, and suitable for direct copy-paste." data-i18n-ph="ph.qualityStandards"></textarea>
           </div>
 
           <div class="field">
-            <label for="validationChecklist">Validation Checklist</label>
-            <textarea id="validationChecklist" placeholder="e.g. Check ambiguity, completeness, consistency, user-intent alignment, formatting clarity, and practical usability."></textarea>
+            <label for="validationChecklist" data-i18n="f.validationChecklist">Validation Checklist</label>
+            <textarea id="validationChecklist" placeholder="e.g. Check ambiguity, completeness, consistency, user-intent alignment, formatting clarity, and practical usability." data-i18n-ph="ph.validationChecklist"></textarea>
           </div>
 
           <div class="field">
-            <label for="iterationRules">Iteration Rules</label>
-            <textarea id="iterationRules" placeholder="e.g. When the draft is weak, refine specificity, improve structure, reduce ambiguity, and strengthen execution detail."></textarea>
+            <label for="iterationRules" data-i18n="f.iterationRules">Iteration Rules</label>
+            <textarea id="iterationRules" placeholder="e.g. When the draft is weak, refine specificity, improve structure, reduce ambiguity, and strengthen execution detail." data-i18n-ph="ph.iterationRules"></textarea>
           </div>
 
           <div class="field">
-            <label for="defaultBehavior">Default Behavior</label>
-            <textarea id="defaultBehavior" placeholder="e.g. If information is missing, infer safely using best-practice defaults while keeping assumptions minimal and explicit."></textarea>
+            <label for="defaultBehavior" data-i18n="f.defaultBehavior">Default Behavior</label>
+            <textarea id="defaultBehavior" placeholder="e.g. If information is missing, infer safely using best-practice defaults while keeping assumptions minimal and explicit." data-i18n-ph="ph.defaultBehavior"></textarea>
           </div>
 
           </div>
@@ -1033,114 +1306,114 @@
           <div class="field-grid" id="p101Fields" hidden>
             <div class="row-2">
               <div class="field">
-                <label for="p101Title">Prompt Name</label>
-                <input id="p101Title" type="text" placeholder="e.g. Weekly Promoter Report Reviewer" />
+                <label for="p101Title" data-i18n="f.p101Title">Prompt Name</label>
+                <input id="p101Title" type="text" placeholder="e.g. Weekly Promoter Report Reviewer" data-i18n-ph="ph.p101Title" />
               </div>
               <div class="field">
-                <label for="p101TaskType">Task Nature</label>
+                <label for="p101TaskType" data-i18n="f.taskType">Task Nature</label>
                 <select id="p101TaskType">
-                  <option value="analytical">Analytical — facts only, no guessing</option>
-                  <option value="generative">Generative — infer, but label assumptions</option>
+                  <option value="analytical" data-i18n="opt.analytical">Analytical — facts only, no guessing</option>
+                  <option value="generative" data-i18n="opt.generative">Generative — infer, but label assumptions</option>
                 </select>
               </div>
             </div>
 
             <div class="field">
-              <label for="p101TaskContext"><span class="section-num">1</span>Task Context</label>
-              <textarea id="p101TaskContext" placeholder="Who Claude is in this task and what job it is doing, e.g. You are reviewing weekly promoter sales reports for a retail team."></textarea>
-              <span class="hint">System prompt. Be concrete about the situation, not just a job title.</span>
+              <label for="p101TaskContext"><span class="section-num">1</span><span data-i18n="f.taskContext">Task Context</span></label>
+              <textarea id="p101TaskContext" placeholder="Who Claude is in this task and what job it is doing, e.g. You are reviewing weekly promoter sales reports for a retail team." data-i18n-ph="ph.taskContext"></textarea>
+              <span class="hint" data-i18n="hint.taskContext">System prompt. Be concrete about the situation, not just a job title.</span>
             </div>
 
             <div class="field">
-              <label for="p101Tone"><span class="section-num">2</span>Tone Context</label>
-              <textarea id="p101Tone" placeholder="e.g. Stay factual and confident. Only state what the materials support."></textarea>
+              <label for="p101Tone"><span class="section-num">2</span><span data-i18n="f.tone">Tone Context</span></label>
+              <textarea id="p101Tone" placeholder="e.g. Stay factual and confident. Only state what the materials support." data-i18n-ph="ph.tone"></textarea>
             </div>
 
             <div class="row-2">
               <div class="field">
-                <label for="p101DocTag"><span class="section-num">3</span>Background XML Tag</label>
+                <label for="p101DocTag"><span class="section-num">3</span><span data-i18n="f.docTag">Background XML Tag</span></label>
                 <input id="p101DocTag" type="text" placeholder="background" />
-                <span class="hint">Letters, digits, _ or - only.</span>
+                <span class="hint" data-i18n="hint.docTag">Letters, digits, _ or - only.</span>
               </div>
               <div class="field">
-                <label for="p101DocTitle">Background Title</label>
-                <input id="p101DocTitle" type="text" placeholder="e.g. Report field definitions" />
+                <label for="p101DocTitle" data-i18n="f.docTitle">Background Title</label>
+                <input id="p101DocTitle" type="text" placeholder="e.g. Report field definitions" data-i18n-ph="ph.docTitle" />
               </div>
             </div>
             <div class="field">
-              <label for="p101Background">Background Data (static)</label>
-              <textarea id="p101Background" placeholder="Stable reference material that rarely changes: form layout, field definitions, policies, glossary."></textarea>
-              <span class="hint">Goes in the system prompt inside XML tags, so it can be cached and reused across requests.</span>
+              <label for="p101Background" data-i18n="f.background">Background Data (static)</label>
+              <textarea id="p101Background" placeholder="Stable reference material that rarely changes: form layout, field definitions, policies, glossary." data-i18n-ph="ph.background"></textarea>
+              <span class="hint" data-i18n="hint.background">Goes in the system prompt inside XML tags, so it can be cached and reused across requests.</span>
             </div>
 
             <div class="field">
-              <label for="p101Rules"><span class="section-num">4</span>Detailed Task Description &amp; Rules</label>
-              <textarea id="p101Rules" placeholder="One rule per line. Decision rules, edge cases, what to do when data is missing."></textarea>
+              <label for="p101Rules"><span class="section-num">4</span><span data-i18n="f.rules">Detailed Task Description &amp; Rules</span></label>
+              <textarea id="p101Rules" placeholder="One rule per line. Decision rules, edge cases, what to do when data is missing." data-i18n-ph="ph.rules"></textarea>
             </div>
 
             <div class="field">
-              <label for="p101Examples"><span class="section-num">5</span>Examples</label>
-              <textarea id="p101Examples" placeholder="Worked examples of tricky cases and the correct result. Leave blank if none."></textarea>
+              <label for="p101Examples"><span class="section-num">5</span><span data-i18n="f.examples">Examples</span></label>
+              <textarea id="p101Examples" placeholder="Worked examples of tricky cases and the correct result. Leave blank if none." data-i18n-ph="ph.examples"></textarea>
             </div>
 
             <div class="field">
-              <label for="p101History"><span class="section-num">6</span>Conversation History (optional)</label>
-              <textarea id="p101History" placeholder="Relevant prior turns or user context. Leave blank if none."></textarea>
+              <label for="p101History"><span class="section-num">6</span><span data-i18n="f.history">Conversation History (optional)</span></label>
+              <textarea id="p101History" placeholder="Relevant prior turns or user context. Leave blank if none." data-i18n-ph="ph.history"></textarea>
             </div>
 
             <div class="field">
-              <label for="p101Request"><span class="section-num">7</span>Immediate Task / Request</label>
-              <textarea id="p101Request" placeholder="What Claude must do right now with the attached input, e.g. Review the attached report and photo."></textarea>
-              <span class="hint">User message. The per-request data (files, images, rows) is attached here.</span>
+              <label for="p101Request"><span class="section-num">7</span><span data-i18n="f.request">Immediate Task / Request</span></label>
+              <textarea id="p101Request" placeholder="What Claude must do right now with the attached input, e.g. Review the attached report and photo." data-i18n-ph="ph.request"></textarea>
+              <span class="hint" data-i18n="hint.request">User message. The per-request data (files, images, rows) is attached here.</span>
             </div>
 
             <div class="row-2">
               <div class="field">
-                <label for="p101InputTag">Input XML Tag</label>
+                <label for="p101InputTag" data-i18n="f.inputTag">Input XML Tag</label>
                 <input id="p101InputTag" type="text" placeholder="input" />
               </div>
               <div class="field">
-                <label for="p101Files">Attach Images / Files</label>
+                <label for="p101Files" data-i18n="f.files">Attach Images / Files</label>
                 <input id="p101Files" type="file" multiple accept="image/jpeg,image/png,image/gif,image/webp,application/pdf,.txt,.csv,.tsv,.md,.json" />
               </div>
             </div>
             <div class="field">
-              <label for="p101InputText">Input Data (this request)</label>
-              <textarea id="p101InputText" placeholder="Paste the data for this request. It is wrapped in the Input XML Tag."></textarea>
-              <span class="hint">Images and PDFs are sent as content blocks before the text. Text files (.txt .csv .md .json) are added inside &lt;file&gt; tags.</span>
+              <label for="p101InputText" data-i18n="f.inputText">Input Data (this request)</label>
+              <textarea id="p101InputText" placeholder="Paste the data for this request. It is wrapped in the Input XML Tag." data-i18n-ph="ph.inputText"></textarea>
+              <span class="hint" data-i18n="hint.inputText">Images and PDFs are sent as content blocks before the text. Text files (.txt .csv .md .json) are added inside &lt;file&gt; tags.</span>
             </div>
-            <ul class="attach-list" id="attachList" aria-label="Attached files"></ul>
+            <ul class="attach-list" id="attachList" aria-label="Attached files" data-i18n-aria="attach.aria"></ul>
             <div class="warn" id="attachWarn" aria-live="polite"></div>
 
             <div class="field">
-              <label for="p101Steps"><span class="section-num">8</span>Analysis Order</label>
-              <textarea id="p101Steps" placeholder="One step per line, in the order Claude should examine the inputs before concluding."></textarea>
-              <span class="hint">Sets the order of work. Current Claude models already think before answering, so this does not ask for a reasoning dump.</span>
+              <label for="p101Steps"><span class="section-num">8</span><span data-i18n="f.steps">Analysis Order</span></label>
+              <textarea id="p101Steps" placeholder="One step per line, in the order Claude should examine the inputs before concluding." data-i18n-ph="ph.steps"></textarea>
+              <span class="hint" data-i18n="hint.steps">Sets the order of work. Current Claude models already think before answering, so this does not ask for a reasoning dump.</span>
             </div>
 
             <div class="field">
-              <label for="p101Output"><span class="section-num">9</span>Output Formatting</label>
-              <textarea id="p101Output" placeholder="Exact structure of the answer, e.g. XML tags or a JSON shape your code will parse."></textarea>
+              <label for="p101Output"><span class="section-num">9</span><span data-i18n="f.output">Output Formatting</span></label>
+              <textarea id="p101Output" placeholder="Exact structure of the answer, e.g. XML tags or a JSON shape your code will parse." data-i18n-ph="ph.output"></textarea>
             </div>
 
             <div class="field">
-              <label for="p101Opening"><span class="section-num">10</span>Response Opening</label>
-              <input id="p101Opening" type="text" placeholder="e.g. <review>" />
-              <span class="hint">Prefill is not supported on current Claude models (API returns 400), so this becomes an instruction. For strict JSON, use structured outputs.</span>
+              <label for="p101Opening"><span class="section-num">10</span><span data-i18n="f.opening">Response Opening</span></label>
+              <input id="p101Opening" type="text" placeholder="e.g. <review>" data-i18n-ph="ph.opening" />
+              <span class="hint" data-i18n="hint.opening">Prefill is not supported on current Claude models (API returns 400), so this becomes an instruction. For strict JSON, use structured outputs.</span>
             </div>
 
-            <div class="group-title">API Export Settings</div>
+            <div class="group-title" data-i18n="api.group">API Export Settings</div>
             <div class="row-2">
               <div class="field">
-                <label for="apiModel">Model</label>
+                <label for="apiModel" data-i18n="api.model">Model</label>
                 <select id="apiModel">
-                  <option value="claude-opus-5-5">Claude Opus 5.5 (default)</option>
+                  <option value="claude-opus-5-5" data-i18n="api.opt.opus">Claude Opus 5.5 (default)</option>
                   <option value="claude-sonnet-5-5">Claude Sonnet 5.5</option>
                   <option value="claude-haiku-5-5">Claude Haiku 5.5</option>
                 </select>
               </div>
               <div class="field">
-                <label for="apiEffort">Effort</label>
+                <label for="apiEffort" data-i18n="api.effort">Effort</label>
                 <select id="apiEffort">
                   <option value="low">low</option>
                   <option value="medium">medium</option>
@@ -1156,42 +1429,41 @@
                 <input id="apiMaxTokens" type="number" min="1" max="128000" step="1000" value="16000" />
               </div>
               <div class="field" style="align-content:end">
-                <label class="check-row"><input type="checkbox" id="apiCache" checked /> Cache system prompt</label>
-                <label class="check-row"><input type="checkbox" id="apiFallback" checked /> Refusal fallback</label>
+                <label class="check-row"><input type="checkbox" id="apiCache" checked /> <span data-i18n="api.cache">Cache system prompt</span></label>
+                <label class="check-row"><input type="checkbox" id="apiFallback" checked /> <span data-i18n="api.fallback">Refusal fallback</span></label>
               </div>
             </div>
             <span class="hint" id="apiHint"></span>
           </div>
 
           <div class="toolbar">
-            <button class="btn btn-primary" id="generateBtnBottom" type="button">Generate Prompt</button>
-            <button class="btn btn-secondary" id="loadSampleBtnBottom" type="button">Load Sample</button>
+            <button class="btn btn-primary" id="generateBtnBottom" type="button" data-i18n="btn.generate">Generate Prompt</button>
+            <button class="btn btn-secondary" id="loadSampleBtnBottom" type="button" data-i18n="btn.loadSample">Load Sample</button>
           </div>
         </div>
       </article>
 
-      <article class="card panel">
+      <article class="card panel" id="outputPanel">
         <div class="panel-head">
           <div>
-            <h2>Generated Prompt</h2>
-            <p class="panel-copy">
-              The output below is designed for direct use in README files, custom GPT instructions, system prompt builders, or AI configuration layers.
-            </p>
+            <h2 data-i18n="panel.output.title">Generated Prompt</h2>
+            <p class="panel-copy" data-i18n="panel.output.copy">This is the prompt, not the answer. Copy it into an AI chat tool and send it to get an answer.</p>
           </div>
         </div>
 
-        <div class="mode-switch three" id="viewTabs" role="group" aria-label="Output view" hidden>
-          <button class="mode-btn" type="button" data-view="prompt" aria-pressed="true">Prompt</button>
+        <div class="mode-switch three" id="viewTabs" role="group" aria-label="Output view" data-i18n-aria="view.group" hidden>
+          <button class="mode-btn" type="button" data-view="prompt" aria-pressed="true" data-i18n="view.prompt">Prompt</button>
           <button class="mode-btn" type="button" data-view="json" aria-pressed="false">API JSON</button>
           <button class="mode-btn" type="button" data-view="curl" aria-pressed="false">cURL</button>
         </div>
+        <p class="hint" id="promptLegend" data-i18n-html="out.legend" hidden><code>SYSTEM PROMPT</code> = the overall rules. <code>USER MESSAGE</code> = what to do this time. If your chat tool has one message box, paste both parts in order.</p>
         <p class="hint" id="viewNote" hidden></p>
 
         <div class="small-actions">
-          <span class="small-note">Build, review, then copy the final prompt.</span>
+          <span class="small-note" data-i18n="out.smallNote">Build, review, then copy the final prompt.</span>
           <div style="display:flex; gap:.6rem; flex-wrap:wrap;">
-            <button class="mini-btn" id="copyBtnTop" type="button">Copy</button>
-            <button class="mini-btn" id="downloadBtn" type="button">Download</button>
+            <button class="mini-btn" id="copyBtnTop" type="button" data-i18n="btn.copy">Copy</button>
+            <button class="mini-btn" id="downloadBtn" type="button" data-i18n="btn.download">Download</button>
           </div>
         </div>
 
@@ -1204,70 +1476,68 @@ Click “Generate Prompt” to build your system prompt.
     <section class="card panel eval" id="evalSection" aria-labelledby="evalTitle" hidden>
       <div class="panel-head">
         <div>
-          <h2 id="evalTitle">Evaluation Lab</h2>
-          <p class="panel-copy">
-            Save prompt versions, add test cases, then run every version against every case under the same API settings and compare the results side by side.
-          </p>
+          <h2 id="evalTitle" data-i18n="eval.title">Evaluation Lab</h2>
+          <p class="panel-copy" data-i18n="eval.copy">Compare prompt versions on the same test cases and see which one gives the answers you expect. This is optional: you don't need it to write your first prompt.</p>
         </div>
       </div>
 
       <div class="eval-grid">
         <div class="eval-block">
           <div class="block-head">
-            <h3>1 · Prompt versions</h3>
-            <button class="mini-btn" id="saveVersionBtn" type="button">Save current form as version</button>
+            <h3 data-i18n="eval.versions.title">1 · Prompt versions</h3>
+            <button class="mini-btn" id="saveVersionBtn" type="button" data-i18n="btn.saveVersion">Save current form as version</button>
           </div>
-          <p class="hint">Saved in this browser only. Ticked versions are included in the run. Each version can use its own model and effort; to compare models on one prompt, duplicate the version and change its model.</p>
+          <p class="hint" data-i18n="eval.versions.hint">Saved in this browser only. Ticked versions are included in the run. Each version can use its own model and effort; to compare models on one prompt, duplicate the version and change its model.</p>
           <div class="row-list" id="versionList"></div>
         </div>
 
         <div class="eval-block">
           <div class="block-head">
-            <h3>2 · Test cases</h3>
+            <h3 data-i18n="eval.cases.title">2 · Test cases</h3>
             <div class="btn-row">
-              <button class="mini-btn" id="addCaseBtn" type="button">Add case</button>
-              <button class="mini-btn" id="sampleCasesBtn" type="button">Load sample cases</button>
+              <button class="mini-btn" id="addCaseBtn" type="button" data-i18n="btn.addCase">Add case</button>
+              <button class="mini-btn" id="sampleCasesBtn" type="button" data-i18n="btn.sampleCases">Load sample cases</button>
             </div>
           </div>
-          <p class="hint">Each case replaces the Input Data. Expected result: text that must appear (case and spacing ignored), or a /regex/flags. Leave blank to judge by eye.</p>
+          <p class="hint" data-i18n="eval.cases.hint">Each case replaces the Input Data. Expected result: text that must appear (case and spacing ignored), or a /regex/flags. Leave blank to judge by eye.</p>
           <div class="row-list" id="caseList"></div>
         </div>
       </div>
 
       <div class="eval-block run-block">
-        <h3>3 · Run</h3>
-        <div class="mode-switch" id="runModeSwitch" role="group" aria-label="Run method" style="margin-top:.6rem">
-          <button class="mode-btn" type="button" data-run="manual" aria-pressed="true">Manual · claude.ai (no key)</button>
-          <button class="mode-btn" type="button" data-run="api" aria-pressed="false">API key</button>
+        <h3 data-i18n="eval.run.title">3 · Run</h3>
+        <div class="mode-switch" id="runModeSwitch" role="group" aria-label="Run method" data-i18n-aria="run.group" style="margin-top:.6rem">
+          <button class="mode-btn" type="button" data-run="manual" aria-pressed="true" data-i18n="run.manual">Manual · claude.ai (no key)</button>
+          <button class="mode-btn" type="button" data-run="api" aria-pressed="false" data-i18n="run.api">API key</button>
         </div>
 
-        <label class="check-row"><input type="checkbox" id="evalWithFiles" /> Include attached files with every case</label>
-        <span class="hint">API: the files are sent with each request. Manual: each cell names the files, and you attach them in claude.ai yourself.</span>
+        <label class="check-row"><input type="checkbox" id="evalWithFiles" /> <span data-i18n="run.withFiles">Include attached files with every case</span></label>
+        <span class="hint" data-i18n="run.withFilesHint">API: the files are sent with each request. Manual: each cell names the files, and you attach them in claude.ai yourself.</span>
 
         <div id="manualRunBox">
           <ol class="steps-list">
-            <li>Click <strong>Build worksheet</strong>.</li>
-            <li>In each cell, click <strong>Copy prompt</strong>, paste it into a <strong>new</strong> claude.ai chat and send it. One chat per cell keeps earlier answers from leaking in.</li>
-            <li>Paste Claude's full reply back into the cell. It is graded right away and saved in this browser.</li>
+            <li data-i18n-html="manual.step1">Click <strong>Build worksheet</strong>.</li>
+            <li data-i18n-html="manual.step2">In each cell, click <strong>Copy prompt</strong>, paste it into a <strong>new</strong> claude.ai chat and send it. One chat per cell keeps earlier answers from leaking in.</li>
+            <li data-i18n-html="manual.step3">Paste Claude's full reply back into the cell. It is graded right away and saved in this browser.</li>
           </ol>
-          <span class="hint">If a version sets a model, pick that model in claude.ai. Effort and the API settings don't apply here.</span>
+          <span class="hint" data-i18n="manual.hint">If a version sets a model, pick that model in claude.ai. Effort and the API settings don't apply here.</span>
           <div class="toolbar">
-            <button class="btn btn-primary" id="buildManualBtn" type="button">Build worksheet</button>
-            <button class="btn btn-secondary" id="clearManualBtn" type="button">Clear pasted replies</button>
+            <button class="btn btn-primary" id="buildManualBtn" type="button" data-i18n="btn.buildWorksheet">Build worksheet</button>
+            <button class="btn btn-secondary" id="clearManualBtn" type="button" data-i18n="btn.clearReplies">Clear pasted replies</button>
           </div>
         </div>
 
         <div id="apiRunBox" hidden>
           <div class="field" style="margin-top:.75rem">
-            <label for="evalKey">Anthropic API key</label>
+            <label for="evalKey" data-i18n="api.keyLabel">Anthropic API key</label>
             <input id="evalKey" type="password" autocomplete="off" spellcheck="false" placeholder="sk-ant-..." />
-            <span class="hint">Kept in memory only, never saved. Sent directly from this browser to api.anthropic.com. Use a key with a spend limit, and never on a shared computer.</span>
-            <span class="hint">A version left on "default" uses the model and effort from API Export Settings. max_tokens, caching and fallback always come from there.</span>
+            <span class="hint" data-i18n="api.keyHint">Kept in memory only, never saved. Sent directly from this browser to api.anthropic.com. Use a key with a spend limit, and never on a shared computer.</span>
+            <span class="hint" data-i18n="api.versionHint">A version left on "default" uses the model and effort from API Export Settings. max_tokens, caching and fallback always come from there.</span>
           </div>
           <div class="toolbar">
-            <button class="btn btn-primary" id="runEvalBtn" type="button">Run evaluation</button>
-            <button class="btn btn-secondary" id="stopEvalBtn" type="button" disabled>Stop</button>
-            <button class="btn btn-secondary" id="exportBatchBtn" type="button">Export Batch JSON</button>
+            <button class="btn btn-primary" id="runEvalBtn" type="button" data-i18n="btn.runEval">Run evaluation</button>
+            <button class="btn btn-secondary" id="stopEvalBtn" type="button" disabled data-i18n="btn.stop">Stop</button>
+            <button class="btn btn-secondary" id="exportBatchBtn" type="button" data-i18n="btn.exportBatch">Export Batch JSON</button>
           </div>
         </div>
         <p class="eval-status" id="evalStatus" aria-live="polite"></p>
@@ -1277,31 +1547,24 @@ Click “Generate Prompt” to build your system prompt.
       </div>
     </section>
 
-    <section class="info-grid" aria-label="Implementation stages">
+    <section class="info-grid" aria-label="Implementation stages" data-i18n-aria="info.aria">
       <article class="info-item">
-        <h3>Stage 1: Content foundation</h3>
-        <p>
-          Your README provides the source logic, structure, and quality rules for the generator.
-          That means the content design work is already underway.
-        </p>
+        <h3 data-i18n="info.s1.title">Stage 1: Content foundation</h3>
+        <p data-i18n="info.s1.body">Your README provides the source logic, structure, and quality rules for the generator. That means the content design work is already underway.</p>
       </article>
 
       <article class="info-item">
-        <h3>Stage 2: Website prototype</h3>
-        <p>
-          This page converts that structure into a manual web generator, so you can test sections, wording, and user flow before making it smarter.
-        </p>
+        <h3 data-i18n="info.s2.title">Stage 2: Website prototype</h3>
+        <p data-i18n="info.s2.body">This page converts that structure into a manual web generator, so you can test sections, wording, and user flow before making it smarter.</p>
       </article>
 
       <article class="info-item">
-        <h3>Stage 3: Product version</h3>
-        <p>
-          The next upgrade is turning this into a stronger tool with presets, section templates, prompt modes, and richer output assembly tied to your full framework.
-        </p>
+        <h3 data-i18n="info.s3.title">Stage 3: Product version</h3>
+        <p data-i18n="info.s3.body">The next upgrade is turning this into a stronger tool with presets, section templates, prompt modes, and richer output assembly tied to your full framework.</p>
       </article>
     </section>
 
-    <footer class="footer">
+    <footer class="footer" data-i18n="footer">
       First working version of the Generator system prompt website, intended for GitHub Pages deployment.
     </footer>
   </main>
@@ -1327,11 +1590,734 @@ Click “Generate Prompt” to build your system prompt.
     const output = $("output");
     const themeToggle = $("themeToggle");
 
+    // ---- Interface language (zh-HK / en) ----
+    // Only what the page displays is translated. Generated prompts, saved data and API requests never change with it.
+    const I18N = {
+      en: {
+        "doc.title": "AI Super Instruction Generator",
+        "doc.desc": "A web-based generator for building copy-ready AI system prompts.",
+        "skip": "Skip to content",
+        "brand.aria": "AI Super Instruction Generator logo",
+        "brand.title": "AI Super Instruction Generator",
+        "brand.subtitle": "System prompt website prototype",
+        "theme.aria": "Toggle color theme",
+
+        "hero.eyebrow": "Prompt generator",
+        "hero.title": "Turn rough ideas into clear, reusable instructions for AI.",
+        "hero.q1.title": "What is this?",
+        "hero.q1.body": "A form that helps you write a prompt: the instructions you give an AI.",
+        "hero.q2.title": "How does it help me?",
+        "hero.q2.body": "You fill in the task, the information to use and the answer format. The tool arranges them into a clear, reusable prompt, so the AI has less to guess.",
+        "hero.q3.title": "Where do I start?",
+        "hero.q3.body": "Follow the 3-step quick start below. It comes with a made-up sales example you can fill in with one click.",
+        "hero.callout": "<strong>This tool writes the prompt; it doesn't give you the answer.</strong> To get an answer, copy the prompt into an AI chat tool (such as claude.ai) and send it there.",
+        "hero.cta": "Start the quick start",
+
+        "btn.generate": "Generate Prompt",
+        "btn.copyOutput": "Copy Output",
+        "btn.loadSample": "Load Sample",
+        "btn.clearAll": "Clear All",
+        "btn.copy": "Copy",
+        "btn.download": "Download",
+        "btn.copied": "Copied",
+
+        "qs.title": "Quick start: your first prompt in 3 steps",
+        "qs.intro": "We'll use a made-up example. Store A sold 120 units this week and 100 last week. Store B sold 80 units this week; last week's figure is not available.",
+        "qs.s1.title": "Choose Prompting 101",
+        "qs.s1.body": "It splits a prompt into labelled boxes, so it's the easiest place to start. V2 Super Instruction is a more advanced mode you can skip for now.",
+        "qs.s1.btn": "Switch to Prompting 101",
+        "qs.s2.title": "Fill in the task and the data",
+        "qs.s2.body": "For this example you only need five boxes: Task Context, Detailed Task Description & Rules, Immediate Task / Request, Input Data and Output Formatting. Keep Task Nature on Analytical: we want facts, not guesses.",
+        "qs.s2.btn": "Fill in the example for me",
+        "qs.s2.note": "Fills the Prompting 101 boxes with the example, in the language you're viewing. You can edit everything afterwards.",
+        "qs.s2.peek": "See what gets filled in",
+        "qs.s3.title": "Generate and copy the prompt",
+        "qs.s3.body": "Click <strong>Generate Prompt</strong>, then <strong>Copy</strong>. The result has two parts: <code>SYSTEM PROMPT</code> (the overall rules) and <code>USER MESSAGE</code> (what to do this time). Paste both, in order and with their headings, into an AI chat tool and send. Only then do you get an answer.",
+        "qs.s3.btn": "Generate the prompt",
+        "qs.answer.summary": "What a good answer looks like",
+        "qs.answer.body": "- Store A sold 120 units this week, up 20 units (20%) from 100 last week.\n- Store B sold 80 units this week; last week's figure was not provided, so no weekly change can be given.\n- This week, Store A sold 40 more units than Store B (120 vs 80).",
+        "qs.answer.note": "The exact wording will vary. Check that Store A is up 20 units (20%) and that Store B has no guessed change.",
+        "qs.later": "Later, you can compare prompt versions in Evaluation Lab or export to the Claude API. You don't need either to get started.",
+        "qs.ex.title": "Weekly sales summary",
+        "qs.ex.taskContext": "You are helping a shop manager write a short weekly sales summary for two stores.",
+        "qs.ex.rules": "Only use the figures provided.\nOnly make comparisons that the data supports.\nIf a figure is missing, say that it is missing. Do not estimate the change.\nDo not guess why sales went up or down.",
+        "qs.ex.request": "Write this week's sales summary for Store A and Store B.",
+        "qs.ex.inputText": "Store A: 120 units sold this week; 100 units last week\nStore B: 80 units sold this week; last week not provided",
+        "qs.ex.output": "Three bullet points, one sentence each. Show any change as units and as a percentage.",
+        "qs.confirmReplace": "This replaces what you've typed in the Prompting 101 boxes. Continue?",
+        "qs.st.mode": "Prompting 101 is on. Next: step 2.",
+        "qs.st.filled": "Example filled in. Check the boxes below, or go straight to step 3.",
+        "qs.st.generated": "Prompt generated. Click Copy above the result, then paste it into an AI chat tool.",
+        "qs.st.needFill": "Fill in step 2 first, or click “Fill in the example for me”.",
+        "err.stopped": "Stopped.",
+        "err.network": "Network error: {msg}",
+        "err.http": "HTTP {code}",
+        "err.gaveUp": "Gave up after 3 attempts.",
+
+        "panel.inputs.title": "Generator Inputs",
+        "panel.inputs.copy": "Fill in the boxes below, then click Generate Prompt. New here? Choose Prompting 101.",
+        "mode.group": "Prompt mode",
+        "mode.v2": "V2 Super Instruction",
+        "mode.101": "Prompting 101 · 10-part",
+        "mode.intro.v2": "V2 Super Instruction: an advanced mode for writing a system prompt that generates other prompts.",
+        "mode.intro.p101": "Prompting 101: a 10-part structure for one clear task. Best for your first prompt.",
+
+        "f.productName": "Generator / Project Name",
+        "ph.productName": "e.g. AI Super Instruction Generator",
+        "hint.productName": "This becomes the title of the generated prompt.",
+        "f.role": "Role",
+        "ph.role": "e.g. You are an expert AI prompt architect specialized in building high-quality system prompts for production use.",
+        "f.objective": "Objective",
+        "ph.objective": "e.g. Transform rough user intent into a structured, production-ready system prompt.",
+        "f.inputProcessing": "Input Processing Rules",
+        "ph.inputProcessing": "e.g. Extract the user's goal, constraints, target audience, preferred output, tone, and hidden assumptions before drafting the prompt.",
+        "f.analysisFramework": "Analysis Framework",
+        "ph.analysisFramework": "e.g. Analyze user needs through intent, constraints, structure, tone, risk, missing details, and implementation readiness.",
+        "f.workflow": "Generation Workflow",
+        "ph.workflow": "e.g. Understand request → identify missing structure → build prompt sections → validate clarity → output final prompt.",
+        "f.constraints": "Constraints",
+        "ph.constraints": "e.g. Do not invent requirements, avoid generic filler, preserve user intent, and keep all instructions implementation-ready.",
+        "f.outputFormat": "Output Format",
+        "ph.outputFormat": "e.g. Return sections for Role, Objective, Input Processing, Analysis Framework, Workflow, Constraints, Output Template, Quality Standards, Validation Checklist, and Default Behavior.",
+        "f.qualityStandards": "Quality Standards",
+        "ph.qualityStandards": "e.g. The result must be clear, specific, reusable, logically ordered, practical, and suitable for direct copy-paste.",
+        "f.validationChecklist": "Validation Checklist",
+        "ph.validationChecklist": "e.g. Check ambiguity, completeness, consistency, user-intent alignment, formatting clarity, and practical usability.",
+        "f.iterationRules": "Iteration Rules",
+        "ph.iterationRules": "e.g. When the draft is weak, refine specificity, improve structure, reduce ambiguity, and strengthen execution detail.",
+        "f.defaultBehavior": "Default Behavior",
+        "ph.defaultBehavior": "e.g. If information is missing, infer safely using best-practice defaults while keeping assumptions minimal and explicit.",
+
+        "f.p101Title": "Prompt Name",
+        "ph.p101Title": "e.g. Weekly Promoter Report Reviewer",
+        "f.taskType": "Task Nature",
+        "opt.analytical": "Analytical — facts only, no guessing",
+        "opt.generative": "Generative — infer, but label assumptions",
+        "f.taskContext": "Task Context",
+        "ph.taskContext": "Who Claude is in this task and what job it is doing, e.g. You are reviewing weekly promoter sales reports for a retail team.",
+        "hint.taskContext": "System prompt. Be concrete about the situation, not just a job title.",
+        "f.tone": "Tone Context",
+        "ph.tone": "e.g. Stay factual and confident. Only state what the materials support.",
+        "f.docTag": "Background XML Tag",
+        "hint.docTag": "Letters, digits, _ or - only.",
+        "f.docTitle": "Background Title",
+        "ph.docTitle": "e.g. Report field definitions",
+        "f.background": "Background Data (static)",
+        "ph.background": "Stable reference material that rarely changes: form layout, field definitions, policies, glossary.",
+        "hint.background": "Goes in the system prompt inside XML tags, so it can be cached and reused across requests.",
+        "f.rules": "Detailed Task Description & Rules",
+        "ph.rules": "One rule per line. Decision rules, edge cases, what to do when data is missing.",
+        "f.examples": "Examples",
+        "ph.examples": "Worked examples of tricky cases and the correct result. Leave blank if none.",
+        "f.history": "Conversation History (optional)",
+        "ph.history": "Relevant prior turns or user context. Leave blank if none.",
+        "f.request": "Immediate Task / Request",
+        "ph.request": "What Claude must do right now with the attached input, e.g. Review the attached report and photo.",
+        "hint.request": "User message. The per-request data (files, images, rows) is attached here.",
+        "f.inputTag": "Input XML Tag",
+        "f.files": "Attach Images / Files",
+        "f.inputText": "Input Data (this request)",
+        "ph.inputText": "Paste the data for this request. It is wrapped in the Input XML Tag.",
+        "hint.inputText": "Images and PDFs are sent as content blocks before the text. Text files (.txt .csv .md .json) are added inside <file> tags.",
+        "attach.aria": "Attached files",
+        "f.steps": "Analysis Order",
+        "ph.steps": "One step per line, in the order Claude should examine the inputs before concluding.",
+        "hint.steps": "Sets the order of work. Current Claude models already think before answering, so this does not ask for a reasoning dump.",
+        "f.output": "Output Formatting",
+        "ph.output": "Exact structure of the answer, e.g. XML tags or a JSON shape your code will parse.",
+        "f.opening": "Response Opening",
+        "ph.opening": "e.g. <review>",
+        "hint.opening": "Prefill is not supported on current Claude models (API returns 400), so this becomes an instruction. For strict JSON, use structured outputs.",
+
+        "api.group": "API Export Settings",
+        "api.model": "Model",
+        "api.opt.opus": "Claude Opus 5.5 (default)",
+        "api.effort": "Effort",
+        "api.cache": "Cache system prompt",
+        "api.fallback": "Refusal fallback",
+        "api.hint.haiku": "Thinking is adaptive. Refusal fallback is not available on Claude Haiku 5.5, so it is left out.",
+        "api.hint.default": "Thinking is adaptive. Refusal fallback lets the API re-run a declined request on another model; it needs the beta header shown in the cURL tab.",
+        "api.keyLabel": "Anthropic API key",
+        "api.keyHint": "Kept in memory only, never saved. Sent directly from this browser to api.anthropic.com. Use a key with a spend limit, and never on a shared computer.",
+        "api.versionHint": "A version left on \"default\" uses the model and effort from API Export Settings. max_tokens, caching and fallback always come from there.",
+
+        "panel.output.title": "Generated Prompt",
+        "panel.output.copy": "This is the prompt, not the answer. Copy it into an AI chat tool and send it to get an answer.",
+        "view.group": "Output view",
+        "view.prompt": "Prompt",
+        "view.note.json": "Messages API request body (system and messages kept separate). The preview shortens file data; Copy and Download include it in full.",
+        "view.note.jsonBeta": " Send it with the header anthropic-beta: {beta}.",
+        "view.note.curl": "Sends the downloaded JSON with the required headers and prints the reply text, or the refusal category.",
+        "out.legend": "<code>SYSTEM PROMPT</code> = the overall rules. <code>USER MESSAGE</code> = what to do this time. If your chat tool has one message box, paste both parts in order.",
+        "out.smallNote": "Build, review, then copy the final prompt.",
+        "out.placeholder": "Click “Generate Prompt” to build your system prompt.",
+        "out.copyFailed": "Copy failed. Please copy manually.",
+
+        "eval.title": "Evaluation Lab",
+        "eval.copy": "Compare prompt versions on the same test cases and see which one gives the answers you expect. This is optional: you don't need it to write your first prompt.",
+        "eval.versions.title": "1 · Prompt versions",
+        "btn.saveVersion": "Save current form as version",
+        "eval.versions.hint": "Saved in this browser only. Ticked versions are included in the run. Each version can use its own model and effort; to compare models on one prompt, duplicate the version and change its model.",
+        "eval.cases.title": "2 · Test cases",
+        "btn.addCase": "Add case",
+        "btn.sampleCases": "Load sample cases",
+        "eval.cases.hint": "Each case replaces the Input Data. Expected result: text that must appear (case and spacing ignored), or a /regex/flags. Leave blank to judge by eye.",
+        "eval.run.title": "3 · Run",
+        "run.group": "Run method",
+        "run.manual": "Manual · claude.ai (no key)",
+        "run.api": "API key",
+        "run.withFiles": "Include attached files with every case",
+        "run.withFilesHint": "API: the files are sent with each request. Manual: each cell names the files, and you attach them in claude.ai yourself.",
+        "manual.step1": "Click <strong>Build worksheet</strong>.",
+        "manual.step2": "In each cell, click <strong>Copy prompt</strong>, paste it into a <strong>new</strong> claude.ai chat and send it. One chat per cell keeps earlier answers from leaking in.",
+        "manual.step3": "Paste Claude's full reply back into the cell. It is graded right away and saved in this browser.",
+        "manual.hint": "If a version sets a model, pick that model in claude.ai. Effort and the API settings don't apply here.",
+        "btn.buildWorksheet": "Build worksheet",
+        "btn.clearReplies": "Clear pasted replies",
+        "btn.runEval": "Run evaluation",
+        "btn.stop": "Stop",
+        "btn.exportBatch": "Export Batch JSON",
+
+        "info.aria": "Implementation stages",
+        "info.s1.title": "Stage 1: Content foundation",
+        "info.s1.body": "Your README provides the source logic, structure, and quality rules for the generator. That means the content design work is already underway.",
+        "info.s2.title": "Stage 2: Website prototype",
+        "info.s2.body": "This page converts that structure into a manual web generator, so you can test sections, wording, and user flow before making it smarter.",
+        "info.s3.title": "Stage 3: Product version",
+        "info.s3.body": "The next upgrade is turning this into a stronger tool with presets, section templates, prompt modes, and richer output assembly tied to your full framework.",
+        "footer": "First working version of the Generator system prompt website, intended for GitHub Pages deployment.",
+
+        "kind.image": "image",
+        "kind.pdf": "pdf",
+        "kind.text": "text",
+        "attach.remove": "Remove",
+        "attach.removeAria": "Remove {name}",
+        "attach.tooBig": "{name} is over 5 MB; the API may reject it, so resize it first.",
+        "attach.nearLimit": "Attachments are close to the 32 MB request limit.",
+        "attach.unsupported": "Not supported: {list}. Use JPG, PNG, GIF, WebP, PDF or a text file.",
+
+        "st.storageBlocked": "This browser blocked local storage, so versions and cases last only until you reload.",
+        "st.repliesStorageBlocked": "This browser blocked local storage, so pasted replies last only until you reload.",
+        "st.saved": "Saved {name}.",
+        "st.duplicated": "Created {name}. Pick a different model for it to compare.",
+        "st.loadedVersion": "Loaded {name} into the form.",
+        "st.sampleCases": "Loaded 3 sample cases for the promoter sample prompt.",
+        "st.needVersion": "Save at least one version and tick it.",
+        "st.needCase": "Add at least one test case with input.",
+        "st.needKey": "Enter an API key to run, or use Export Batch JSON instead.",
+        "st.running": "Running {done}/{total}…",
+        "st.stopped": "Stopped after {done} of {total} requests.",
+        "st.finished": "Finished {total} requests.",
+        "st.exported": "Exported {n} requests for POST /v1/messages/batches. custom_id is v<version>-c<case> ({legend}). Refusal fallback is left out because the Batches API rejects it.",
+        "st.worksheet": "Worksheet ready: {n} prompts. Rebuild it after changing versions, cases or attachments.",
+        "st.noReplies": "There are no pasted replies to clear.",
+        "st.cleared": "Cleared all pasted replies.",
+
+        "cf.deleteVersion": "Delete {name}?",
+        "cf.sampleCases": "Replace the current test cases with the sample cases?",
+        "cf.run": "This sends {total} request(s), billed to your API key:\n{plan}\n\nContinue?",
+        "cf.clearReplies": "Delete all pasted replies saved in this browser?",
+
+        "ver.empty": "No versions yet. Fill in the form, then save it as a version.",
+        "ver.include": "Include {name} in the run",
+        "ver.nameAria": "Version name",
+        "ver.savedAt": "Saved {date}",
+        "ver.load": "Load",
+        "ver.loadAria": "Load {name} into the form",
+        "ver.delete": "Delete",
+        "ver.deleteAria": "Delete {name}",
+        "ver.duplicate": "Duplicate",
+        "ver.duplicateAria": "Duplicate {name}",
+        "ver.modelAria": "{name} model",
+        "ver.effortAria": "{name} effort",
+        "ver.modelDefault": "Model: default",
+        "ver.effortDefault": "Effort: default",
+        "ver.effortOpt": "Effort: {e}",
+
+        "case.empty": "No test cases yet.",
+        "case.label": "Case {n}",
+        "case.deleteAria": "Delete case {n}",
+        "case.inputPh": "Input data for this case",
+        "case.inputAria": "Case {n} input",
+        "case.expectedPh": "Expected result, e.g. <verdict>QUALIFIED",
+        "case.expectedAria": "Case {n} expected result",
+
+        "res.testCase": "Test case",
+        "res.summary": "Summary",
+        "res.expected": "Expected: {x}",
+        "res.noExpected": "No expected result",
+        "res.noExpectedManual": "No expected result: mark pass or fail yourself",
+        "res.running": "Running…",
+        "res.error": "ERROR",
+        "res.noText": "(no text)",
+        "res.refused": "Refused ({cat})",
+        "res.unspecified": "unspecified",
+        "res.meta": "{model} · {stop} · {inTok} in / {outTok} out · {sec} s",
+        "res.apiSummary": "Pass {passed}/{graded} · avg {sec} s · {tokens} tokens",
+        "res.manualSummary": "Pass {passed}/{graded} · {answered}/{total} answered",
+        "badge.pass": "PASS",
+        "badge.fail": "FAIL",
+        "badge.eye": "CHECK BY EYE",
+        "badge.waiting": "WAITING",
+
+        "man.label": "{name} · manual",
+        "man.labelModel": "{name} · {model} (pick in claude.ai)",
+        "man.copy": "Copy prompt",
+        "man.copyAria": "Copy prompt for {name}, {case}",
+        "man.copyFallback": "Use Show prompt",
+        "man.attach": "Attach in claude.ai: {files}",
+        "man.show": "Show prompt",
+        "man.promptAria": "Prompt to copy",
+        "man.stale": "The prompt changed after this reply was pasted. Copy the new prompt and paste a fresh reply.",
+        "man.replyPh": "Paste Claude's reply here",
+        "man.replyAria": "Claude's reply for {name}, {case}",
+        "man.markPass": "Mark pass",
+        "man.markFail": "Mark fail"
+      },
+
+      "zh-HK": {
+        "doc.title": "AI 提示詞產生器",
+        "doc.desc": "免費網上工具，幫你把零散想法整理成清晰、可重用的 AI 提示詞。",
+        "skip": "跳到主要內容",
+        "brand.aria": "AI 提示詞產生器標誌",
+        "brand.title": "AI 提示詞產生器",
+        "brand.subtitle": "提示詞網站原型",
+        "theme.aria": "切換深色／淺色主題",
+
+        "hero.eyebrow": "提示詞產生器",
+        "hero.title": "把零散的想法，整理成清晰、可重用的 AI 指令。",
+        "hero.q1.title": "這是甚麼？",
+        "hero.q1.body": "一個幫你寫提示詞的表格。提示詞，就是你交給 AI 的指令。",
+        "hero.q2.title": "它幫到我甚麼？",
+        "hero.q2.body": "你只要填寫任務、要用的資料和想要的答案格式，工具就會整理成清晰、可重用的提示詞，讓 AI 少一點靠估。",
+        "hero.q3.title": "我應該由哪裡開始？",
+        "hero.q3.body": "跟着下面的三步快速入門。它附有一個虛構的銷售例子，按一下就能填好。",
+        "hero.callout": "<strong>這個工具只負責「產生提示詞」，不會直接給你答案。</strong>要取得答案，請把提示詞複製到 AI 聊天工具（例如 claude.ai）再送出。",
+        "hero.cta": "開始快速入門",
+
+        "btn.generate": "產生提示詞",
+        "btn.copyOutput": "複製結果",
+        "btn.loadSample": "載入進階範例",
+        "btn.clearAll": "全部清除",
+        "btn.copy": "複製",
+        "btn.download": "下載",
+        "btn.copied": "已複製",
+
+        "qs.title": "快速入門：三步完成第一個提示詞",
+        "qs.intro": "我們用一個虛構例子：店 A 本週售出 120 件，上週售出 100 件；店 B 本週售出 80 件，上週數字未提供。",
+        "qs.s1.title": "選擇 Prompting 101",
+        "qs.s1.body": "這個模式把提示詞拆成一格格有標題的欄位，最適合第一次使用。「V2 超級指令」是較進階的模式，現在可以先不理。",
+        "qs.s1.btn": "切換到 Prompting 101",
+        "qs.s2.title": "填寫任務和資料",
+        "qs.s2.body": "這個例子只需填五格：任務背景、詳細要求及規則、今次的要求、今次的資料和輸出格式。「任務性質」保持「分析型」，因為我們要的是事實，不是估計。",
+        "qs.s2.btn": "幫我填入例子",
+        "qs.s2.note": "會用你現在瀏覽的語言，把例子填入 Prompting 101 的欄位；填好後可以自由修改。",
+        "qs.s2.peek": "看看會填入甚麼",
+        "qs.s3.title": "產生並複製提示詞",
+        "qs.s3.body": "按「<strong>產生提示詞</strong>」，再按「<strong>複製</strong>」。結果分成兩段：<code>SYSTEM PROMPT</code>（整體規則）和 <code>USER MESSAGE</code>（今次要做的事）。把兩段連同標題，按次序貼到 AI 聊天工具再送出，這時才會得到答案。",
+        "qs.s3.btn": "產生提示詞",
+        "qs.answer.summary": "理想答案大致是這樣",
+        "qs.answer.body": "- 店 A 本週售出 120 件，比上週的 100 件多 20 件（增加 20%）。\n- 店 B 本週售出 80 件；由於未有提供上週數字，未能計算按週變化。\n- 本週店 A 比店 B 多售出 40 件（120 件對 80 件）。",
+        "qs.answer.note": "實際字眼會有出入。請核對店 A 是否增加 20 件（20%），以及店 B 有沒有被估算升跌。",
+        "qs.later": "熟習後，可以用「評測區」比較不同版本，或匯出到 Claude API；入門時兩者都不需要。",
+        "qs.ex.title": "每週銷售摘要",
+        "qs.ex.taskContext": "你正協助一位店舖經理，為兩間分店撰寫簡短的每週銷售摘要。",
+        "qs.ex.rules": "只可使用提供的數字。\n只作有數據支持的比較。\n如缺少某個數字，要清楚註明「未提供」，不可估算升跌。\n不要自行推測銷量升跌的原因。",
+        "qs.ex.request": "請為店 A 和店 B 撰寫本週銷售摘要。",
+        "qs.ex.inputText": "店 A：本週售出 120 件；上週售出 100 件\n店 B：本週售出 80 件；上週數字未提供",
+        "qs.ex.output": "用三點摘要，每點一句。如有變化，要同時列出件數和百分比。",
+        "qs.confirmReplace": "這會取代你在 Prompting 101 欄位中已輸入的內容。要繼續嗎？",
+        "qs.st.mode": "已切換到 Prompting 101。下一步：第 2 步。",
+        "qs.st.filled": "已填入例子。可以往下查看各欄，或直接做第 3 步。",
+        "qs.st.generated": "已產生提示詞。請按結果上方的「複製」，再貼到 AI 聊天工具。",
+        "qs.st.needFill": "請先完成第 2 步，或按「幫我填入例子」。",
+        "err.stopped": "已停止。",
+        "err.network": "網絡錯誤：{msg}",
+        "err.http": "HTTP {code}",
+        "err.gaveUp": "試了 3 次仍然失敗。",
+
+        "panel.inputs.title": "輸入區",
+        "panel.inputs.copy": "填寫下面的欄位，再按「產生提示詞」。第一次使用？請選 Prompting 101。",
+        "mode.group": "提示詞模式",
+        "mode.v2": "V2 超級指令",
+        "mode.101": "Prompting 101 · 10 段式",
+        "mode.intro.v2": "V2 超級指令：進階模式，用來編寫「產生其他提示詞」的系統提示詞。",
+        "mode.intro.p101": "Prompting 101：用 10 段結構完成一項清晰的任務，最適合第一次使用。",
+
+        "f.productName": "產生器／項目名稱",
+        "ph.productName": "例如：AI 超級指令產生器",
+        "hint.productName": "這會成為產生的提示詞的標題。",
+        "f.role": "角色",
+        "ph.role": "例如：你是一位專門為正式環境編寫高質素系統提示詞的 AI 提示詞架構師。",
+        "f.objective": "目標",
+        "ph.objective": "例如：把用家粗略的意圖，轉化成結構清晰、可直接使用的系統提示詞。",
+        "f.inputProcessing": "輸入處理規則",
+        "ph.inputProcessing": "例如：起草前，先找出用家的目標、限制、對象、想要的輸出、語氣和隱含假設。",
+        "f.analysisFramework": "分析框架",
+        "ph.analysisFramework": "例如：從意圖、限制、結構、語氣、風險、缺漏資料和可行程度分析用家需要。",
+        "f.workflow": "產生流程",
+        "ph.workflow": "例如：理解要求 → 找出缺少的結構 → 編寫各部分 → 檢查是否清晰 → 輸出最終提示詞。",
+        "f.constraints": "限制",
+        "ph.constraints": "例如：不要自行加入要求，避免空泛字句，保留用家原意，所有指令都要可以直接執行。",
+        "f.outputFormat": "輸出格式",
+        "ph.outputFormat": "例如：按角色、目標、輸入處理、分析框架、流程、限制、輸出範本、質素標準、檢查清單和預設行為分段輸出。",
+        "f.qualityStandards": "質素標準",
+        "ph.qualityStandards": "例如：結果必須清晰、具體、可重用、條理分明、實用，並可直接複製使用。",
+        "f.validationChecklist": "檢查清單",
+        "ph.validationChecklist": "例如：檢查有否含糊、是否完整、前後一致、符合用家原意、格式清晰和實際可用。",
+        "f.iterationRules": "修訂規則",
+        "ph.iterationRules": "例如：初稿不夠好時，寫得更具體、改善結構、減少含糊，並補充執行細節。",
+        "f.defaultBehavior": "預設行為",
+        "ph.defaultBehavior": "例如：資料不足時，按常見做法穩妥推斷，並清楚列出盡量少的假設。",
+
+        "f.p101Title": "提示詞名稱",
+        "ph.p101Title": "例如：每週推廣員報告審核",
+        "f.taskType": "任務性質",
+        "opt.analytical": "分析型：只按事實，不作估計",
+        "opt.generative": "創作型：可以推斷，但要列明假設",
+        "f.taskContext": "任務背景",
+        "ph.taskContext": "Claude 在這項任務的角色和工作，例如：你正為零售團隊審核每週推廣員銷售報告。",
+        "hint.taskContext": "放在 SYSTEM PROMPT（整體規則）。寫清楚具體情況，不要只寫職銜。",
+        "f.tone": "語氣",
+        "ph.tone": "例如：保持客觀、有把握；只講資料支持的內容。",
+        "f.docTag": "背景資料標籤（XML）",
+        "hint.docTag": "只可用英文字母、數字、_ 或 -。",
+        "f.docTitle": "背景資料標題",
+        "ph.docTitle": "例如：報告欄位定義",
+        "f.background": "背景資料（固定不變）",
+        "ph.background": "很少變動的參考資料，例如表格版面、欄位定義、政策、詞彙表。",
+        "hint.background": "會以 XML 標籤包起，放在 SYSTEM PROMPT 內，方便快取和每次重用。",
+        "f.rules": "詳細要求及規則",
+        "ph.rules": "每行一條規則：判斷準則、特殊情況、缺少資料時怎樣處理。",
+        "f.examples": "例子",
+        "ph.examples": "難處理情況的示範和正確結果；沒有可以留空。",
+        "f.history": "對話紀錄（可選）",
+        "ph.history": "相關的先前對話或用家背景；沒有可以留空。",
+        "f.request": "今次的要求",
+        "ph.request": "Claude 現在要用附上的資料做甚麼，例如：審核附上的報告和相片。",
+        "hint.request": "放在 USER MESSAGE（今次要做的事）。每次不同的資料（檔案、圖片、數據）都在這裡附上。",
+        "f.inputTag": "輸入資料標籤（XML）",
+        "f.files": "附加圖片／檔案",
+        "f.inputText": "今次的資料",
+        "ph.inputText": "貼上今次要用的資料，會以「輸入資料標籤」包起。",
+        "hint.inputText": "圖片和 PDF 會放在文字之前一併送出；文字檔（.txt .csv .md .json）會以 <file> 標籤加入。",
+        "attach.aria": "已附加的檔案",
+        "f.steps": "分析次序",
+        "ph.steps": "每行一個步驟，即 Claude 下結論前檢查資料的次序。",
+        "hint.steps": "設定工作次序。現時的 Claude 模型本身會先思考再回答，所以這裡不會要求它列出推理過程。",
+        "f.output": "輸出格式",
+        "ph.output": "答案的確實結構，例如三點摘要、XML 標籤，或程式會讀取的 JSON 格式。",
+        "f.opening": "回答開頭",
+        "ph.opening": "例如：<review>",
+        "hint.opening": "現時的 Claude 模型不支援預填回答（API 會回傳 400），所以這裡會變成一條指示。如需嚴格的 JSON，請用 structured outputs。",
+
+        "api.group": "API 匯出設定",
+        "api.model": "模型",
+        "api.opt.opus": "Claude Opus 5.5（預設）",
+        "api.effort": "思考程度（effort）",
+        "api.cache": "快取 SYSTEM PROMPT",
+        "api.fallback": "被拒答時改用後備模型",
+        "api.hint.haiku": "思考模式為自動（adaptive）。Claude Haiku 5.5 不支援拒答後備，所以不會加入。",
+        "api.hint.default": "思考模式為自動（adaptive）。拒答後備會在請求被拒時，改用另一個模型再試；需要 cURL 分頁所示的 beta header。",
+        "api.keyLabel": "Anthropic API key",
+        "api.keyHint": "只保存在記憶體，不會儲存；會由這個瀏覽器直接送到 api.anthropic.com。請使用設有消費上限的 key，切勿在共用電腦使用。",
+        "api.versionHint": "設為「預設」的版本會沿用「API 匯出設定」的模型和思考程度；max_tokens、快取和後備設定一律以該處為準。",
+
+        "panel.output.title": "產生的提示詞",
+        "panel.output.copy": "這是提示詞，不是答案。把它複製到 AI 聊天工具送出，才會得到答案。",
+        "view.group": "輸出檢視",
+        "view.prompt": "提示詞",
+        "view.note.json": "Messages API 請求內容（system 和 messages 分開）。預覽會縮短檔案資料；「複製」和「下載」會包含完整內容。",
+        "view.note.jsonBeta": " 送出時請加上 header：anthropic-beta: {beta}。",
+        "view.note.curl": "會連同所需的 header 送出已下載的 JSON，並顯示回答文字或拒答類別。",
+        "out.legend": "<code>SYSTEM PROMPT</code>＝整體規則；<code>USER MESSAGE</code>＝今次要做的事。如聊天工具只有一個輸入框，按次序把兩段一併貼上即可。",
+        "out.smallNote": "產生、檢查，再複製最終提示詞。",
+        "out.placeholder": "按「產生提示詞」建立你的提示詞。",
+        "out.copyFailed": "未能複製，請自行選取文字再複製。",
+
+        "eval.title": "評測區（Evaluation Lab）",
+        "eval.copy": "用同一批測試案例比較不同版本的提示詞，看看哪個較符合預期。這是進階功能，寫第一個提示詞時不需要用。",
+        "eval.versions.title": "1 · 提示詞版本",
+        "btn.saveVersion": "把目前表格存成版本",
+        "eval.versions.hint": "只會儲存在這個瀏覽器。已剔選的版本會納入評測。每個版本可以設定自己的模型和思考程度；想在同一個提示詞比較模型，可以複製版本再改模型。",
+        "eval.cases.title": "2 · 測試案例",
+        "btn.addCase": "新增案例",
+        "btn.sampleCases": "載入示範案例",
+        "eval.cases.hint": "每個案例會取代「今次的資料」。預期結果：答案必須包含的文字（不分大小寫和空格），或 /regex/flags 格式。留空即由你自行判斷。",
+        "eval.run.title": "3 · 執行",
+        "run.group": "執行方式",
+        "run.manual": "手動 · claude.ai（毋須 key）",
+        "run.api": "API key",
+        "run.withFiles": "每個案例都附上已附加的檔案",
+        "run.withFilesHint": "API：檔案會隨每個請求送出。手動：每格會列出檔案名稱，請自行在 claude.ai 附上。",
+        "manual.step1": "按「<strong>建立工作表</strong>」。",
+        "manual.step2": "在每一格按「<strong>複製提示詞</strong>」，貼到 claude.ai 的<strong>新</strong>對話再送出。每格用一個新對話，避免受之前的答案影響。",
+        "manual.step3": "把 Claude 的完整回答貼回該格，會即時評分，並儲存在這個瀏覽器。",
+        "manual.hint": "如版本指定了模型，請在 claude.ai 選用該模型。思考程度和 API 設定在這裡不適用。",
+        "btn.buildWorksheet": "建立工作表",
+        "btn.clearReplies": "清除已貼上的回答",
+        "btn.runEval": "執行評測",
+        "btn.stop": "停止",
+        "btn.exportBatch": "匯出 Batch JSON",
+
+        "info.aria": "開發階段",
+        "info.s1.title": "第 1 階段：內容基礎",
+        "info.s1.body": "README 提供了產生器的邏輯、結構和質素規則，內容設計工作已經展開。",
+        "info.s2.title": "第 2 階段：網站原型",
+        "info.s2.body": "這個網頁把該結構變成手動操作的網上產生器，方便先測試各部分、字眼和流程，再進一步改良。",
+        "info.s3.title": "第 3 階段：產品版本",
+        "info.s3.body": "下一步是加入預設範本、段落模板、提示詞模式，以及配合完整框架的輸出組合，令工具更強大。",
+        "footer": "提示詞產生器網站的首個可用版本，以 GitHub Pages 發佈。",
+
+        "kind.image": "圖片",
+        "kind.pdf": "PDF",
+        "kind.text": "文字",
+        "attach.remove": "移除",
+        "attach.removeAria": "移除 {name}",
+        "attach.tooBig": "{name} 超過 5 MB，API 可能不接受，請先縮小。",
+        "attach.nearLimit": "附件已接近 32 MB 的請求上限。",
+        "attach.unsupported": "不支援：{list}。請使用 JPG、PNG、GIF、WebP、PDF 或文字檔。",
+
+        "st.storageBlocked": "這個瀏覽器封鎖了本機儲存，版本和案例在重新載入後便會消失。",
+        "st.repliesStorageBlocked": "這個瀏覽器封鎖了本機儲存，已貼上的回答在重新載入後便會消失。",
+        "st.saved": "已儲存 {name}。",
+        "st.duplicated": "已建立 {name}。可以為它選另一個模型作比較。",
+        "st.loadedVersion": "已把 {name} 載入表格。",
+        "st.sampleCases": "已載入 3 個示範案例（配合推廣員進階範例）。",
+        "st.needVersion": "請最少儲存並剔選一個版本。",
+        "st.needCase": "請最少新增一個有資料的測試案例。",
+        "st.needKey": "請輸入 API key 才可執行，或改用「匯出 Batch JSON」。",
+        "st.running": "執行中 {done}/{total}…",
+        "st.stopped": "已停止：完成 {done}／{total} 個請求。",
+        "st.finished": "已完成 {total} 個請求。",
+        "st.exported": "已匯出 {n} 個請求，供 POST /v1/messages/batches 使用。custom_id 格式為 v<版本>-c<案例>（{legend}）。Batches API 不接受拒答後備，所以已略去。",
+        "st.worksheet": "工作表已準備好：共 {n} 個提示詞。更改版本、案例或附件後，請重新建立。",
+        "st.noReplies": "沒有可清除的回答。",
+        "st.cleared": "已清除所有已貼上的回答。",
+
+        "cf.deleteVersion": "要刪除 {name} 嗎？",
+        "cf.sampleCases": "要用示範案例取代目前的測試案例嗎？",
+        "cf.run": "這會送出 {total} 個請求，費用由你的 API key 支付：\n{plan}\n\n要繼續嗎？",
+        "cf.clearReplies": "要刪除這個瀏覽器中所有已貼上的回答嗎？",
+
+        "ver.empty": "未有版本。請先填寫表格，再存成版本。",
+        "ver.include": "把 {name} 納入評測",
+        "ver.nameAria": "版本名稱",
+        "ver.savedAt": "儲存於 {date}",
+        "ver.load": "載入",
+        "ver.loadAria": "把 {name} 載入表格",
+        "ver.delete": "刪除",
+        "ver.deleteAria": "刪除 {name}",
+        "ver.duplicate": "複製版本",
+        "ver.duplicateAria": "複製 {name}",
+        "ver.modelAria": "{name} 的模型",
+        "ver.effortAria": "{name} 的思考程度",
+        "ver.modelDefault": "模型：預設",
+        "ver.effortDefault": "思考程度：預設",
+        "ver.effortOpt": "思考程度：{e}",
+
+        "case.empty": "未有測試案例。",
+        "case.label": "案例 {n}",
+        "case.deleteAria": "刪除案例 {n}",
+        "case.inputPh": "這個案例的資料",
+        "case.inputAria": "案例 {n} 的資料",
+        "case.expectedPh": "預期結果，例如：120 件",
+        "case.expectedAria": "案例 {n} 的預期結果",
+
+        "res.testCase": "測試案例",
+        "res.summary": "總結",
+        "res.expected": "預期：{x}",
+        "res.noExpected": "沒有預期結果",
+        "res.noExpectedManual": "沒有預期結果：請自行判斷符合與否",
+        "res.running": "執行中…",
+        "res.error": "錯誤",
+        "res.noText": "（沒有文字）",
+        "res.refused": "被拒答（{cat}）",
+        "res.unspecified": "未註明",
+        "res.meta": "{model} · {stop} · 輸入 {inTok} / 輸出 {outTok} · {sec} 秒",
+        "res.apiSummary": "通過 {passed}/{graded} · 平均 {sec} 秒 · {tokens} tokens",
+        "res.manualSummary": "通過 {passed}/{graded} · 已回答 {answered}/{total}",
+        "badge.pass": "PASS（符合）",
+        "badge.fail": "FAIL（不符）",
+        "badge.eye": "需自行判斷",
+        "badge.waiting": "等待回答",
+
+        "man.label": "{name} · 手動",
+        "man.labelModel": "{name} · {model}（請在 claude.ai 選用）",
+        "man.copy": "複製提示詞",
+        "man.copyAria": "複製 {name}、{case} 的提示詞",
+        "man.copyFallback": "請用「顯示提示詞」",
+        "man.attach": "請在 claude.ai 附上：{files}",
+        "man.show": "顯示提示詞",
+        "man.promptAria": "要複製的提示詞",
+        "man.stale": "貼上回答後，提示詞已經更改。請複製新的提示詞，再貼上新的回答。",
+        "man.replyPh": "在這裡貼上 Claude 的回答",
+        "man.replyAria": "{name}、{case} 的 Claude 回答",
+        "man.markPass": "判為符合",
+        "man.markFail": "判為不符"
+      }
+    };
+
+    const LANG_KEY = "ui.lang";
+    const SUPPORTED_LANGS = ["zh-HK", "en"];
+    let uiLang = detectLang();
+
+    // A saved choice wins; otherwise any Chinese browser language opens in Traditional Chinese (Hong Kong).
+    function detectLang() {
+      try {
+        const saved = localStorage.getItem(LANG_KEY);
+        if (SUPPORTED_LANGS.includes(saved)) return saved;
+      } catch (error) {
+        /* storage blocked: fall back to the browser language */
+      }
+      const prefs = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || "en"];
+      return prefs.some((lang) => /^zh\b/i.test(lang)) ? "zh-HK" : "en";
+    }
+
+    function t(key, params = {}) {
+      const table = I18N[uiLang] || I18N.en;
+      const text = key in table ? table[key] : key in I18N.en ? I18N.en[key] : key;
+      return text.replace(/\{(\w+)\}/g, (match, name) => (name in params ? String(params[name]) : match));
+    }
+
+    // data-i18n-html is used only for strings written in I18N above, never for user or model text.
+    function applyStaticTexts() {
+      document.querySelectorAll("[data-i18n]").forEach((el) => {
+        el.textContent = t(el.dataset.i18n);
+      });
+      document.querySelectorAll("[data-i18n-html]").forEach((el) => {
+        el.innerHTML = t(el.dataset.i18nHtml);
+      });
+      document.querySelectorAll("[data-i18n-ph]").forEach((el) => {
+        el.placeholder = t(el.dataset.i18nPh);
+      });
+      document.querySelectorAll("[data-i18n-aria]").forEach((el) => {
+        el.setAttribute("aria-label", t(el.dataset.i18nAria));
+      });
+    }
+
+    // Changes only what the page shows. Form values, the current mode, the output and saved data stay as they are.
+    function setLanguage(lang, persist = true) {
+      uiLang = SUPPORTED_LANGS.includes(lang) ? lang : "en";
+      document.documentElement.lang = uiLang === "zh-HK" ? "zh-Hant-HK" : "en";
+      document.title = t("doc.title");
+      const description = document.querySelector('meta[name="description"]');
+      if (description) description.setAttribute("content", t("doc.desc"));
+      document.querySelectorAll(".lang-btn").forEach((btn) => {
+        btn.setAttribute("aria-pressed", String(btn.dataset.lang === uiLang));
+      });
+      applyStaticTexts();
+      refreshDynamicTexts();
+      if (persist) {
+        try {
+          localStorage.setItem(LANG_KEY, uiLang);
+        } catch (error) {
+          /* remembering the language is optional */
+        }
+      }
+    }
+
+    function refreshDynamicTexts() {
+      renderModeIntro();
+      syncFallbackAvailability();
+      renderViewNote();
+      if (!lastFull) output.textContent = t("out.placeholder");
+      renderQsExample();
+      renderQsStatus();
+      renderEvalStatus();
+      renderAttachments(lastRejected);
+      renderVersions();
+      renderCases();
+      rerenderResultsTable();
+    }
+
+    function rerenderResultsTable() {
+      if (!lastTable || $("resultsTable").hidden) return;
+      if (lastTable.type === "api") {
+        renderResults(lastTable.versions, lastTable.cases);
+      } else {
+        renderManualTable(lastTable.versions, lastTable.cases);
+      }
+    }
+
+    // ---- In-page quick start (same made-up sales data as docs/quick-start.*.md) ----
+    const QS_KEYS = ["title", "taskContext", "rules", "request", "inputText", "output"];
+    const QS_LABELS = { title: "f.p101Title", taskContext: "f.taskContext", rules: "f.rules", request: "f.request", inputText: "f.inputText", output: "f.output" };
+    let qsStatusKey = "";
+
+    function qsExample() {
+      const example = {};
+      QS_KEYS.forEach((key) => {
+        example[key] = t(`qs.ex.${key}`);
+      });
+      return example;
+    }
+
+    function renderQsExample() {
+      const list = $("qsExample");
+      list.replaceChildren();
+      const example = qsExample();
+      const addRow = (label, value) => {
+        const term = document.createElement("dt");
+        term.textContent = label;
+        const detail = document.createElement("dd");
+        detail.textContent = value;
+        list.append(term, detail);
+      };
+      addRow(t(QS_LABELS.title), example.title);
+      addRow(t("f.taskType"), t("opt.analytical"));
+      QS_KEYS.slice(1).forEach((key) => addRow(t(QS_LABELS[key]), example[key]));
+    }
+
+    function setQsStatus(key) {
+      qsStatusKey = key;
+      renderQsStatus();
+    }
+
+    function renderQsStatus() {
+      $("qsStatus").textContent = qsStatusKey ? t(qsStatusKey) : "";
+    }
+
+    function qsChooseMode() {
+      if (mode !== "p101") setMode("p101");
+      setQsStatus("qs.st.mode");
+    }
+
+    // Writes the example only when the person asks for it; switching language later never rewrites what is in the boxes.
+    function qsFillExample() {
+      const example = qsExample();
+      const hasOtherText = Object.entries(fields101).some(([key, el]) => key !== "taskType" && el.value.trim() && el.value !== (example[key] || ""));
+      if (hasOtherText && !confirm(t("qs.confirmReplace"))) return;
+      if (mode !== "p101") setMode("p101");
+      setValues101({ ...example, taskType: "analytical" });
+      setQsStatus("qs.st.filled");
+    }
+
+    function qsGenerate() {
+      if (mode !== "p101") setMode("p101");
+      if (!fields101.taskContext.value.trim() && !fields101.request.value.trim()) {
+        setQsStatus("qs.st.needFill");
+        return;
+      }
+      if (view !== "prompt") {
+        setView("prompt");
+      } else {
+        generatePrompt();
+      }
+      setQsStatus("qs.st.generated");
+      $("outputPanel").scrollIntoView({ behavior: "smooth", block: "start" });
+      $("copyBtnTop").focus({ preventScroll: true });
+    }
+
+
     // ---- Prompting 101 mode (10-part structure) ----
     const API_URL = "https://api.anthropic.com/v1/messages";
     const API_VERSION = "2026-10-21";
     const FALLBACK_BETA = "server-side-fallback-2026-07-01";
-    const PLACEHOLDER = "Click “Generate Prompt” to build your system prompt.";
+    let noteState = null;
+    let lastRejected = [];
+    let lastStatus = null;
+    let lastTable = null;
     const INPUT_PLACEHOLDER = "[Paste this request's input in the Input Data box (section 7) or attach files]";
     const IMAGE_TYPES = ["image/jpeg", "image/png", "image/gif", "image/webp"];
     const TEXT_FILE = /\.(txt|csv|tsv|md|markdown|json)$/i;
@@ -1548,10 +2534,23 @@ Click “Generate Prompt” to build your system prompt.
       ].join("\n");
     }
 
-    const VIEW_NOTES = {
-      json: "Messages API request body (system and messages kept separate). The preview shortens file data; Copy and Download include it in full.",
-      curl: "Sends the downloaded JSON with the required headers and prints the reply text, or the refusal category."
-    };
+    function renderViewNote() {
+      const note = $("viewNote");
+      if (!noteState || !lastFull || mode !== "p101") {
+        note.textContent = "";
+        note.hidden = true;
+        return;
+      }
+      note.textContent = noteState.view === "json"
+        ? t("view.note.json") + (noteState.fallback ? t("view.note.jsonBeta", { beta: FALLBACK_BETA }) : "")
+        : t("view.note.curl");
+      note.hidden = false;
+    }
+
+    function renderModeIntro() {
+      $("modeIntro").textContent = t(mode === "p101" ? "mode.intro.p101" : "mode.intro.v2");
+      $("promptLegend").hidden = !(mode === "p101" && view === "prompt");
+    }
 
     function setView(next) {
       view = next;
@@ -1559,14 +2558,15 @@ Click “Generate Prompt” to build your system prompt.
         btn.setAttribute("aria-pressed", String(btn.dataset.view === view));
       });
       generatePrompt();
+      renderModeIntro();
     }
 
     function syncFallbackAvailability() {
       const haiku = apiFields.model.value === "claude-haiku-5-5";
       apiFields.fallback.disabled = haiku;
       $("apiHint").textContent = haiku
-        ? "Thinking is adaptive. Refusal fallback is not available on Claude Haiku 5.5, so it is left out."
-        : "Thinking is adaptive. Refusal fallback lets the API re-run a declined request on another model; it needs the beta header shown in the cURL tab.";
+        ? t("api.hint.haiku")
+        : t("api.hint.default");
     }
 
     function onApiSettingsChange() {
@@ -1634,6 +2634,7 @@ Click “Generate Prompt” to build your system prompt.
     }
 
     function renderAttachments(rejected = []) {
+      lastRejected = rejected;
       const list = $("attachList");
       list.replaceChildren();
       attachments.forEach((file) => {
@@ -1650,8 +2651,8 @@ Click “Generate Prompt” to build your system prompt.
         name.textContent = file.name;
         const meta = document.createElement("span");
         meta.className = "hint";
-        meta.textContent = `${file.kind} · ${fmtSize(file.size)}`;
-        const remove = miniButton("Remove", () => removeAttachment(file.id), `Remove ${file.name}`);
+        meta.textContent = `${t(`kind.${file.kind}`)} · ${fmtSize(file.size)}`;
+        const remove = miniButton(t("attach.remove"), () => removeAttachment(file.id), t("attach.removeAria", { name: file.name }));
         li.append(name, meta, remove);
         list.append(li);
       });
@@ -1659,10 +2660,10 @@ Click “Generate Prompt” to build your system prompt.
       const warnings = [];
       attachments
         .filter((f) => f.kind === "image" && f.size > 5 * MB)
-        .forEach((f) => warnings.push(`${f.name} is over 5 MB; the API may reject it, so resize it first.`));
+        .forEach((f) => warnings.push(t("attach.tooBig", { name: f.name })));
       const encoded = attachments.reduce((sum, f) => sum + f.size, 0) * 4 / 3;
-      if (encoded > 30 * MB) warnings.push("Attachments are close to the 32 MB request limit.");
-      if (rejected.length) warnings.push(`Not supported: ${rejected.join(", ")}. Use JPG, PNG, GIF, WebP, PDF or a text file.`);
+      if (encoded > 30 * MB) warnings.push(t("attach.nearLimit"));
+      if (rejected.length) warnings.push(t("attach.unsupported", { list: rejected.join(", ") }));
       $("attachWarn").textContent = warnings.join(" ");
     }
 
@@ -1790,7 +2791,8 @@ Click “Generate Prompt” to build your system prompt.
 
     function showPlaceholder() {
       lastFull = "";
-      output.textContent = PLACEHOLDER;
+      noteState = null;
+      output.textContent = t("out.placeholder");
       $("viewNote").hidden = true;
     }
 
@@ -1808,6 +2810,7 @@ Click “Generate Prompt” to build your system prompt.
         btn.setAttribute("aria-pressed", String(btn.dataset.view === "prompt"));
       });
       showPlaceholder();
+      renderModeIntro();
     }
 
     // ---- C. Evaluation Lab ----
@@ -1831,14 +2834,20 @@ Click “Generate Prompt” to build your system prompt.
       try {
         localStorage.setItem(key, JSON.stringify(value));
       } catch (error) {
-        setEvalStatus("This browser blocked local storage, so versions and cases last only until you reload.", true);
+        setEvalStatus("st.storageBlocked", {}, true);
       }
     }
 
-    function setEvalStatus(message, isError = false) {
+    // Kept as a key + params so the message can be shown again in the other language.
+    function setEvalStatus(key, params = {}, isError = false) {
+      lastStatus = key ? { key, params, isError } : null;
+      renderEvalStatus();
+    }
+
+    function renderEvalStatus() {
       const status = $("evalStatus");
-      status.textContent = message;
-      status.classList.toggle("error", isError);
+      status.textContent = lastStatus ? t(lastStatus.key, lastStatus.params) : "";
+      status.classList.toggle("error", Boolean(lastStatus && lastStatus.isError));
     }
 
     function saveVersion() {
@@ -1847,7 +2856,7 @@ Click “Generate Prompt” to build your system prompt.
       versions.push({ id: uid(), name: `v${n}`, savedAt: new Date().toISOString(), include: true, model: "", effort: "", values: getValues101() });
       saveStore(STORE_VERSIONS, versions);
       renderVersions();
-      setEvalStatus(`Saved v${n}.`);
+      setEvalStatus("st.saved", { name: `v${n}` });
     }
 
     function duplicateVersion(version) {
@@ -1864,7 +2873,7 @@ Click “Generate Prompt” to build your system prompt.
       versions.splice(versions.indexOf(version) + 1, 0, copy);
       saveStore(STORE_VERSIONS, versions);
       renderVersions();
-      setEvalStatus(`Created ${name}. Pick a different model for it to compare.`);
+      setEvalStatus("st.duplicated", { name });
     }
 
     function versionSettings(version) {
@@ -1896,7 +2905,7 @@ Click “Generate Prompt” to build your system prompt.
       if (!versions.length) {
         const empty = document.createElement("p");
         empty.className = "hint";
-        empty.textContent = "No versions yet. Fill in the form, then save it as a version.";
+        empty.textContent = t("ver.empty");
         list.append(empty);
         return;
       }
@@ -1906,7 +2915,7 @@ Click “Generate Prompt” to build your system prompt.
         const include = document.createElement("input");
         include.type = "checkbox";
         include.checked = version.include !== false;
-        include.setAttribute("aria-label", `Include ${version.name} in the run`);
+        include.setAttribute("aria-label", t("ver.include", { name: version.name }));
         include.addEventListener("change", () => {
           version.include = include.checked;
           saveStore(STORE_VERSIONS, versions);
@@ -1914,24 +2923,24 @@ Click “Generate Prompt” to build your system prompt.
         const name = document.createElement("input");
         name.type = "text";
         name.value = version.name;
-        name.title = `Saved ${new Date(version.savedAt).toLocaleString()}`;
-        name.setAttribute("aria-label", "Version name");
+        name.title = t("ver.savedAt", { date: new Date(version.savedAt).toLocaleString(uiLang === "zh-HK" ? "zh-HK" : "en") });
+        name.setAttribute("aria-label", t("ver.nameAria"));
         name.addEventListener("change", () => {
           version.name = name.value.trim() || version.name;
           name.value = version.name;
           saveStore(STORE_VERSIONS, versions);
         });
-        const load = miniButton("Load", () => {
+        const load = miniButton(t("ver.load"), () => {
           setValues101(version.values || {});
           generatePrompt();
-          setEvalStatus(`Loaded ${version.name} into the form.`);
-        }, `Load ${version.name} into the form`);
-        const remove = miniButton("Delete", () => {
-          if (!confirm(`Delete ${version.name}?`)) return;
+          setEvalStatus("st.loadedVersion", { name: version.name });
+        }, t("ver.loadAria", { name: version.name }));
+        const remove = miniButton(t("ver.delete"), () => {
+          if (!confirm(t("cf.deleteVersion", { name: version.name }))) return;
           versions = versions.filter((v) => v.id !== version.id);
           saveStore(STORE_VERSIONS, versions);
           renderVersions();
-        }, `Delete ${version.name}`);
+        }, t("ver.deleteAria", { name: version.name }));
         const update = (key) => (value) => {
           version[key] = value;
           saveStore(STORE_VERSIONS, versions);
@@ -1939,18 +2948,18 @@ Click “Generate Prompt” to build your system prompt.
         const opts = document.createElement("div");
         opts.className = "version-opts";
         const modelSelect = optionSelect(
-          `${version.name} model`,
+          t("ver.modelAria", { name: version.name }),
           version.model,
-          [["", "Model: default"], ...Object.entries(MODEL_LABELS)],
+          [["", t("ver.modelDefault")], ...Object.entries(MODEL_LABELS)],
           update("model")
         );
         const effortSelect = optionSelect(
-          `${version.name} effort`,
+          t("ver.effortAria", { name: version.name }),
           version.effort,
-          [["", "Effort: default"], ...EFFORTS.map((e) => [e, `Effort: ${e}`])],
+          [["", t("ver.effortDefault")], ...EFFORTS.map((e) => [e, t("ver.effortOpt", { e })])],
           update("effort")
         );
-        const duplicate = miniButton("Duplicate", () => duplicateVersion(version), `Duplicate ${version.name}`);
+        const duplicate = miniButton(t("ver.duplicate"), () => duplicateVersion(version), t("ver.duplicateAria", { name: version.name }));
         opts.append(modelSelect, effortSelect, duplicate);
         row.append(include, name, load, remove, opts);
         list.append(row);
@@ -1964,11 +2973,11 @@ Click “Generate Prompt” to build your system prompt.
     }
 
     function loadSampleCases() {
-      if (cases.length && !confirm("Replace the current test cases with the sample cases?")) return;
+      if (cases.length && !confirm(t("cf.sampleCases"))) return;
       cases = SAMPLE_CASES.map((c) => ({ id: uid(), input: c.input, expected: c.expected }));
       saveStore(STORE_CASES, cases);
       renderCases();
-      setEvalStatus("Loaded 3 sample cases for the promoter sample prompt.");
+      setEvalStatus("st.sampleCases");
     }
 
     function renderCases() {
@@ -1977,7 +2986,7 @@ Click “Generate Prompt” to build your system prompt.
       if (!cases.length) {
         const empty = document.createElement("p");
         empty.className = "hint";
-        empty.textContent = "No test cases yet.";
+        empty.textContent = t("case.empty");
         list.append(empty);
         return;
       }
@@ -1987,17 +2996,17 @@ Click “Generate Prompt” to build your system prompt.
         const head = document.createElement("div");
         head.className = "block-head";
         const label = document.createElement("strong");
-        label.textContent = `Case ${index + 1}`;
-        const remove = miniButton("Delete", () => {
+        label.textContent = t("case.label", { n: index + 1 });
+        const remove = miniButton(t("ver.delete"), () => {
           cases = cases.filter((c) => c.id !== testCase.id);
           saveStore(STORE_CASES, cases);
           renderCases();
-        }, `Delete case ${index + 1}`);
+        }, t("case.deleteAria", { n: index + 1 }));
         head.append(label, remove);
         const input = document.createElement("textarea");
         input.value = testCase.input;
-        input.placeholder = "Input data for this case";
-        input.setAttribute("aria-label", `Case ${index + 1} input`);
+        input.placeholder = t("case.inputPh");
+        input.setAttribute("aria-label", t("case.inputAria", { n: index + 1 }));
         input.addEventListener("input", () => {
           testCase.input = input.value;
           saveStore(STORE_CASES, cases);
@@ -2005,8 +3014,8 @@ Click “Generate Prompt” to build your system prompt.
         const expected = document.createElement("input");
         expected.type = "text";
         expected.value = testCase.expected;
-        expected.placeholder = "Expected result, e.g. <verdict>QUALIFIED";
-        expected.setAttribute("aria-label", `Case ${index + 1} expected result`);
+        expected.placeholder = t("case.expectedPh");
+        expected.setAttribute("aria-label", t("case.expectedAria", { n: index + 1 }));
         expected.addEventListener("input", () => {
           testCase.expected = expected.value;
           saveStore(STORE_CASES, cases);
@@ -2037,7 +3046,9 @@ Click “Generate Prompt” to build your system prompt.
       const text = (data.content || []).filter((b) => b.type === "text").map((b) => b.text).join("");
       return {
         status: "done",
-        text: refused ? `Refused (${(data.stop_details && data.stop_details.category) || "unspecified"})` : text,
+        text,
+        refused,
+        category: (data.stop_details && data.stop_details.category) || "",
         stopReason: data.stop_reason || "unknown",
         model: data.model || "",
         inTok: (usage.input_tokens || 0) + (usage.cache_read_input_tokens || 0) + (usage.cache_creation_input_tokens || 0),
@@ -2062,8 +3073,8 @@ Click “Generate Prompt” to build your system prompt.
         try {
           res = await fetch(API_URL, request);
         } catch (error) {
-          if (signal.aborted) return { status: "error", error: "Stopped." };
-          if (attempt === 2) return { status: "error", error: `Network error: ${error.message}` };
+          if (signal.aborted) return { status: "error", errorKey: "err.stopped" };
+          if (attempt === 2) return { status: "error", errorKey: "err.network", errorParams: { msg: error.message } };
           await sleep(1000 * 2 ** attempt);
           continue;
         }
@@ -2071,13 +3082,15 @@ Click “Generate Prompt” to build your system prompt.
         if (res.ok && data) return parseResponse(data, testCase, performance.now() - started);
         const retryable = res.status === 429 || res.status >= 500;
         if (!retryable || attempt === 2) {
-          return { status: "error", error: (data && data.error && data.error.message) || `HTTP ${res.status}` };
+          return data && data.error && data.error.message
+            ? { status: "error", error: data.error.message }
+            : { status: "error", errorKey: "err.http", errorParams: { code: res.status } };
         }
         const retryAfter = Number(res.headers.get("retry-after")) * 1000;
         await sleep(Math.min(retryAfter || 1000 * 2 ** (attempt + 1), 20000));
-        if (signal.aborted) return { status: "error", error: "Stopped." };
+        if (signal.aborted) return { status: "error", errorKey: "err.stopped" };
       }
-      return { status: "error", error: "Gave up after 3 attempts." };
+      return { status: "error", errorKey: "err.gaveUp" };
     }
 
     function activeSelection() {
@@ -2090,12 +3103,12 @@ Click “Generate Prompt” to build your system prompt.
     async function runEval() {
       const key = $("evalKey").value.trim();
       const { activeVersions, activeCases } = activeSelection();
-      if (!activeVersions.length) return setEvalStatus("Save at least one version and tick it.", true);
-      if (!activeCases.length) return setEvalStatus("Add at least one test case with input.", true);
-      if (!key) return setEvalStatus("Enter an API key to run, or use Export Batch JSON instead.", true);
+      if (!activeVersions.length) return setEvalStatus("st.needVersion", {}, true);
+      if (!activeCases.length) return setEvalStatus("st.needCase", {}, true);
+      if (!key) return setEvalStatus("st.needKey", {}, true);
       const total = activeVersions.length * activeCases.length;
       const plan = activeVersions.map((v) => `• ${versionLabel(v)} × ${activeCases.length}`).join("\n");
-      if (!confirm(`This sends ${total} request(s), billed to your API key:\n${plan}\n\nContinue?`)) return;
+      if (!confirm(t("cf.run", { total, plan }))) return;
 
       results = {};
       runController = new AbortController();
@@ -2105,7 +3118,7 @@ Click “Generate Prompt” to build your system prompt.
       const jobs = [];
       activeVersions.forEach((v) => activeCases.forEach((c) => jobs.push({ v, c })));
       let done = 0;
-      setEvalStatus(`Running 0/${total}…`);
+      setEvalStatus("st.running", { done: 0, total });
       renderResults(activeVersions, activeCases);
 
       const worker = async () => {
@@ -2116,7 +3129,7 @@ Click “Generate Prompt” to build your system prompt.
           renderResults(activeVersions, activeCases);
           results[cellKey] = await runOne(v, c, versionSettings(v), key, signal);
           done += 1;
-          setEvalStatus(`Running ${done}/${total}…`);
+          setEvalStatus("st.running", { done, total });
           renderResults(activeVersions, activeCases);
         }
       };
@@ -2124,7 +3137,7 @@ Click “Generate Prompt” to build your system prompt.
 
       $("runEvalBtn").disabled = false;
       $("stopEvalBtn").disabled = true;
-      setEvalStatus(signal.aborted ? `Stopped after ${done} of ${total} requests.` : `Finished ${total} requests.`);
+      setEvalStatus(signal.aborted ? "st.stopped" : "st.finished", { done, total });
       runController = null;
     }
 
@@ -2146,39 +3159,40 @@ Click “Generate Prompt” to build your system prompt.
         return td;
       }
       if (result.status === "running") {
-        td.textContent = "Running…";
+        td.textContent = t("res.running");
         return td;
       }
       const badge = document.createElement("span");
       if (result.status === "error") {
         badge.className = "badge fail";
-        badge.textContent = "ERROR";
+        badge.textContent = t("res.error");
         const message = document.createElement("div");
         message.className = "hint";
-        message.textContent = result.error;
+        message.textContent = result.errorKey ? t(result.errorKey, result.errorParams) : result.error;
         td.append(badge, message);
         return td;
       }
-      const label = result.pass === true ? "PASS" : result.pass === false ? "FAIL" : "CHECK BY EYE";
+      const label = t(result.pass === true ? "badge.pass" : result.pass === false ? "badge.fail" : "badge.eye");
       badge.className = `badge ${result.pass === true ? "pass" : result.pass === false ? "fail" : "neutral"}`;
       badge.textContent = label;
       const out = document.createElement("div");
       out.className = "cell-out";
-      out.textContent = result.text || "(no text)";
+      out.textContent = result.refused ? t("res.refused", { cat: result.category || t("res.unspecified") }) : (result.text || t("res.noText"));
       const meta = document.createElement("div");
       meta.className = "hint";
-      meta.textContent = `${result.model} · ${result.stopReason} · ${result.inTok.toLocaleString()} in / ${result.outTok.toLocaleString()} out · ${(result.ms / 1000).toFixed(1)} s`;
+      meta.textContent = t("res.meta", { model: result.model, stop: result.stopReason, inTok: result.inTok.toLocaleString(), outTok: result.outTok.toLocaleString(), sec: (result.ms / 1000).toFixed(1) });
       td.append(badge, out, meta);
       return td;
     }
 
     // Model output is untrusted text, so every cell is filled with textContent, never innerHTML.
     function renderResults(activeVersions, activeCases) {
+      lastTable = { type: "api", versions: activeVersions, cases: activeCases };
       const table = $("resultsTable");
       table.replaceChildren();
       table.hidden = false;
       const head = table.createTHead().insertRow();
-      addCell(head, "th", "Test case");
+      addCell(head, "th", t("res.testCase"));
       activeVersions.forEach((v) => addCell(head, "th", versionLabel(v)));
       const body = table.createTBody();
       activeCases.forEach((c, index) => {
@@ -2186,10 +3200,10 @@ Click “Generate Prompt” to build your system prompt.
         const first = addCell(row, "th", "");
         first.scope = "row";
         const title = document.createElement("strong");
-        title.textContent = `Case ${index + 1}`;
+        title.textContent = t("case.label", { n: index + 1 });
         const expected = document.createElement("div");
         expected.className = "hint";
-        expected.textContent = c.expected ? `Expected: ${c.expected}` : "No expected result";
+        expected.textContent = c.expected ? t("res.expected", { x: c.expected }) : t("res.noExpected");
         const preview = document.createElement("div");
         preview.className = "cell-out";
         preview.textContent = c.input;
@@ -2197,7 +3211,7 @@ Click “Generate Prompt” to build your system prompt.
         activeVersions.forEach((v) => row.append(resultCell(results[`${v.id}|${c.id}`])));
       });
       const foot = table.createTFoot().insertRow();
-      addCell(foot, "th", "Summary");
+      addCell(foot, "th", t("res.summary"));
       activeVersions.forEach((v) => {
         const done = activeCases.map((c) => results[`${v.id}|${c.id}`]).filter((r) => r && r.status === "done");
         const graded = done.filter((r) => r.pass !== null);
@@ -2205,15 +3219,15 @@ Click “Generate Prompt” to build your system prompt.
         const avgMs = done.length ? done.reduce((sum, r) => sum + r.ms, 0) / done.length : 0;
         const tokens = done.reduce((sum, r) => sum + r.inTok + r.outTok, 0);
         addCell(foot, "td", done.length
-          ? `Pass ${passed}/${graded.length} · avg ${(avgMs / 1000).toFixed(1)} s · ${tokens.toLocaleString()} tokens`
+          ? t("res.apiSummary", { passed, graded: graded.length, sec: (avgMs / 1000).toFixed(1), tokens: tokens.toLocaleString() })
           : "—");
       });
     }
 
     function exportBatch() {
       const { activeVersions, activeCases } = activeSelection();
-      if (!activeVersions.length) return setEvalStatus("Save at least one version and tick it.", true);
-      if (!activeCases.length) return setEvalStatus("Add at least one test case with input.", true);
+      if (!activeVersions.length) return setEvalStatus("st.needVersion", {}, true);
+      if (!activeCases.length) return setEvalStatus("st.needCase", {}, true);
       const files = $("evalWithFiles").checked ? attachments : [];
       const requests = [];
       activeVersions.forEach((v, vi) => activeCases.forEach((c, ci) => {
@@ -2222,7 +3236,7 @@ Click “Generate Prompt” to build your system prompt.
       }));
       downloadText(JSON.stringify({ requests }, null, 2), "prompting-101-batch.json", "application/json");
       const legend = activeVersions.map((v, vi) => `v${vi + 1} = ${versionLabel(v)}`).join(", ");
-      setEvalStatus(`Exported ${requests.length} requests for POST /v1/messages/batches. custom_id is v<version>-c<case> (${legend}). Refusal fallback is left out because the Batches API rejects it.`);
+      setEvalStatus("st.exported", { n: requests.length, legend });
     }
 
     // ---- C2. Manual evaluation (claude.ai, no API key) ----
@@ -2265,8 +3279,8 @@ Click “Generate Prompt” to build your system prompt.
 
     function manualLabel(version) {
       return version.model
-        ? `${version.name} · ${MODEL_LABELS[version.model] || version.model} (pick in claude.ai)`
-        : `${version.name} · manual`;
+        ? t("man.labelModel", { name: version.name, model: MODEL_LABELS[version.model] || version.model })
+        : t("man.label", { name: version.name });
     }
 
     // undefined = no reply yet, null = needs a judgement by eye, true/false = graded.
@@ -2279,26 +3293,25 @@ Click “Generate Prompt” to build your system prompt.
 
     function setBadge(badge, pass) {
       const states = {
-        undefined: ["neutral", "WAITING"],
-        null: ["neutral", "CHECK BY EYE"],
-        true: ["pass", "PASS"],
-        false: ["fail", "FAIL"]
+        undefined: ["neutral", "badge.waiting"],
+        null: ["neutral", "badge.eye"],
+        true: ["pass", "badge.pass"],
+        false: ["fail", "badge.fail"]
       };
-      const [cls, label] = states[String(pass)];
+      const [cls, key] = states[String(pass)];
       badge.className = `badge ${cls}`;
-      badge.textContent = label;
+      badge.textContent = t(key);
     }
 
     async function copyText(text, button) {
-      const original = button.textContent;
       try {
         await navigator.clipboard.writeText(text);
-        button.textContent = "Copied";
+        button.textContent = t("btn.copied");
       } catch (error) {
-        button.textContent = "Use Show prompt";
+        button.textContent = t("man.copyFallback");
       }
       setTimeout(() => {
-        button.textContent = original;
+        button.textContent = t("man.copy");
       }, 1200);
     }
 
@@ -2312,24 +3325,24 @@ Click “Generate Prompt” to build your system prompt.
       const head = document.createElement("div");
       head.className = "block-head";
       const badge = document.createElement("span");
-      const copy = miniButton("Copy prompt", () => copyText(prompt.text, copy), `Copy prompt for ${version.name}, ${caseLabel}`);
+      const copy = miniButton(t("man.copy"), () => copyText(prompt.text, copy), t("man.copyAria", { name: version.name, case: caseLabel }));
       head.append(badge, copy);
       wrap.append(head);
 
       if (prompt.attach.length) {
         const attachNote = document.createElement("div");
         attachNote.className = "hint";
-        attachNote.textContent = `Attach in claude.ai: ${prompt.attach.join(", ")}`;
+        attachNote.textContent = t("man.attach", { files: prompt.attach.join(", ") });
         wrap.append(attachNote);
       }
 
       const details = document.createElement("details");
       const summary = document.createElement("summary");
-      summary.textContent = "Show prompt";
+      summary.textContent = t("man.show");
       const promptBox = document.createElement("textarea");
       promptBox.readOnly = true;
       promptBox.value = prompt.text;
-      promptBox.setAttribute("aria-label", "Prompt to copy");
+      promptBox.setAttribute("aria-label", t("man.promptAria"));
       details.append(summary, promptBox);
       wrap.append(details);
 
@@ -2338,14 +3351,14 @@ Click “Generate Prompt” to build your system prompt.
       wrap.append(stale);
 
       const reply = document.createElement("textarea");
-      reply.placeholder = "Paste Claude's reply here";
-      reply.setAttribute("aria-label", `Claude's reply for ${version.name}, ${caseLabel}`);
+      reply.placeholder = t("man.replyPh");
+      reply.setAttribute("aria-label", t("man.replyAria", { name: version.name, case: caseLabel }));
       wrap.append(reply);
 
       const verdictRow = document.createElement("div");
       verdictRow.className = "btn-row";
-      const markPass = miniButton("Mark pass", () => setVerdict(true));
-      const markFail = miniButton("Mark fail", () => setVerdict(false));
+      const markPass = miniButton(t("man.markPass"), () => setVerdict(true));
+      const markFail = miniButton(t("man.markFail"), () => setVerdict(false));
       verdictRow.append(markPass, markFail);
       if (!(testCase.expected || "").trim()) wrap.append(verdictRow);
 
@@ -2355,7 +3368,7 @@ Click “Generate Prompt” to build your system prompt.
         const pass = manualPass(current, testCase);
         setBadge(badge, pass);
         stale.textContent = current && current.text && current.hash && current.hash !== prompt.hash
-          ? "The prompt changed after this reply was pasted. Copy the new prompt and paste a fresh reply."
+          ? t("man.stale")
           : "";
         const verdict = current && typeof current.verdict === "boolean" ? current.verdict : null;
         markPass.setAttribute("aria-pressed", String(verdict === true));
@@ -2385,21 +3398,27 @@ Click “Generate Prompt” to build your system prompt.
       try {
         localStorage.setItem(key, JSON.stringify(value));
       } catch (error) {
-        setEvalStatus("This browser blocked local storage, so pasted replies last only until you reload.", true);
+        setEvalStatus("st.repliesStorageBlocked", {}, true);
       }
     }
 
     // Updates only badges and the summary while typing, so the reply box keeps focus.
     function buildManualWorksheet() {
       const { activeVersions, activeCases } = activeSelection();
-      if (!activeVersions.length) return setEvalStatus("Save at least one version and tick it.", true);
-      if (!activeCases.length) return setEvalStatus("Add at least one test case with input.", true);
+      if (!activeVersions.length) return setEvalStatus("st.needVersion", {}, true);
+      if (!activeCases.length) return setEvalStatus("st.needCase", {}, true);
+      renderManualTable(activeVersions, activeCases);
+      setEvalStatus("st.worksheet", { n: activeVersions.length * activeCases.length });
+    }
+
+    function renderManualTable(activeVersions, activeCases) {
+      lastTable = { type: "manual", versions: activeVersions, cases: activeCases };
 
       const table = $("resultsTable");
       table.replaceChildren();
       table.hidden = false;
       const head = table.createTHead().insertRow();
-      addCell(head, "th", "Test case");
+      addCell(head, "th", t("res.testCase"));
       activeVersions.forEach((v) => addCell(head, "th", manualLabel(v)));
 
       const summaryCells = [];
@@ -2409,7 +3428,7 @@ Click “Generate Prompt” to build your system prompt.
           const answered = passes.filter((p) => p !== undefined).length;
           const graded = passes.filter((p) => p === true || p === false);
           const passed = graded.filter(Boolean).length;
-          summaryCells[i].textContent = `Pass ${passed}/${graded.length} · ${answered}/${activeCases.length} answered`;
+          summaryCells[i].textContent = t("res.manualSummary", { passed, graded: graded.length, answered, total: activeCases.length });
         });
       };
 
@@ -2419,31 +3438,30 @@ Click “Generate Prompt” to build your system prompt.
         const first = addCell(row, "th", "");
         first.scope = "row";
         const title = document.createElement("strong");
-        title.textContent = `Case ${index + 1}`;
+        title.textContent = t("case.label", { n: index + 1 });
         const expected = document.createElement("div");
         expected.className = "hint";
-        expected.textContent = c.expected ? `Expected: ${c.expected}` : "No expected result: mark pass or fail yourself";
+        expected.textContent = c.expected ? t("res.expected", { x: c.expected }) : t("res.noExpectedManual");
         const preview = document.createElement("div");
         preview.className = "cell-out";
         preview.textContent = c.input;
         first.append(title, expected, preview);
-        activeVersions.forEach((v) => row.append(manualCell(v, c, `Case ${index + 1}`, updateSummary)));
+        activeVersions.forEach((v) => row.append(manualCell(v, c, t("case.label", { n: index + 1 }), updateSummary)));
       });
 
       const foot = table.createTFoot().insertRow();
-      addCell(foot, "th", "Summary");
+      addCell(foot, "th", t("res.summary"));
       activeVersions.forEach(() => summaryCells.push(addCell(foot, "td", "")));
       updateSummary();
-      setEvalStatus(`Worksheet ready: ${activeVersions.length * activeCases.length} prompts. Rebuild it after changing versions, cases or attachments.`);
     }
 
     function clearManualReplies() {
-      if (!Object.keys(manual).length) return setEvalStatus("There are no pasted replies to clear.");
-      if (!confirm("Delete all pasted replies saved in this browser?")) return;
+      if (!Object.keys(manual).length) return setEvalStatus("st.noReplies");
+      if (!confirm(t("cf.clearReplies"))) return;
       manual = {};
       saveObject(STORE_MANUAL, manual);
       if (!$("resultsTable").hidden && runMode === "manual") buildManualWorksheet();
-      setEvalStatus("Cleared all pasted replies.");
+      setEvalStatus("st.cleared");
     }
 
     function setRunMode(next) {
@@ -2455,6 +3473,7 @@ Click “Generate Prompt” to build your system prompt.
       $("apiRunBox").hidden = runMode !== "api";
       $("resultsTable").hidden = true;
       $("resultsTable").replaceChildren();
+      lastTable = null;
       setEvalStatus("");
       try {
         localStorage.setItem(STORE_RUN_MODE, runMode);
@@ -2521,11 +3540,11 @@ Use the above framework to analyze the user's request, identify hidden requireme
     }
 
     function generatePrompt() {
-      const note = $("viewNote");
       if (mode !== "p101") {
         lastFull = buildPrompt();
         output.textContent = lastFull;
-        note.hidden = true;
+        noteState = null;
+        renderViewNote();
         return;
       }
       const parts = buildParts101(getValues101(), { files: attachments });
@@ -2535,17 +3554,17 @@ Use the above framework to analyze the user's request, identify hidden requireme
         output.textContent = parts.binary.length
           ? JSON.stringify(buildRequestBody(parts, settings, { preview: true }), null, 2)
           : lastFull;
-        note.textContent = VIEW_NOTES.json + (settings.fallback ? ` Send it with the header anthropic-beta: ${FALLBACK_BETA}.` : "");
+        noteState = { view: "json", fallback: settings.fallback };
       } else if (view === "curl") {
         lastFull = renderCurl(settings);
         output.textContent = lastFull;
-        note.textContent = VIEW_NOTES.curl;
+        noteState = { view: "curl" };
       } else {
         lastFull = renderPromptText(parts);
         output.textContent = lastFull;
-        note.textContent = "";
+        noteState = null;
       }
-      note.hidden = !note.textContent;
+      renderViewNote();
     }
 
     function loadSampleForMode() {
@@ -2564,13 +3583,13 @@ Use the above framework to analyze the user's request, identify hidden requireme
       try {
         await navigator.clipboard.writeText(lastFull || output.textContent);
         button.dataset.busy = "1";
-        button.textContent = "Copied";
+        button.textContent = t("btn.copied");
         setTimeout(() => {
-          button.textContent = original;
+          button.textContent = button.dataset.i18n ? t(button.dataset.i18n) : original;
           delete button.dataset.busy;
         }, 1200);
       } catch (error) {
-        alert("Copy failed. Please copy manually.");
+        alert(t("out.copyFailed"));
       }
     }
 
@@ -2655,6 +3674,14 @@ function loadSample() {
       btn.addEventListener("click", () => setRunMode(btn.dataset.run));
     });
     setRunMode(runMode);
+
+    document.querySelectorAll(".lang-btn").forEach((btn) => {
+      btn.addEventListener("click", () => setLanguage(btn.dataset.lang));
+    });
+    $("qsModeBtn").addEventListener("click", qsChooseMode);
+    $("qsFillBtn").addEventListener("click", qsFillExample);
+    $("qsGenerateBtn").addEventListener("click", qsGenerate);
+    setLanguage(uiLang, false);
 
     syncFallbackAvailability();
     renderVersions();
