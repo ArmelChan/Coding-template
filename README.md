@@ -17,6 +17,12 @@ This repository now contains a polished, reusable **system instruction** for an 
 | **V2 Super Instruction** | Meta-prompts that generate other prompts | One system prompt (the template below) |
 | **Prompting 101 · 10-part** | A single production task for Claude (review, extraction, analysis) | A **SYSTEM PROMPT** block and a **USER MESSAGE** block |
 
+### Interface language (繁體中文 | English)
+- The header switch changes only the text the page displays. Form values, the current mode, generated prompts (their English scaffolding included), API requests and saved evaluation data are not affected.
+- The choice is remembered in `localStorage` (`ui.lang`). On a first visit, a Chinese browser language opens in 繁體中文（香港）; any other opens in English.
+- All interface strings live in the `I18N` object in `index.html`. Elements carry `data-i18n`, `data-i18n-html` (our own strings only), `data-i18n-ph` (placeholder) or `data-i18n-aria` (aria-label).
+- The home page has a 3-step quick start with the same made-up sales example as `docs/quick-start.*.md`. **Fill in the example for me** writes the example in the language being viewed, and only when clicked.
+
 Prompting 101 mode follows the 10-part structure from Anthropic's *Prompting 101* talk (Code with Claude):
 
 | # | Section | Placed in | Notes |
