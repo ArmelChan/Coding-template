@@ -1,4 +1,4 @@
-[繁體中文（香港）](quick-start.zh-HK.md) | English
+[繁體中文（香港）](quick-start.zh-HK.md) \| English
 
 # Quick Start: AI Prompt Generator
 
@@ -27,7 +27,7 @@ Now the AI knows much more clearly what to deliver. That makes a good answer mor
 
 ## Your first prompt in four steps
 
-Open the tool's web page (the `index.html` file in this project) in your browser. Use the 繁體中文 | English switch at the top right to change the interface language. The home page also has a quick start with this same example: click **Fill in the example for me** to fill it in.
+Open the tool's web page (the `index.html` file in this project) in your browser. Use the 繁體中文 \| English switch at the top right to change the interface language. The home page also has a quick start with this same example: click **Fill in the example for me** to fill it in.
 
 ### 1. Choose `Prompting 101`
 
