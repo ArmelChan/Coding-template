@@ -48,6 +48,8 @@ The output panel has three tabs in Prompting 101 mode:
 
 ### C. Evaluation Lab
 1. **Save current form as version** (v1, v2, …). Versions and test cases are kept in this browser's localStorage.
+   - Each version has its own **Model** and **Effort** (default = API Export Settings). Column headers show `name · model · effort`.
+   - To compare models on the same prompt, click **Duplicate** and pick another model for the copy.
 2. **Test cases**: each case replaces the Input Data. *Expected result* passes when the text appears in the reply (case and whitespace ignored), or use `/regex/flags`. Leave it blank to judge by eye.
 3. **Run evaluation** sends every ticked version × case to the API (3 at a time, retries 429/5xx) and shows a side-by-side table with PASS / FAIL, model, stop reason, tokens and latency. Refusals count as FAIL and show their category.
 4. **Export Batch JSON** writes the same matrix for `POST /v1/messages/batches` (custom_id `v<version>-c<case>`), so you can run it without putting a key in the browser. `fallbacks` is omitted because the Batches API rejects it.

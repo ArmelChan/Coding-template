@@ -625,6 +625,32 @@
       grid-template-columns: auto 1fr auto auto;
       gap: 0.5rem;
       align-items: center;
+      padding: 0.6rem;
+      border: 1px solid var(--color-divider);
+      border-radius: var(--radius-lg);
+    }
+
+    .version-opts {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: 1fr 1fr auto;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .version-opts select {
+      padding: 0.5rem 0.4rem;
+      font-size: var(--text-sm);
+    }
+
+    @media (max-width: 640px) {
+      .version-opts {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .version-opts .mini-btn {
+        grid-column: 1 / -1;
+      }
     }
 
     .version-row input[type="text"] {
@@ -1156,7 +1182,7 @@ Click “Generate Prompt” to build your system prompt.
             <h3>1 · Prompt versions</h3>
             <button class="mini-btn" id="saveVersionBtn" type="button">Save current form as version</button>
           </div>
-          <p class="hint">Saved in this browser only. Ticked versions are included in the run.</p>
+          <p class="hint">Saved in this browser only. Ticked versions are included in the run. Each version can use its own model and effort; to compare models on one prompt, duplicate the version and change its model.</p>
           <div class="row-list" id="versionList"></div>
         </div>
 
@@ -1183,7 +1209,7 @@ Click “Generate Prompt” to build your system prompt.
           </div>
           <div class="field" style="align-content:start">
             <label class="check-row"><input type="checkbox" id="evalWithFiles" /> Also send attached files with every case</label>
-            <span class="hint">Model, effort and the other options come from API Export Settings, so every version runs under the same conditions.</span>
+            <span class="hint">A version left on "default" uses the model and effort from API Export Settings. max_tokens, caching and fallback always come from there.</span>
           </div>
         </div>
         <div class="toolbar">
@@ -1391,12 +1417,20 @@ Click “Generate Prompt” to build your system prompt.
     }
 
     // ---- A. Claude API export ----
-    function getApiSettings() {
-      const model = apiFields.model.value;
+    const MODEL_LABELS = {
+      "claude-opus-5-5": "Opus 5.5",
+      "claude-sonnet-5-5": "Sonnet 5.5",
+      "claude-haiku-5-5": "Haiku 5.5"
+    };
+    const EFFORTS = ["low", "medium", "high", "xhigh", "max"];
+
+    // overrides.model / overrides.effort come from a saved version; empty means "use API settings".
+    function getApiSettings(overrides = {}) {
+      const model = overrides.model || apiFields.model.value;
       const maxTokens = Math.min(128000, Math.max(1, parseInt(apiFields.maxTokens.value, 10) || 16000));
       return {
         model,
-        effort: apiFields.effort.value,
+        effort: overrides.effort || apiFields.effort.value,
         maxTokens,
         cache: apiFields.cache.checked,
         fallback: apiFields.fallback.checked && model !== "claude-haiku-5-5"
@@ -1755,13 +1789,52 @@ Click “Generate Prompt” to build your system prompt.
     }
 
     function saveVersion() {
-      const names = new Set(versions.map((v) => v.name));
-      let n = versions.length + 1;
-      while (names.has(`v${n}`)) n += 1;
-      versions.push({ id: uid(), name: `v${n}`, savedAt: new Date().toISOString(), include: true, values: getValues101() });
+      const used = versions.map((v) => /^v(\d+)$/.exec(v.name)).filter(Boolean).map((m) => Number(m[1]));
+      const n = used.length ? Math.max(...used) + 1 : 1;
+      versions.push({ id: uid(), name: `v${n}`, savedAt: new Date().toISOString(), include: true, model: "", effort: "", values: getValues101() });
       saveStore(STORE_VERSIONS, versions);
       renderVersions();
       setEvalStatus(`Saved v${n}.`);
+    }
+
+    function duplicateVersion(version) {
+      const names = new Set(versions.map((v) => v.name));
+      let name = `${version.name} copy`;
+      for (let n = 2; names.has(name); n += 1) name = `${version.name} copy ${n}`;
+      const copy = {
+        ...version,
+        id: uid(),
+        name,
+        savedAt: new Date().toISOString(),
+        values: { ...(version.values || {}) }
+      };
+      versions.splice(versions.indexOf(version) + 1, 0, copy);
+      saveStore(STORE_VERSIONS, versions);
+      renderVersions();
+      setEvalStatus(`Created ${name}. Pick a different model for it to compare.`);
+    }
+
+    function versionSettings(version) {
+      return getApiSettings({ model: version.model, effort: version.effort });
+    }
+
+    function versionLabel(version) {
+      const settings = versionSettings(version);
+      return `${version.name} · ${MODEL_LABELS[settings.model] || settings.model} · ${settings.effort}`;
+    }
+
+    function optionSelect(label, current, options, onChange) {
+      const select = document.createElement("select");
+      select.setAttribute("aria-label", label);
+      options.forEach(([value, text]) => {
+        const option = document.createElement("option");
+        option.value = value;
+        option.textContent = text;
+        select.append(option);
+      });
+      select.value = current || "";
+      select.addEventListener("change", () => onChange(select.value));
+      return select;
     }
 
     function renderVersions() {
@@ -1806,7 +1879,27 @@ Click “Generate Prompt” to build your system prompt.
           saveStore(STORE_VERSIONS, versions);
           renderVersions();
         }, `Delete ${version.name}`);
-        row.append(include, name, load, remove);
+        const update = (key) => (value) => {
+          version[key] = value;
+          saveStore(STORE_VERSIONS, versions);
+        };
+        const opts = document.createElement("div");
+        opts.className = "version-opts";
+        const modelSelect = optionSelect(
+          `${version.name} model`,
+          version.model,
+          [["", "Model: default"], ...Object.entries(MODEL_LABELS)],
+          update("model")
+        );
+        const effortSelect = optionSelect(
+          `${version.name} effort`,
+          version.effort,
+          [["", "Effort: default"], ...EFFORTS.map((e) => [e, `Effort: ${e}`])],
+          update("effort")
+        );
+        const duplicate = miniButton("Duplicate", () => duplicateVersion(version), `Duplicate ${version.name}`);
+        opts.append(modelSelect, effortSelect, duplicate);
+        row.append(include, name, load, remove, opts);
         list.append(row);
       });
     }
@@ -1947,9 +2040,9 @@ Click “Generate Prompt” to build your system prompt.
       if (!activeVersions.length) return setEvalStatus("Save at least one version and tick it.", true);
       if (!activeCases.length) return setEvalStatus("Add at least one test case with input.", true);
       if (!key) return setEvalStatus("Enter an API key to run, or use Export Batch JSON instead.", true);
-      const settings = getApiSettings();
       const total = activeVersions.length * activeCases.length;
-      if (!confirm(`This sends ${total} request(s) to ${settings.model} at effort "${settings.effort}" and is billed to your API key. Continue?`)) return;
+      const plan = activeVersions.map((v) => `• ${versionLabel(v)} × ${activeCases.length}`).join("\n");
+      if (!confirm(`This sends ${total} request(s), billed to your API key:\n${plan}\n\nContinue?`)) return;
 
       results = {};
       runController = new AbortController();
@@ -1968,7 +2061,7 @@ Click “Generate Prompt” to build your system prompt.
           const cellKey = `${v.id}|${c.id}`;
           results[cellKey] = { status: "running" };
           renderResults(activeVersions, activeCases);
-          results[cellKey] = await runOne(v, c, settings, key, signal);
+          results[cellKey] = await runOne(v, c, versionSettings(v), key, signal);
           done += 1;
           setEvalStatus(`Running ${done}/${total}…`);
           renderResults(activeVersions, activeCases);
@@ -2033,7 +2126,7 @@ Click “Generate Prompt” to build your system prompt.
       table.hidden = false;
       const head = table.createTHead().insertRow();
       addCell(head, "th", "Test case");
-      activeVersions.forEach((v) => addCell(head, "th", v.name));
+      activeVersions.forEach((v) => addCell(head, "th", versionLabel(v)));
       const body = table.createTBody();
       activeCases.forEach((c, index) => {
         const row = body.insertRow();
@@ -2068,15 +2161,14 @@ Click “Generate Prompt” to build your system prompt.
       const { activeVersions, activeCases } = activeSelection();
       if (!activeVersions.length) return setEvalStatus("Save at least one version and tick it.", true);
       if (!activeCases.length) return setEvalStatus("Add at least one test case with input.", true);
-      const settings = getApiSettings();
       const files = $("evalWithFiles").checked ? attachments : [];
       const requests = [];
       activeVersions.forEach((v, vi) => activeCases.forEach((c, ci) => {
         const parts = buildParts101(v.values || {}, { inputText: c.input, files });
-        requests.push({ custom_id: `v${vi + 1}-c${ci + 1}`, params: buildRequestBody(parts, settings, { forBatch: true }) });
+        requests.push({ custom_id: `v${vi + 1}-c${ci + 1}`, params: buildRequestBody(parts, versionSettings(v), { forBatch: true }) });
       }));
       downloadText(JSON.stringify({ requests }, null, 2), "prompting-101-batch.json", "application/json");
-      const legend = activeVersions.map((v, vi) => `v${vi + 1} = ${v.name}`).join(", ");
+      const legend = activeVersions.map((v, vi) => `v${vi + 1} = ${versionLabel(v)}`).join(", ");
       setEvalStatus(`Exported ${requests.length} requests for POST /v1/messages/batches. custom_id is v<version>-c<case> (${legend}). Refusal fallback is left out because the Batches API rejects it.`);
     }
 
