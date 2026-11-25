@@ -3,6 +3,32 @@
 ## Purpose
 This repository now contains a polished, reusable **system instruction** for an "AI Super Instruction Generator" that transforms vague user input into clear, executable prompts for advanced LLMs.
 
+## Web Generator Modes (`index.html`)
+
+| Mode | Use it for | Output |
+|---|---|---|
+| **V2 Super Instruction** | Meta-prompts that generate other prompts | One system prompt (the template below) |
+| **Prompting 101 · 10-part** | A single production task for Claude (review, extraction, analysis) | A **SYSTEM PROMPT** block and a **USER MESSAGE** block |
+
+Prompting 101 mode follows the 10-part structure from Anthropic's *Prompting 101* talk (Code with Claude):
+
+| # | Section | Placed in | Notes |
+|---|---|---|---|
+| 1 | Task context | System | Who Claude is and the concrete situation |
+| 2 | Tone context | System | e.g. factual, confident only when the data is clear |
+| 3 | Background data | System | Wrapped in a configurable XML tag; static, so it can be cached |
+| 4 | Detailed rules | System | One rule per line → bullet list |
+| 5 | Examples | System | Wrapped in `<examples>` |
+| 6 | Conversation history | User | Optional, wrapped in `<conversation_history>` |
+| 7 | Immediate task | User | Plus a slot for this request's input |
+| 8 | Analysis order | User | Numbered order of work before concluding |
+| 9 | Output formatting | User | e.g. XML sections your code will parse |
+| 10 | Response opening | User | Written as an instruction, because current Claude models reject assistant prefill (HTTP 400). For strict JSON, use structured outputs |
+
+**Task Nature** switch adds the matching behaviour block automatically:
+- **Analytical**: use only the provided materials, say plainly when something is missing or unclear, and cite the supporting field or detail.
+- **Generative**: fill gaps with sensible assumptions and list them in an *Assumptions* section.
+
 ## Copy-Ready System Prompt
 
 ```markdown

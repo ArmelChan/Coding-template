@@ -464,6 +464,57 @@
       margin-top: 1rem;
     }
 
+    [hidden] {
+      display: none !important;
+    }
+
+    .mode-switch {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.35rem;
+      padding: 0.3rem;
+      margin-bottom: 1rem;
+      background: var(--color-surface-offset);
+      border: 1px solid rgba(40, 37, 29, 0.08);
+      border-radius: var(--radius-lg);
+    }
+
+    .mode-btn {
+      min-height: 44px;
+      padding: 0.5rem 0.75rem;
+      border: 0;
+      border-radius: var(--radius-md);
+      line-height: 1.25;
+      background: transparent;
+      color: var(--color-text-muted);
+      font-weight: 700;
+      cursor: pointer;
+      transition: background var(--transition), color var(--transition);
+    }
+
+    .mode-btn[aria-pressed="true"] {
+      background: var(--color-primary);
+      color: #fff;
+    }
+
+    .section-num {
+      display: inline-block;
+      min-width: 1.6rem;
+      color: var(--color-primary);
+    }
+
+    .row-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.95rem;
+    }
+
+    @media (max-width: 640px) {
+      .row-2 {
+        grid-template-columns: 1fr;
+      }
+    }
+
     .output-box {
       min-height: 620px;
       white-space: pre-wrap;
@@ -642,7 +693,13 @@
           </div>
         </div>
 
+        <div class="mode-switch" role="group" aria-label="Prompt mode">
+          <button class="mode-btn" type="button" id="modeV2Btn" aria-pressed="true">V2 Super Instruction</button>
+          <button class="mode-btn" type="button" id="mode101Btn" aria-pressed="false">Prompting 101 · 10-part</button>
+        </div>
+
         <div class="field-grid">
+          <div class="field-grid" id="v2Fields">
           <div class="field">
             <label for="productName">Generator / Project Name</label>
             <input id="productName" type="text" placeholder="e.g. AI Super Instruction Generator" />
@@ -702,6 +759,90 @@
           <div class="field">
             <label for="defaultBehavior">Default Behavior</label>
             <textarea id="defaultBehavior" placeholder="e.g. If information is missing, infer safely using best-practice defaults while keeping assumptions minimal and explicit."></textarea>
+          </div>
+
+          </div>
+
+          <div class="field-grid" id="p101Fields" hidden>
+            <div class="row-2">
+              <div class="field">
+                <label for="p101Title">Prompt Name</label>
+                <input id="p101Title" type="text" placeholder="e.g. Weekly Promoter Report Reviewer" />
+              </div>
+              <div class="field">
+                <label for="p101TaskType">Task Nature</label>
+                <select id="p101TaskType">
+                  <option value="analytical">Analytical — facts only, no guessing</option>
+                  <option value="generative">Generative — infer, but label assumptions</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="p101TaskContext"><span class="section-num">1</span>Task Context</label>
+              <textarea id="p101TaskContext" placeholder="Who Claude is in this task and what job it is doing, e.g. You are reviewing weekly promoter sales reports for a retail team."></textarea>
+              <span class="hint">System prompt. Be concrete about the situation, not just a job title.</span>
+            </div>
+
+            <div class="field">
+              <label for="p101Tone"><span class="section-num">2</span>Tone Context</label>
+              <textarea id="p101Tone" placeholder="e.g. Stay factual and confident. Only state what the materials support."></textarea>
+            </div>
+
+            <div class="row-2">
+              <div class="field">
+                <label for="p101DocTag"><span class="section-num">3</span>Background XML Tag</label>
+                <input id="p101DocTag" type="text" placeholder="background" />
+                <span class="hint">Letters, digits, _ or - only.</span>
+              </div>
+              <div class="field">
+                <label for="p101DocTitle">Background Title</label>
+                <input id="p101DocTitle" type="text" placeholder="e.g. Report field definitions" />
+              </div>
+            </div>
+            <div class="field">
+              <label for="p101Background">Background Data (static)</label>
+              <textarea id="p101Background" placeholder="Stable reference material that rarely changes: form layout, field definitions, policies, glossary."></textarea>
+              <span class="hint">Goes in the system prompt inside XML tags, so it can be cached and reused across requests.</span>
+            </div>
+
+            <div class="field">
+              <label for="p101Rules"><span class="section-num">4</span>Detailed Task Description &amp; Rules</label>
+              <textarea id="p101Rules" placeholder="One rule per line. Decision rules, edge cases, what to do when data is missing."></textarea>
+            </div>
+
+            <div class="field">
+              <label for="p101Examples"><span class="section-num">5</span>Examples</label>
+              <textarea id="p101Examples" placeholder="Worked examples of tricky cases and the correct result. Leave blank if none."></textarea>
+            </div>
+
+            <div class="field">
+              <label for="p101History"><span class="section-num">6</span>Conversation History (optional)</label>
+              <textarea id="p101History" placeholder="Relevant prior turns or user context. Leave blank if none."></textarea>
+            </div>
+
+            <div class="field">
+              <label for="p101Request"><span class="section-num">7</span>Immediate Task / Request</label>
+              <textarea id="p101Request" placeholder="What Claude must do right now with the attached input, e.g. Review the attached report and photo."></textarea>
+              <span class="hint">User message. The per-request data (files, images, rows) is attached here.</span>
+            </div>
+
+            <div class="field">
+              <label for="p101Steps"><span class="section-num">8</span>Analysis Order</label>
+              <textarea id="p101Steps" placeholder="One step per line, in the order Claude should examine the inputs before concluding."></textarea>
+              <span class="hint">Sets the order of work. Current Claude models already think before answering, so this does not ask for a reasoning dump.</span>
+            </div>
+
+            <div class="field">
+              <label for="p101Output"><span class="section-num">9</span>Output Formatting</label>
+              <textarea id="p101Output" placeholder="Exact structure of the answer, e.g. XML tags or a JSON shape your code will parse."></textarea>
+            </div>
+
+            <div class="field">
+              <label for="p101Opening"><span class="section-num">10</span>Response Opening</label>
+              <input id="p101Opening" type="text" placeholder="e.g. <review>" />
+              <span class="hint">Prefill is not supported on current Claude models (API returns 400), so this becomes an instruction. For strict JSON, use structured outputs.</span>
+            </div>
           </div>
 
           <div class="toolbar">
@@ -785,6 +926,138 @@ Click “Generate Prompt” to build your system prompt.
     const output = $("output");
     const themeToggle = $("themeToggle");
 
+    // ---- Prompting 101 mode (10-part structure) ----
+    const fields101 = {
+      title: $("p101Title"),
+      taskType: $("p101TaskType"),
+      taskContext: $("p101TaskContext"),
+      tone: $("p101Tone"),
+      docTag: $("p101DocTag"),
+      docTitle: $("p101DocTitle"),
+      background: $("p101Background"),
+      rules: $("p101Rules"),
+      examples: $("p101Examples"),
+      history: $("p101History"),
+      request: $("p101Request"),
+      steps: $("p101Steps"),
+      output: $("p101Output"),
+      opening: $("p101Opening")
+    };
+
+    let mode = "v2";
+    const PLACEHOLDER = "Click “Generate Prompt” to build your system prompt.";
+
+    function toLines(text) {
+      return text.split("\n").map((line) => line.trim()).filter(Boolean);
+    }
+
+    function asBullets(text) {
+      return toLines(text)
+        .map((line) => (/^([-*•]|\d+[.)])\s/.test(line) ? line : `- ${line}`))
+        .join("\n");
+    }
+
+    function asSteps(text) {
+      return toLines(text)
+        .map((line, i) => `${i + 1}. ${line.replace(/^([-*•]|\d+[.)])\s*/, "")}`)
+        .join("\n");
+    }
+
+    function safeTag(value) {
+      const tag = value.trim();
+      return /^[A-Za-z_][A-Za-z0-9_-]*$/.test(tag) ? tag : "background";
+    }
+
+    const TASK_TYPE_RULES = {
+      analytical: `## Accuracy rules
+- Base every conclusion only on the materials provided.
+- If something is missing, unreadable or ambiguous, say so plainly instead of guessing.
+- For each conclusion, point to the field, line or image detail that supports it.`,
+      generative: `## Assumption rules
+- Where details are missing, make sensible professional assumptions so the result is complete.
+- List every assumption in a short "Assumptions" section so the user can correct it.`
+    };
+
+    function buildPrompt101() {
+      const v = (key) => fields101[key].value.trim();
+      const title = v("title") || "Untitled Prompt";
+      const tag = safeTag(v("docTag"));
+      const system = [`# ${title}`, v("taskContext") || "[1. Define the task context]"];
+
+      if (v("tone")) system.push(`## Tone\n${v("tone")}`);
+      if (v("background")) {
+        const heading = v("docTitle") ? `## Background: ${v("docTitle")}` : "## Background";
+        system.push(`${heading}\n<${tag}>\n${v("background")}\n</${tag}>`);
+      }
+      if (v("rules")) system.push(`## Rules\n${asBullets(v("rules"))}`);
+      system.push(TASK_TYPE_RULES[fields101.taskType.value] || TASK_TYPE_RULES.analytical);
+      if (v("examples")) system.push(`## Examples\n<examples>\n${v("examples")}\n</examples>`);
+
+      const user = [];
+      if (v("history")) user.push(`<conversation_history>\n${v("history")}\n</conversation_history>`);
+      user.push(v("request") || "[7. Define the immediate task]");
+      user.push("[Paste this request's input here, e.g. <input>…</input>, and attach any images or files]");
+      if (v("steps")) user.push(`Work through the materials in this order before concluding:\n${asSteps(v("steps"))}`);
+      if (v("output")) user.push(`## Output format\n${v("output")}`);
+      if (v("opening")) user.push(`Begin your response with: ${v("opening")}`);
+
+      return `===== SYSTEM PROMPT =====
+${system.join("\n\n")}
+
+===== USER MESSAGE =====
+${user.join("\n\n")}`;
+    }
+
+    function loadSample101() {
+      fields101.title.value = "Weekly Promoter Report Reviewer";
+      fields101.taskType.value = "analytical";
+      fields101.taskContext.value = "You are a retail operations analyst helping a sales team review promoter performance. Each week a store promoter submits a sales sheet covering a 7-day cycle (pasted text) and a photo of their shelf display. Your job is to check the submission, decide whether the promoter qualifies for the weekly incentive, and flag anything that needs a manager's attention.";
+      fields101.tone.value = "Professional, concise and neutral. Be confident when the data is clear; when it is not, say exactly what is unclear.";
+      fields101.docTag.value = "report_field_guide";
+      fields101.docTitle.value = "Report field definitions";
+      fields101.background.value = [
+        "week_start_date / week_end_date: reporting cycle, must cover exactly 7 calendar days",
+        "sales_amount: net sales for the cycle",
+        "sales_target: target set by the area manager",
+        "achievement_pct: sales_amount / sales_target × 100",
+        "units_sold: units sold in the cycle",
+        "incentive_game_score: 0–100 score from the weekly incentive game",
+        "attendance_days: days the promoter worked in the cycle",
+        "prize_qualification: Y/N as claimed by the promoter",
+        "stock_issue_flag: Y if the store ran out of stock during the cycle"
+      ].join("\n");
+      fields101.rules.value = [
+        "Recalculate achievement_pct yourself; do not rely on the submitted value.",
+        "A promoter qualifies only if achievement_pct ≥ 100%, incentive_game_score ≥ 80 and attendance_days ≥ 5.",
+        "If stock_issue_flag is Y, still give the result but mark it for manager review.",
+        "If the reporting cycle is not exactly 7 days, mark the submission invalid.",
+        "Use the shelf photo only to check display compliance (facings, price tags, branding). Never estimate sales from the photo.",
+        "Never fill in missing values. List them as data gaps."
+      ].join("\n");
+      fields101.examples.value = "<example>\nInput: sales_amount 95,000 · sales_target 100,000 · incentive_game_score 92 · attendance_days 6 · prize_qualification Y\nCorrect result: NOT QUALIFIED. Achievement is 95%, below the 100% threshold. The claimed \"Y\" conflicts with the data and should be flagged.\n</example>";
+      fields101.history.value = "";
+      fields101.request.value = "Review this week's submission. The sales sheet is inside <sales_sheet> tags and the shelf photo is attached.";
+      fields101.steps.value = [
+        "Check the reporting dates and that every required field is present.",
+        "Recalculate achievement_pct and compare it with the submitted value.",
+        "Apply each qualification rule in turn.",
+        "Check the shelf photo for display compliance.",
+        "Decide the final verdict."
+      ].join("\n");
+      fields101.output.value = "Return exactly these XML sections:\n<data_check>missing or inconsistent fields, or \"none\"</data_check>\n<calculation>recalculated achievement_pct with the formula</calculation>\n<display_check>shelf photo findings</display_check>\n<verdict>QUALIFIED | NOT QUALIFIED | NEEDS REVIEW, plus one sentence explaining why</verdict>";
+      fields101.opening.value = "<data_check>";
+      generatePrompt();
+    }
+
+    function setMode(next) {
+      mode = next;
+      $("v2Fields").hidden = mode !== "v2";
+      $("p101Fields").hidden = mode !== "p101";
+      $("modeV2Btn").setAttribute("aria-pressed", String(mode === "v2"));
+      $("mode101Btn").setAttribute("aria-pressed", String(mode === "p101"));
+      output.textContent = PLACEHOLDER;
+    }
+
     function safeValue(el, fallback) {
       return el.value.trim() || fallback;
     }
@@ -843,7 +1116,15 @@ Use the above framework to analyze the user's request, identify hidden requireme
     }
 
     function generatePrompt() {
-      output.textContent = buildPrompt();
+      output.textContent = mode === "p101" ? buildPrompt101() : buildPrompt();
+    }
+
+    function loadSampleForMode() {
+      if (mode === "p101") {
+        loadSample101();
+      } else {
+        loadSample();
+      }
     }
 
     async function copyOutput() {
@@ -876,17 +1157,19 @@ function loadSample() {
       }
 
     function clearAll() {
-      Object.values(fields).forEach((field) => {
+      const active = mode === "p101" ? fields101 : fields;
+      Object.values(active).forEach((field) => {
         field.value = "";
       });
-      output.textContent = 'Click “Generate Prompt” to build your system prompt.';
+      fields101.taskType.value = "analytical";
+      output.textContent = PLACEHOLDER;
     }
 
     function downloadOutput() {
       const blob = new Blob([output.textContent], { type: "text/plain;charset=utf-8" });
       const link = document.createElement("a");
       link.href = URL.createObjectURL(blob);
-      link.download = "generated-system-prompt.txt";
+      link.download = mode === "p101" ? "prompting-101-prompt.txt" : "generated-system-prompt.txt";
       document.body.appendChild(link);
       link.click();
       link.remove();
@@ -903,8 +1186,10 @@ function loadSample() {
     $("generateBtnBottom").addEventListener("click", generatePrompt);
     $("copyBtn").addEventListener("click", copyOutput);
     $("copyBtnTop").addEventListener("click", copyOutput);
-    $("loadSampleBtn").addEventListener("click", loadSample);
-    $("loadSampleBtnBottom").addEventListener("click", loadSample);
+    $("loadSampleBtn").addEventListener("click", loadSampleForMode);
+    $("loadSampleBtnBottom").addEventListener("click", loadSampleForMode);
+    $("modeV2Btn").addEventListener("click", () => setMode("v2"));
+    $("mode101Btn").addEventListener("click", () => setMode("p101"));
     $("clearBtn").addEventListener("click", clearAll);
     $("downloadBtn").addEventListener("click", downloadOutput);
     themeToggle.addEventListener("click", toggleTheme);
