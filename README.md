@@ -3,6 +3,13 @@
 ## Purpose
 This repository now contains a polished, reusable **system instruction** for an "AI Super Instruction Generator" that transforms vague user input into clear, executable prompts for advanced LLMs.
 
+## 新手入門 / Quick Start
+
+第一次使用，或從未寫過提示詞？請先看入門指引。 / New to prompts? Start with the beginner's guide.
+
+- [繁體中文（香港）](docs/quick-start.zh-HK.md)
+- [English](docs/quick-start.en.md)
+
 ## Web Generator Modes (`index.html`)
 
 | Mode | Use it for | Output |
