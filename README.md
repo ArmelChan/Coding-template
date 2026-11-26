@@ -21,6 +21,7 @@ This repository now contains a polished, reusable **system instruction** for an 
 - The header switch changes only the text the page displays. Form values, the current mode, generated prompts (their English scaffolding included), API requests and saved evaluation data are not affected.
 - The choice is remembered in `localStorage` (`ui.lang`). On a first visit, a Chinese browser language opens in 繁體中文（香港）; any other opens in English.
 - All interface strings live in the `I18N` object in `index.html`. Elements carry `data-i18n`, `data-i18n-html` (our own strings only), `data-i18n-ph` (placeholder) or `data-i18n-aria` (aria-label).
+- The home page links to the beginner's guide in the current language (`docs/quick-start.*.html`, as published by GitHub Pages), both from the first screen and from the quick start.
 - The home page has a 3-step quick start with the same made-up sales example as `docs/quick-start.*.md`. **Fill in the example for me** writes the example in the language being viewed, and only when clicked.
 
 Prompting 101 mode follows the 10-part structure from Anthropic's *Prompting 101* talk (Code with Claude):
@@ -37,6 +38,11 @@ Prompting 101 mode follows the 10-part structure from Anthropic's *Prompting 101
 | 8 | Analysis order | User | Numbered order of work before concluding |
 | 9 | Output formatting | User | e.g. XML sections your code will parse |
 | 10 | Response opening | User | Written as an instruction, because current Claude models reject assistant prefill (HTTP 400). For strict JSON, use structured outputs |
+
+**Reasoning display** (section 8):
+- **Built-in thinking (answer only)**, the default: the prompt is unchanged.
+- **Multi-step chain of thought**: the USER MESSAGE also asks for written, checkable working for each analysis step (`<step_1>`, `<step_2>`, …), then a `<check>` self-check, then the final `<answer>`. If no steps are typed, three default stages are used, and **Response Opening** applies inside `<answer>`.
+- This is written working. It never asks for Claude's private reasoning, which current models keep internal.
 
 **Task Nature** switch adds the matching behaviour block automatically:
 - **Analytical**: use only the provided materials, say plainly when something is missing or unclear, and cite the supporting field or detail.
