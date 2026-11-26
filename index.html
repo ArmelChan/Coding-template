@@ -700,6 +700,18 @@
       }
     }
 
+    .qs-guide {
+      font-size: var(--text-sm);
+    }
+
+    .qs-guide a,
+    .hint a {
+      color: var(--color-primary);
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
     [hidden] {
       display: none !important;
     }
@@ -1179,6 +1191,7 @@
 
       <div class="hero-actions">
         <a class="btn btn-primary" href="#quickstart" id="heroStartBtn" data-i18n="hero.cta">Start the quick start</a>
+        <a class="btn btn-secondary" href="docs/quick-start.en.html" id="heroGuideLink" data-i18n="hero.guide" data-i18n-href="guide.href">Read the beginner's guide</a>
         <button class="btn btn-secondary" id="generateBtn" type="button" data-i18n="btn.generate">Generate Prompt</button>
         <button class="btn btn-secondary" id="copyBtn" type="button" data-i18n="btn.copyOutput">Copy Output</button>
         <button class="btn btn-secondary" id="loadSampleBtn" type="button" data-i18n="btn.loadSample">Load Sample</button>
@@ -1221,6 +1234,7 @@
       </ol>
       <p class="qs-status" id="qsStatus" aria-live="polite"></p>
       <p class="hint" data-i18n="qs.later">Later, you can compare prompt versions in Evaluation Lab or export to the Claude API. You don't need either to get started.</p>
+      <p class="qs-guide"><span data-i18n="qs.guideLead">Prefer a written walkthrough?</span> <a id="qsGuideLink" href="docs/quick-start.en.html" data-i18n="qs.guideLink" data-i18n-href="guide.href">Open the beginner's guide</a></p>
     </section>
 
     <section class="layout">
@@ -1389,6 +1403,15 @@
               <label for="p101Steps"><span class="section-num">8</span><span data-i18n="f.steps">Analysis Order</span></label>
               <textarea id="p101Steps" placeholder="One step per line, in the order Claude should examine the inputs before concluding." data-i18n-ph="ph.steps"></textarea>
               <span class="hint" data-i18n="hint.steps">Sets the order of work. Current Claude models already think before answering, so this does not ask for a reasoning dump.</span>
+            </div>
+
+            <div class="field">
+              <label for="p101Reasoning" data-i18n="f.reasoning">Reasoning display</label>
+              <select id="p101Reasoning">
+                <option value="builtin" data-i18n="opt.reasonBuiltin">Built-in thinking (answer only)</option>
+                <option value="staged" data-i18n="opt.reasonStaged">Multi-step chain of thought</option>
+              </select>
+              <span class="hint" data-i18n="hint.reasoning">Built-in: Claude thinks before answering and you see only the answer. Multi-step: the prompt also asks for written working for each step above, a self-check, then the answer, so you can follow how it got there. Replies get longer. This is written working, not Claude's private reasoning.</span>
             </div>
 
             <div class="field">
@@ -1723,6 +1746,14 @@ Click “Generate Prompt” to build your system prompt.
         "f.steps": "Analysis Order",
         "ph.steps": "One step per line, in the order Claude should examine the inputs before concluding.",
         "hint.steps": "Sets the order of work. Current Claude models already think before answering, so this does not ask for a reasoning dump.",
+        "hero.guide": "Read the beginner's guide",
+        "guide.href": "docs/quick-start.en.html",
+        "qs.guideLead": "Prefer a written walkthrough?",
+        "qs.guideLink": "Open the beginner's guide",
+        "f.reasoning": "Reasoning display",
+        "opt.reasonBuiltin": "Built-in thinking (answer only)",
+        "opt.reasonStaged": "Multi-step chain of thought",
+        "hint.reasoning": "Built-in: Claude thinks before answering and you see only the answer. Multi-step: the prompt also asks for written working for each step above, a self-check, then the answer, so you can follow how it got there. Replies get longer. This is written working, not Claude's private reasoning.",
         "f.output": "Output Formatting",
         "ph.output": "Exact structure of the answer, e.g. XML tags or a JSON shape your code will parse.",
         "f.opening": "Response Opening",
@@ -2005,6 +2036,14 @@ Click “Generate Prompt” to build your system prompt.
         "f.steps": "分析次序",
         "ph.steps": "每行一個步驟，即 Claude 下結論前檢查資料的次序。",
         "hint.steps": "設定工作次序。現時的 Claude 模型本身會先思考再回答，所以這裡不會要求它列出推理過程。",
+        "hero.guide": "閱讀新手指引",
+        "guide.href": "docs/quick-start.zh-HK.html",
+        "qs.guideLead": "想看文字版的詳細說明？",
+        "qs.guideLink": "打開新手指引",
+        "f.reasoning": "思考呈現方式",
+        "opt.reasonBuiltin": "內建思考（只顯示答案）",
+        "opt.reasonStaged": "多重 chain-of-thought",
+        "hint.reasoning": "內建：Claude 會先思考再回答，你只會看到答案。多重：提示詞會另外要求按上面每個步驟寫出工作過程，再做一次自我檢查，最後才給答案，方便你逐層核對。回答會較長。這是寫出來的工作步驟，不是 Claude 內部的思考內容。",
         "f.output": "輸出格式",
         "ph.output": "答案的確實結構，例如三點摘要、XML 標籤，或程式會讀取的 JSON 格式。",
         "f.opening": "回答開頭",
@@ -2194,6 +2233,9 @@ Click “Generate Prompt” to build your system prompt.
       document.querySelectorAll("[data-i18n-aria]").forEach((el) => {
         el.setAttribute("aria-label", t(el.dataset.i18nAria));
       });
+      document.querySelectorAll("[data-i18n-href]").forEach((el) => {
+        el.setAttribute("href", t(el.dataset.i18nHref));
+      });
     }
 
     // Changes only what the page shows. Form values, the current mode, the output and saved data stay as they are.
@@ -2286,10 +2328,11 @@ Click “Generate Prompt” to build your system prompt.
     // Writes the example only when the person asks for it; switching language later never rewrites what is in the boxes.
     function qsFillExample() {
       const example = qsExample();
-      const hasOtherText = Object.entries(fields101).some(([key, el]) => key !== "taskType" && el.value.trim() && el.value !== (example[key] || ""));
+      const choiceFields = ["taskType", "reasoning"];
+      const hasOtherText = Object.entries(fields101).some(([key, el]) => !choiceFields.includes(key) && el.value.trim() && el.value !== (example[key] || ""));
       if (hasOtherText && !confirm(t("qs.confirmReplace"))) return;
       if (mode !== "p101") setMode("p101");
-      setValues101({ ...example, taskType: "analytical" });
+      setValues101({ ...example, taskType: "analytical", reasoning: fields101.reasoning.value });
       setQsStatus("qs.st.filled");
     }
 
@@ -2338,6 +2381,7 @@ Click “Generate Prompt” to build your system prompt.
       inputTag: $("p101InputTag"),
       inputText: $("p101InputText"),
       steps: $("p101Steps"),
+      reasoning: $("p101Reasoning"),
       output: $("p101Output"),
       opening: $("p101Opening")
     };
@@ -2383,6 +2427,18 @@ Click “Generate Prompt” to build your system prompt.
       return bytes >= MB ? `${(bytes / MB).toFixed(1)} MB` : `${Math.max(1, Math.round(bytes / 1024))} KB`;
     }
 
+    // "Multi-step chain of thought": asks for written, checkable working per step plus a self-check.
+    // It never asks for the model's private reasoning, which current Claude models keep internal.
+    const DEFAULT_STAGES = "Pick out the facts in the materials that matter for this task.\nApply the rules to those facts.\nDraw the conclusion.";
+
+    function stagedWorking(hasOutputFormat) {
+      return `## Show your working
+Write each step above as its own block, in order: <step_1>…</step_1>, <step_2>…</step_2>, and so on.
+Keep each block short and checkable: the facts used, any calculation, and what that step concludes.
+Then add <check>…</check>: re-check every conclusion against the rules and the materials, and correct anything that does not hold.
+Finish with <answer>…</answer> containing only the final answer${hasOutputFormat ? ", in the output format below" : ""}.`;
+    }
+
     const TASK_TYPE_RULES = {
       analytical: `## Accuracy rules
 - Base every conclusion only on the materials provided.
@@ -2406,6 +2462,7 @@ Click “Generate Prompt” to build your system prompt.
         el.value = typeof values[key] === "string" ? values[key] : "";
       });
       if (!fields101.taskType.value) fields101.taskType.value = "analytical";
+      if (!fields101.reasoning.value) fields101.reasoning.value = "builtin";
     }
 
     // Builds the prompt from a plain values object, so saved versions can be rebuilt without the form.
@@ -2442,9 +2499,12 @@ Click “Generate Prompt” to build your system prompt.
       } else if (!binary.length) {
         user.push(INPUT_PLACEHOLDER);
       }
-      if (v("steps")) user.push(`Work through the materials in this order before concluding:\n${asSteps(v("steps"))}`);
+      const staged = values.reasoning === "staged";
+      const steps = v("steps") || (staged ? DEFAULT_STAGES : "");
+      if (steps) user.push(`Work through the materials in this order before concluding:\n${asSteps(steps)}`);
+      if (staged) user.push(stagedWorking(Boolean(v("output"))));
       if (v("output")) user.push(`## Output format\n${v("output")}`);
-      if (v("opening")) user.push(`Begin your response with: ${v("opening")}`);
+      if (v("opening")) user.push(staged ? `Inside <answer>, begin with: ${v("opening")}` : `Begin your response with: ${v("opening")}`);
 
       return { system: system.join("\n\n"), userText: user.join("\n\n"), binary };
     }
@@ -3615,6 +3675,7 @@ function loadSample() {
           field.value = "";
         });
         fields101.taskType.value = "analytical";
+        fields101.reasoning.value = "builtin";
         clearAttachments();
       } else {
         Object.values(fields).forEach((field) => {
